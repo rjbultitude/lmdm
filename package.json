@@ -1,0 +1,19 @@
+{
+  "name": "lambdoma",
+  "version": "1.0.0",
+  "description": "Virtual lambdona keyboard",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "lambdoma",
+    "just",
+    "intonation",
+    "music",
+    "theory"
+  ],
+  "author": "Richard Bultitude",
+  "license": "ISC"
+}
