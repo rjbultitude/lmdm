@@ -1,9 +1,41 @@
 const numeration = "numeration";
 const denomination = "denomination";
 const ascendBoth = "ascendBoth";
+const lambdomaArray = [];
+const maxLoopSize = 5;
 
-function createLambdomaSequence(startingNumerator, startingDenominator, loopSize, type) {
-  const lambdomaSequence = [];
+class ratio {
+  constructor(numerator, denominator) {
+    this.numerator = numerator;
+    this.denominator = denominator;
+  }
+  get fraction() {
+    return this.calcFraction;
+  }
+
+  calcFraction() {
+    this.numerator / this.denominator;
+  }
+}
+
+function createMasterLamdomaSeq(maxLoopSize) {
+  const masterLamdomaArr = [];
+  let count = 1;
+  for (let index = 0; index < maxLoopSize; index++) {
+    const lambdomaSequence = createLambdomaSequence({
+      startingNumerator: count,
+      startingDenominator: 1, 
+      loopSize: 5,
+      type: denomination
+    });
+    masterLamdomaArr.push(lambdomaSequence);
+    count += 1;
+  }
+  return masterLamdomaArr;
+}
+
+function createLambdomaSequence({startingNumerator, startingDenominator, loopSize, type}) {
+  const thisArray = [];
   let numeratorCount = startingNumerator;
   let denominatorCount = startingDenominator;
   let numeratorCountAmt = 0;
@@ -23,15 +55,13 @@ function createLambdomaSequence(startingNumerator, startingDenominator, loopSize
       break;
   }
   for (let index = 0; index < loopSize; index++) {
-    const thisFraction = numeratorCount / denominatorCount;
-    lambdomaSequence.push(thisFraction);
+    const newRatio = new ratio(numeratorCount, denominatorCount);
+    thisArray.push(newRatio);
     numeratorCount += numeratorCountAmt;
     denominatorCount += denominatorCountAmt;
-    console.log("denominatorCount", denominatorCount);
-    console.log("denominatorCountAmt", denominatorCountAmt);
   }
-  return lambdomaSequence;
+  return thisArray;
 }
 
-const lambdomaSequence = createLambdomaSequence(1, 1, 5, denomination);
-console.log(lambdomaSequence);
+const masterLamdomaSeq = createMasterLamdomaSeq(maxLoopSize);
+console.log(masterLamdomaSeq);
