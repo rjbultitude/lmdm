@@ -10,14 +10,16 @@ class ratio {
     this.denominator = denominator;
   }
   get fraction() {
-    return this.calcFraction;
+    return this.calcFraction();
   }
 
   calcFraction() {
-    this.numerator / this.denominator;
+    return this.numerator / this.denominator;
   }
 }
-
+/*  This creates a lambdome sequence
+    where the first row is ascending numerators
+    columns are ascending denominators */
 function createMasterLamdomaSeq(maxLoopSize) {
   const masterLamdomaArr = [];
   let count = 1;
@@ -65,3 +67,4 @@ function createLambdomaSequence({startingNumerator, startingDenominator, loopSiz
 
 const masterLamdomaSeq = createMasterLamdomaSeq(maxLoopSize);
 console.log(masterLamdomaSeq);
+console.log("play 2/3", masterLamdomaSeq[1][2].fraction);
