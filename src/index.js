@@ -1,13 +1,4 @@
-import { getNote } from "./noteFunctions.js";
 import { createColumns } from "./keyboardInterface.js";
-import { ROOT_NOTE } from "./constants.js";
 
-const twoOverThree = getNote({
-  rootNote: ROOT_NOTE,
-  row: 1,
-  column: 2
-});
-
-console.log("twoOverThree", twoOverThree);
-
+// Generate keyboard interface and bind click events
 createColumns();

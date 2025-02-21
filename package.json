@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "test",
-    "start": "http-server ./"
+    "start": "http-server ./ -c-1"
   },
   "keywords": [
     "lambdoma",

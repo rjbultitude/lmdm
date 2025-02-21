@@ -32,7 +32,7 @@ function createMasterLamdomaSeq(maxLoopSize) {
     masterLamdomaArr.push(lambdomaSequence);
     count += 1;
   }
-  return masterLamdomaArr;
+  return masterLamdomaArr.reverse();
 }
 
 export function createLambdomaSequence({startingNumerator, startingDenominator, loopSize, type}) {
@@ -61,7 +61,7 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
     numeratorCount += numeratorCountAmt;
     denominatorCount += denominatorCountAmt;
   }
-  return thisArray;
+  return thisArray.reverse();
 }
 
 const masterLamdomaSeq = createMasterLamdomaSeq(maxLoopSize);
