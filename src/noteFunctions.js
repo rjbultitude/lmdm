@@ -1,9 +1,6 @@
-import masterLamdomaSeq from "./createLambdomaSeq.js";
-
 export function getNote({
   rootNote,
-  row,
-  column
+  ratio
 }) {
-  return rootNote * masterLamdomaSeq[row][column].fraction;
+  return rootNote * ratio.fraction;
 }

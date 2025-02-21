@@ -1,17 +1,18 @@
 import masterLamdomaSeq from "./createLambdomaSeq.js";
 import { getNote } from "./noteFunctions.js";
 import { ROOT_NOTE } from "./constants.js";
+import { playNote } from "./audio.js";
 
 const mainSection = document.getElementById("main");
 
 export function addClickEvent(el, ratio) {
-  el.addEventListener("click", function() {
+  el.addEventListener("click", function(e) {
+    e.preventDefault();
     const thisNote = getNote({
       rootNote: ROOT_NOTE,
-      row: 1,
-      column: 2
+      ratio
     });
-    //playNote(thisNote);
+    playNote(thisNote);
     console.log("this fraction is ", ratio.fraction);
     console.log("this note is ", thisNote);
   }, false);
