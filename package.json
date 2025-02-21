@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "http-server ./"
   },
   "keywords": [
     "lambdoma",
@@ -15,5 +16,8 @@
     "theory"
   ],
   "author": "Richard Bultitude",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
 }

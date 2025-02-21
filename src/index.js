@@ -1,4 +1,5 @@
 import { getNote } from "./noteFunctions.js";
+import { createColumns } from "./keyboardInterface.js";
 import { ROOT_NOTE } from "./constants.js";
 
 const twoOverThree = getNote({
@@ -8,3 +9,5 @@ const twoOverThree = getNote({
 });
 
 console.log("twoOverThree", twoOverThree);
+
+createColumns();
