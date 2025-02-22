@@ -1,30 +1,42 @@
+import { AUDIO_CONFIG } from "./constants.js";
+
 const stopBtn = document.getElementById("stop");
-let connected = false;
-let startOsc = false;
+const smoothingInterval = 0.02;
+let contextNotSet = true;
+let audioContext;
+let oscillator;
+let gainNode;
 
-// define audio context
-const context = new (window.AudioContext || window.webkitAudioContext)();
-const oscillator = context.createOscillator();
-oscillator.type = 'sine';
-oscillator.connect(context.destination);
-connected = true;
-
-// function stop() {
-//   oscillator.disconnect(context.destination);
-//   connected = false;
-// }
+function setAudioContext() {
+  // define audio context
+  audioContext = new AudioContext();
+  // the "volume control" in our chain:
+  gainNode = audioContext.createGain();
+  gainNode.connect(audioContext.destination);
+  gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+  
+  // the "signal" in our chain:
+  oscillator = audioContext.createOscillator();
+  oscillator.frequency.value = AUDIO_CONFIG.ROOT_NOTE;
+  oscillator.type = 'sine';
+  oscillator.connect(gainNode);
+  oscillator.start();
+  contextNotSet = false;
+}
 
 export function playNote(frequency) {
-  if (!startOsc) {
-    oscillator.frequency.value = frequency;
-    oscillator.start();
-    startOsc = true;
+  if (contextNotSet) {
+    setAudioContext();
   }
+  const now = audioContext.currentTime;
+  oscillator.frequency.value = frequency;
+  gainNode.gain.setTargetAtTime(AUDIO_CONFIG.MAX_VOLUME, now, smoothingInterval);
+  return;
 };
 
 stopBtn.addEventListener('click', function(e) {
+  const now = audioContext.currentTime;
   e.preventDefault();
-  if (connected) {
-    oscillator.stop();
-  }
+  gainNode.gain.setTargetAtTime(0, now, smoothingInterval);
+  startOsc = false;
 });

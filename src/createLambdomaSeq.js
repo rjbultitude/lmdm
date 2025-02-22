@@ -1,7 +1,9 @@
+import { GRID_SIZE } from "./constants.js";
+
 const numeration = "numeration";
 const denomination = "denomination";
 const ascendBoth = "ascendBoth";
-const maxLoopSize = 5;
+const maxLoopSize = GRID_SIZE;
 
 class ratio {
   constructor(numerator, denominator) {
@@ -26,7 +28,7 @@ function createMasterLamdomaSeq(maxLoopSize) {
     const lambdomaSequence = createLambdomaSequence({
       startingNumerator: count,
       startingDenominator: 1, 
-      loopSize: 5,
+      loopSize: GRID_SIZE,
       type: denomination
     });
     masterLamdomaArr.push(lambdomaSequence);

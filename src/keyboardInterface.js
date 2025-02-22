@@ -1,6 +1,6 @@
 import masterLamdomaSeq from "./createLambdomaSeq.js";
 import { getNote } from "./noteFunctions.js";
-import { ROOT_NOTE } from "./constants.js";
+import { AUDIO_CONFIG } from "./constants.js";
 import { playNote } from "./audio.js";
 
 const mainSection = document.getElementById("main");
@@ -9,7 +9,7 @@ export function addClickEvent(el, ratio) {
   el.addEventListener("click", function(e) {
     e.preventDefault();
     const thisNote = getNote({
-      rootNote: ROOT_NOTE,
+      rootNote: AUDIO_CONFIG.ROOT_NOTE,
       ratio
     });
     playNote(thisNote);
