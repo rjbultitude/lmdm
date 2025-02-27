@@ -8,13 +8,14 @@ const mainSection = document.getElementById("main");
 export function addClickEvent(el, ratio) {
   el.addEventListener("click", function(e) {
     e.preventDefault();
-    const thisNote = getNote({
+    const noteId = e.target.id;
+    const thisFreq = getNote({
       rootNote: AUDIO_CONFIG.ROOT_NOTE,
       ratio
     });
-    playNote(thisNote);
+    playNote(noteId, thisFreq);
     console.log("this fraction is ", ratio.fraction);
-    console.log("this note is ", thisNote);
+    console.log("this note is ", thisFreq);
   }, false);
 }
 
