@@ -4,6 +4,7 @@
   <style>
     :root {
       --button-size: 90px;
+      --transition-period: 200ms;
     }
     main {
       display: flex;
@@ -26,6 +27,8 @@
 
     .keyboard__button:hover {
       cursor: pointer;
+      background-color: bisque;
+      transition: background-color var(--transition-period) linear;
     }
     
     .keyboard__button__text {
@@ -35,6 +38,7 @@
 
     .keyboard__button[data-playing="true"] {
       background-color: coral;
+      transition: background-color var(--transition-period) linear;
     }
   </style>
 </head>
