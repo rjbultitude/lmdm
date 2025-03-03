@@ -26,7 +26,6 @@ export function playNote(noteId, frequency) {
 export function stopNote(noteId) {
   activeVoices[noteId].stop();
   delete activeVoices[noteId];
-  startOsc = false;
 }
 
 stopBtn.addEventListener('click', function(e) {
@@ -34,6 +33,5 @@ stopBtn.addEventListener('click', function(e) {
   Object.keys(activeVoices).forEach((activeVoiceKey)=> {
     activeVoices[activeVoiceKey].stop();
     delete activeVoices[activeVoiceKey];
-    startOsc = false;
   });
 });

@@ -27,7 +27,7 @@ export default class Voice {
 
   stop() {
     this.oscillators.forEach((oscillator) => {
-      gain.setTargetAtTime(0, this.now, AUDIO_CONFIG.SMOOTHING_INTERVAL);
+      //vca.gain.setTargetAtTime(0, this.now, AUDIO_CONFIG.SMOOTHING_INTERVAL);
       oscillator.stop();
     });
   }
