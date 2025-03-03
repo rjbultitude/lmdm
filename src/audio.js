@@ -1,4 +1,5 @@
 import Voice from "./VoiceClass.js";
+import { resetPlaying } from "./keyboardInterface.js";
 
 const stopBtn = document.getElementById("stop");
 let contextNotSet = true;
@@ -30,8 +31,8 @@ export function stopNote(noteId) {
 
 stopBtn.addEventListener('click', function(e) {
   e.preventDefault();
-  Object.keys(activeVoices).forEach((activeVoiceKey)=> {
-    activeVoices[activeVoiceKey].stop();
-    delete activeVoices[activeVoiceKey];
+  Object.keys(activeVoices).forEach((activeVoiceKey) => {
+    stopNote(activeVoiceKey);
+    resetPlaying(activeVoiceKey);
   });
 });

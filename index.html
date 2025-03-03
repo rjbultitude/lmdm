@@ -2,18 +2,34 @@
 <head>
   <title>Lambdoma online keyboard</title>
   <style>
+    :root {
+      --button-size: 90px;
+    }
     main {
       display: flex;
       flex-direction: row;
+      transform: rotate(45deg) translate(35%, 35%);
+      /* position: relative;
+      /* top: 480px; */
     }
 
     .keyboard__column {
       flex-direction: column;
-      width: 140px;
+      width: var(--button-size);
     }
 
     .keyboard__button {
-      width: 140px;
+      width: var(--button-size);
+      height: var(--button-size);
+    }
+
+    .keyboard__button:hover {
+      cursor: pointer;
+    }
+    
+    .keyboard__button__text {
+      pointer-events: none;
+      rotate: -45deg;
     }
 
     .keyboard__button[data-playing="true"] {
@@ -23,7 +39,7 @@
 </head>
 <body>
   <main id="main">
-    <button id="stop">Stop</button>
   </main>
+  <button id="stop">Stop All</button>
   <script type="module" src="./src/index.js"></script>
 </body>

@@ -9,6 +9,7 @@ let playing = false;
 export function addClickEvent(el, ratio) {
   el.addEventListener("click", function(e) {
     e.preventDefault();
+    e.stopPropagation();
     const noteId = e.target.id;
     const playingString = e.target.dataset.playing;
     const playing = (playingString === "true");
@@ -18,14 +19,19 @@ export function addClickEvent(el, ratio) {
         ratio
       });
       playNote(noteId, thisFreq);
-      e.target.dataset.playing = true;
+      e.target.dataset.playing = "true";
       console.log("this fraction is ", ratio.fraction);
       console.log("this note is ", thisFreq);
       return;
     }
     stopNote(noteId);
-    e.target.dataset.playing = false;
+    e.target.dataset.playing = "false";
   }, false);
+}
+
+export function resetPlaying(noteId) {
+  const playingButton = document.getElementById(noteId);
+  playingButton.dataset.playing = "false";
 }
 
 export function createColumns() {
@@ -36,10 +42,13 @@ export function createColumns() {
     // Buttons
     column.forEach((ratio) => {
       const thisButton = document.createElement("button");
+      const thisTextWrapper = document.createElement("div");
+      thisTextWrapper.setAttribute("class", "keyboard__button__text");
+      thisTextWrapper.innerText = `${ratio.numerator}/${ratio.denominator}`;
       thisButton.setAttribute("id", `${ratio.numerator}-${ratio.denominator}`);
       thisButton.setAttribute("class", "keyboard__button");
       thisButton.setAttribute("data-playing", "false");
-      thisButton.innerText = `${ratio.numerator}/${ratio.denominator}`;
+      thisButton.insertAdjacentElement("afterbegin", thisTextWrapper);
       addClickEvent(thisButton, ratio);
       thisRow.insertAdjacentElement("afterbegin", thisButton);
     });
