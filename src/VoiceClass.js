@@ -1,4 +1,4 @@
-import { AUDIO_CONFIG } from "./constants";
+import { AUDIO_CONFIG } from "./constants.js";
 
 export default class Voice {
   constructor(context, freq) {
@@ -9,7 +9,7 @@ export default class Voice {
   }
   start() {
     const vco = this.context.createOscillator();
-    vco.type = vco.AUDIO_CONFIG.WAVE_TYPE;
+    vco.type = AUDIO_CONFIG.WAVE_TYPE;
     vco.frequency.value = this.frequency;
 
     /* VCA */

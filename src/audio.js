@@ -1,5 +1,4 @@
-import { AUDIO_CONFIG } from "./constants.js";
-import Voice from "VoiceClass.js";
+import Voice from "./VoiceClass.js";
 
 const stopBtn = document.getElementById("stop");
 let contextNotSet = true;
@@ -24,9 +23,17 @@ export function playNote(noteId, frequency) {
   thisVoice.start();
 };
 
-stopBtn.addEventListener('click', function(e) {
-  e.preventDefault();
+export function stopNote(noteId) {
   activeVoices[noteId].stop();
   delete activeVoices[noteId];
   startOsc = false;
+}
+
+stopBtn.addEventListener('click', function(e) {
+  e.preventDefault();
+  Object.keys(activeVoices).forEach((activeVoiceKey)=> {
+    activeVoices[activeVoiceKey].stop();
+    delete activeVoices[activeVoiceKey];
+    startOsc = false;
+  });
 });
