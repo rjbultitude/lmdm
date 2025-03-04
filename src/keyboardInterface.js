@@ -4,7 +4,6 @@ import { AUDIO_CONFIG } from "./constants.js";
 import { playNote, stopNote } from "./audio.js";
 
 const mainSection = document.getElementById("main");
-let playing = false;
 
 export function addClickEvent(el, ratio) {
   el.addEventListener("click", function(e) {

@@ -6,28 +6,30 @@ export default class Voice {
     this.context = context;
     this.oscillators = [];
     this.now = context.currentTime;
+    this.vco = null;
+    this.vca = null;
   }
   start() {
-    const vco = this.context.createOscillator();
-    vco.type = AUDIO_CONFIG.WAVE_TYPE;
-    vco.frequency.value = this.frequency;
+    this.vco = this.context.createOscillator();
+    this.vco.type = AUDIO_CONFIG.WAVE_TYPE;
+    this.vco.frequency.value = this.frequency;
 
     /* VCA */
-    const vca = this.context.createGain();
-    vca.gain.value = AUDIO_CONFIG.MAX_VOLUME;
+    this.vca = this.context.createGain();
+    this.vca.gain.value = AUDIO_CONFIG.MAX_VOLUME;
 
     /* connections */
-    vco.connect(vca);
-    vca.connect(this.context.destination);
-    vco.start(0);
+    this.vco.connect(this.vca);
+    this.vca.connect(this.context.destination);
+    this.vco.start(0);
 
     /* Keep track of the oscillators used */
-    this.oscillators.push(vco);
+    this.oscillators.push(this.vco);
   }
 
   stop() {
     this.oscillators.forEach((oscillator) => {
-      //vca.gain.setTargetAtTime(0, this.now, AUDIO_CONFIG.SMOOTHING_INTERVAL);
+      this.vca.gain.setTargetAtTime(0, this.now, AUDIO_CONFIG.SMOOTHING_INTERVAL);
       oscillator.stop();
     });
   }
