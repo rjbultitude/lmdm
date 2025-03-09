@@ -6,4 +6,4 @@ export const AUDIO_CONFIG = {
   SMOOTHING_INTERVAL: 0.02
 };
 
-export const GRID_SIZE = 4;
+export const GRID_SIZE = 8;
