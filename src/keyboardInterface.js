@@ -45,7 +45,7 @@ export function createColumns() {
       thisTextWrapper.setAttribute("class", "keyboard__button__text");
       thisTextWrapper.innerText = `${ratio.numerator}/${ratio.denominator}`;
       thisButton.setAttribute("id", `${ratio.numerator}-${ratio.denominator}`);
-      thisButton.setAttribute("class", "keyboard__button");
+      thisButton.setAttribute("class", `keyboard__button ${ratio.colour}`);
       thisButton.setAttribute("data-playing", "false");
       thisButton.insertAdjacentElement("afterbegin", thisTextWrapper);
       addClickEvent(thisButton, ratio);

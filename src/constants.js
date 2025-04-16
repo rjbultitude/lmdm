@@ -6,4 +6,9 @@ export const AUDIO_CONFIG = {
   SMOOTHING_INTERVAL: 0.02
 };
 
+export const COLOURS = {
+  GREEN: "green",
+  GREY: "grey"
+};
+
 export const GRID_SIZE = 8;

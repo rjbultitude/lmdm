@@ -1,14 +1,23 @@
-import { GRID_SIZE } from "./constants.js";
+import { GRID_SIZE, COLOURS } from "./constants.js";
 
 const numeration = "numeration";
 const denomination = "denomination";
 const ascendBoth = "ascendBoth";
 const maxLoopSize = GRID_SIZE;
 
+function getColour(numerator, denominator) {
+  if (numerator === denominator || numerator === denominator * 2 || denominator === numerator * 2 ) {
+    return COLOURS.GREEN;
+  }
+  return COLOURS.GREY;
+}
+
+
 class ratio {
-  constructor(numerator, denominator) {
+  constructor(numerator, denominator, colour) {
     this.numerator = numerator;
     this.denominator = denominator;
+    this.colour = colour;
   }
   get fraction() {
     return this.calcFraction();
@@ -58,7 +67,8 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
       break;
   }
   for (let index = 0; index < loopSize; index++) {
-    const newRatio = new ratio(numeratorCount, denominatorCount);
+    const thisColour = getColour(numeratorCount, denominatorCount);
+    const newRatio = new ratio(numeratorCount, denominatorCount, thisColour);
     thisArray.push(newRatio);
     numeratorCount += numeratorCountAmt;
     denominatorCount += denominatorCountAmt;
