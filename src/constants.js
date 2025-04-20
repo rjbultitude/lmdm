@@ -8,6 +8,14 @@ export const AUDIO_CONFIG = {
 
 export const COLOURS = {
   GREEN: "green",
+  ORANGE: "orange",
+  YELLOW: "yellow",
+  BLUE: "blue",
+  INDIGO: "indigo",
+  VIOLET: "violet",
+  PURPLE: "purple",
+  PINK: "pink",
+  RED: "red",
   GREY: "grey"
 };
 

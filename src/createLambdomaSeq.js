@@ -5,9 +5,44 @@ const denomination = "denomination";
 const ascendBoth = "ascendBoth";
 const maxLoopSize = GRID_SIZE;
 
-function getColour(numerator, denominator) {
-  if (numerator === denominator || numerator === denominator * 2 || denominator === numerator * 2 ) {
+function getColour(fraction) {
+  // Octaves
+  if (fraction === 0.5 || fraction === 1 || fraction === 2) {
     return COLOURS.GREEN;
+  }
+  // Perfect 5th
+  if (fraction === 1.5 || fraction === 0.75) {
+    return COLOURS.YELLOW;
+  }
+  // Perfect 4th
+  const fractionThreePlaces = parseFloat(fraction.toFixed(3));
+  console.log("fractionThreePlaces", fractionThreePlaces);
+  if (fractionThreePlaces === 1.333 || fractionThreePlaces === 0.666) {
+    return COLOURS.ORANGE;
+  }
+  // Major Third
+  if (fraction === 1.25) {
+    return COLOURS.BLUE;
+  }
+  // Minor Third
+  if (fraction === 1.2) {
+    return COLOURS.INDIGO;
+  }
+  // Harmonic Seventh
+  if (fraction === 1.75) {
+    return COLOURS.INDIGO;
+  }
+  // Minor Sixth
+  if (fraction === 1.6) {
+    return COLOURS.INDIGO;
+  }
+  // Major Second
+  if (fraction === 1.125) {
+    return COLOURS.INDIGO;
+  }
+  // Minor Second
+  if (parseFloat(fraction.toFixed(3)) === 1.106) {
+    return COLOURS.INDIGO;
   }
   return COLOURS.GREY;
 }
@@ -21,6 +56,10 @@ class ratio {
   }
   get fraction() {
     return this.calcFraction();
+  }
+
+  set setColour(colour) {
+    this.colour = colour;
   }
 
   calcFraction() {
@@ -67,8 +106,13 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
       break;
   }
   for (let index = 0; index < loopSize; index++) {
-    const thisColour = getColour(numeratorCount, denominatorCount);
-    const newRatio = new ratio(numeratorCount, denominatorCount, thisColour);
+    const newRatio = new ratio(numeratorCount, denominatorCount);
+    const thisFraction = newRatio.calcFraction();
+    const thisColour = getColour(thisFraction);
+    if (newRatio.numerator === 3 && newRatio.denominator === 4) {
+      console.log("3/4 thisFraction", thisFraction);
+    }
+    newRatio.setColour = thisColour;
     thisArray.push(newRatio);
     numeratorCount += numeratorCountAmt;
     denominatorCount += denominatorCountAmt;
