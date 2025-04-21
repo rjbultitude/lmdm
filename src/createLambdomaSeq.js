@@ -5,43 +5,46 @@ const denomination = "denomination";
 const ascendBoth = "ascendBoth";
 const maxLoopSize = GRID_SIZE;
 
+function checkOctaves(fraction, number) {
+  return number / 2 === fraction || number === fraction || number * 2 === fraction;
+}
+
 function getColour(fraction) {
+  const fractionThreePlaces = parseFloat(fraction.toFixed(3));
   // Octaves
-  if (fraction === 0.5 || fraction === 1 || fraction === 2) {
+  if (checkOctaves(fraction, 1)) {
     return COLOURS.GREEN;
   }
   // Perfect 5th
-  if (fraction === 1.5 || fraction === 0.75) {
+  if (checkOctaves(fraction, 1.5)) {
     return COLOURS.YELLOW;
   }
   // Perfect 4th
-  const fractionThreePlaces = parseFloat(fraction.toFixed(3));
-  console.log("fractionThreePlaces", fractionThreePlaces);
-  if (fractionThreePlaces === 1.333 || fractionThreePlaces === 0.666) {
+  if (checkOctaves(fractionThreePlaces, 1.333)) {
     return COLOURS.ORANGE;
   }
   // Major Third
-  if (fraction === 1.25) {
+  if (checkOctaves(fraction, 1.25)) {
     return COLOURS.BLUE;
   }
   // Minor Third
-  if (fraction === 1.2) {
+  if (checkOctaves(fraction, 1.2)) {
     return COLOURS.INDIGO;
   }
   // Harmonic Seventh
-  if (fraction === 1.75) {
+  if (checkOctaves(fraction, 1.75)) {
     return COLOURS.INDIGO;
   }
   // Minor Sixth
-  if (fraction === 1.6) {
+  if (checkOctaves(fraction, 1.6)) {
     return COLOURS.INDIGO;
   }
   // Major Second
-  if (fraction === 1.125) {
+  if (checkOctaves(fraction, 1.125)) {
     return COLOURS.INDIGO;
   }
   // Minor Second
-  if (parseFloat(fraction.toFixed(3)) === 1.106) {
+  if (checkOctaves(fractionThreePlaces, 1.106)) {
     return COLOURS.INDIGO;
   }
   return COLOURS.GREY;
