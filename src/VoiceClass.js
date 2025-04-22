@@ -30,6 +30,7 @@ export default class Voice {
   stop() {
     this.oscillators.forEach((oscillator) => {
       this.vca.gain.setTargetAtTime(0, this.now, AUDIO_CONFIG.SMOOTHING_INTERVAL);
+      // does't seem to be synchronous
       oscillator.stop();
     });
   }

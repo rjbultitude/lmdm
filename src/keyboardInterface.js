@@ -5,7 +5,7 @@ import { playNote, stopNote } from "./audio.js";
 
 const mainSection = document.getElementById("main");
 
-export function addClickEvent(el, ratio) {
+export function noteBtnAddClickEvent(el, ratio) {
   el.addEventListener("click", function(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -48,7 +48,7 @@ export function createColumns() {
       thisButton.setAttribute("class", `keyboard__button ${ratio.colour}`);
       thisButton.setAttribute("data-playing", "false");
       thisButton.insertAdjacentElement("afterbegin", thisTextWrapper);
-      addClickEvent(thisButton, ratio);
+      noteBtnAddClickEvent(thisButton, ratio);
       thisRow.insertAdjacentElement("afterbegin", thisButton);
     });
     mainSection.insertAdjacentElement("afterbegin", thisRow);

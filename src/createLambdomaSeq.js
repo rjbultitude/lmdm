@@ -1,9 +1,24 @@
-import { GRID_SIZE, COLOURS } from "./constants.js";
+import { GRID_SIZE, NOTE_MAP } from "./constants.js";
 
 const numeration = "numeration";
 const denomination = "denomination";
 const ascendBoth = "ascendBoth";
 const maxLoopSize = GRID_SIZE;
+const geometricNumberStart = 2;
+
+// function doubleUntil(numberToDouble, stopPoint) {
+//   if (stopPoint === 32) return;
+//   const newNumber = numberToDouble * geometricNumberStart;
+//   geometricNumberStart * 2;
+//   return newNumber;
+// }
+
+// function divideUntil(numberToDouble, stopPoint) {
+//   if (stopPoint === 32) return;
+//   const newNumber = numberToDouble * geometricNumberStart;
+//   geometricNumberStart * 2;
+//   return newNumber;
+// }
 
 function checkOctaves(fraction, number) {
   return number / 2 === fraction || number === fraction || number * 2 === fraction;
@@ -11,45 +26,44 @@ function checkOctaves(fraction, number) {
 
 function getColour(fraction) {
   const fractionThreePlaces = parseFloat(fraction.toFixed(3));
-  // Octaves
-  if (checkOctaves(fraction, 1)) {
-    return COLOURS.GREEN;
+  // Unison
+  if (checkOctaves(fraction, NOTE_MAP["Unison"].fraction)) {
+    return NOTE_MAP["Unison"].colour;
   }
   // Perfect 5th
-  if (checkOctaves(fraction, 1.5)) {
-    return COLOURS.YELLOW;
+  if (checkOctaves(fraction, NOTE_MAP["Perfect_Fifth"].fraction)) {
+    return NOTE_MAP["Perfect_Fifth"].colour;
   }
   // Perfect 4th
-  if (checkOctaves(fractionThreePlaces, 1.333)) {
-    return COLOURS.ORANGE;
+  if (checkOctaves(fractionThreePlaces, NOTE_MAP["Perfect_Fourth"].fraction)) {
+    return NOTE_MAP["Perfect_Fourth"].colour;
   }
   // Major Third
-  if (checkOctaves(fraction, 1.25)) {
-    return COLOURS.BLUE;
+  if (checkOctaves(fraction, NOTE_MAP["Major_Third"].fraction)) {
+    return NOTE_MAP["Major_Third"].colour;
   }
   // Minor Third
-  if (checkOctaves(fraction, 1.2)) {
-    return COLOURS.INDIGO;
+  if (checkOctaves(fraction, NOTE_MAP["Minor_Third"].fraction)) {
+    return NOTE_MAP["Minor_Third"].colour;
   }
   // Harmonic Seventh
-  if (checkOctaves(fraction, 1.75)) {
-    return COLOURS.INDIGO;
+  if (checkOctaves(fraction, NOTE_MAP["Harmonic_Seventh"].fraction)) {
+    return NOTE_MAP["Harmonic_Seventh"].colour;
   }
   // Minor Sixth
-  if (checkOctaves(fraction, 1.6)) {
-    return COLOURS.INDIGO;
+  if (checkOctaves(fraction, NOTE_MAP["Minor_Sixth"].fraction)) {
+    return NOTE_MAP["Minor_Sixth"].colour;
   }
   // Major Second
-  if (checkOctaves(fraction, 1.125)) {
-    return COLOURS.INDIGO;
+  if (checkOctaves(fraction, NOTE_MAP["Major_Second"].fraction)) {
+    return NOTE_MAP["Major_Second"].colour;
   }
   // Minor Second
-  if (checkOctaves(fractionThreePlaces, 1.106)) {
-    return COLOURS.INDIGO;
+  if (checkOctaves(fractionThreePlaces, NOTE_MAP["Minor_Second"].fraction)) {
+    return NOTE_MAP["Minor_Second"].colour;
   }
-  return COLOURS.GREY;
+  return "grey";
 }
-
 
 class ratio {
   constructor(numerator, denominator, colour) {
@@ -111,6 +125,7 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
   for (let index = 0; index < loopSize; index++) {
     const newRatio = new ratio(numeratorCount, denominatorCount);
     const thisFraction = newRatio.calcFraction();
+    // Is there some other way of doing this?
     const thisColour = getColour(thisFraction);
     if (newRatio.numerator === 3 && newRatio.denominator === 4) {
       console.log("3/4 thisFraction", thisFraction);
