@@ -24,45 +24,20 @@ function checkOctaves(fraction, number) {
   return number / 2 === fraction || number === fraction || number * 2 === fraction;
 }
 
+function countDecimals(value) { 
+  if ((value % 1) != 0) {
+    return value.toString().split(".")[1].length;  
+  }
+  return 0;
+};
+
 function getColour(fraction) {
-  const fractionThreePlaces = parseFloat(fraction.toFixed(3));
-  // Unison
-  if (checkOctaves(fraction, NOTE_MAP["Unison"].fraction)) {
-    return NOTE_MAP["Unison"].colour;
+  let fractionStr = '';
+  if (countDecimals(fraction) > 1) {
+    fractionStr = parseFloat(fraction.toFixed(3)).toString;
   }
-  // Perfect 5th
-  if (checkOctaves(fraction, NOTE_MAP["Perfect_Fifth"].fraction)) {
-    return NOTE_MAP["Perfect_Fifth"].colour;
-  }
-  // Perfect 4th
-  if (checkOctaves(fractionThreePlaces, NOTE_MAP["Perfect_Fourth"].fraction)) {
-    return NOTE_MAP["Perfect_Fourth"].colour;
-  }
-  // Major Third
-  if (checkOctaves(fraction, NOTE_MAP["Major_Third"].fraction)) {
-    return NOTE_MAP["Major_Third"].colour;
-  }
-  // Minor Third
-  if (checkOctaves(fraction, NOTE_MAP["Minor_Third"].fraction)) {
-    return NOTE_MAP["Minor_Third"].colour;
-  }
-  // Harmonic Seventh
-  if (checkOctaves(fraction, NOTE_MAP["Harmonic_Seventh"].fraction)) {
-    return NOTE_MAP["Harmonic_Seventh"].colour;
-  }
-  // Minor Sixth
-  if (checkOctaves(fraction, NOTE_MAP["Minor_Sixth"].fraction)) {
-    return NOTE_MAP["Minor_Sixth"].colour;
-  }
-  // Major Second
-  if (checkOctaves(fraction, NOTE_MAP["Major_Second"].fraction)) {
-    return NOTE_MAP["Major_Second"].colour;
-  }
-  // Minor Second
-  if (checkOctaves(fractionThreePlaces, NOTE_MAP["Minor_Second"].fraction)) {
-    return NOTE_MAP["Minor_Second"].colour;
-  }
-  return "grey";
+  fractionStr = fraction.toString();
+  return NOTE_MAP[fractionStr]?.colour;
 }
 
 class ratio {
@@ -125,11 +100,7 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
   for (let index = 0; index < loopSize; index++) {
     const newRatio = new ratio(numeratorCount, denominatorCount);
     const thisFraction = newRatio.calcFraction();
-    // Is there some other way of doing this?
     const thisColour = getColour(thisFraction);
-    if (newRatio.numerator === 3 && newRatio.denominator === 4) {
-      console.log("3/4 thisFraction", thisFraction);
-    }
     newRatio.setColour = thisColour;
     thisArray.push(newRatio);
     numeratorCount += numeratorCountAmt;

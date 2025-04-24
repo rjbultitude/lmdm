@@ -7,47 +7,47 @@ export const AUDIO_CONFIG = {
 };
 
 export const NOTE_MAP = {
-  "Unison": {
+  "1": {
     name: "Unison",
     colour: "red",
     fraction: 1
   },
-  "Perfect_Fifth": {
+  "1.5": {
     name: "Perfect Fifth",
     colour: "yellow",
     fraction: 1.5
   },
-  "Perfect_Fourth": {
+  "1.333": {
     name: "Perfect Fourth",
     colour: "green",
     fraction: 1.333
   },
-  "Major_Third": {
+  "1.25": {
     name: "Major Third",
     colour: "blue",
     fraction: 1.25
   },
-  "Minor_Third": {
+  "1.2": {
     name: "Minor Third",
     colour: "indigo",
     fraction: 1.2
   },
-  "Harmonic_Seventh": {
+  "1.75": {
     name: "Harmonic Seventh",
     colour: "violet",
     fraction: 1.75
   },
-  "Minor_Sixth": {
+  "1.6": {
     name: "Minor Sixth",
     colour: "purple",
     fraction: 1.6
   },
-  "Major_Second": {
+  "1.125": {
     name: "PMajor Second",
     colour: "orange",
     fraction: 1.125
   },
-  "Minor_Second": {
+  "1.106": {
     name: "Minor Second",
     colour: "pink",
     fraction: 1.106
