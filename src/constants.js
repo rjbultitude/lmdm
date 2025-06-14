@@ -6,16 +6,16 @@ export const AUDIO_CONFIG = {
   SMOOTHING_INTERVAL: 0.002
 };
 
-export const NOTE_MAP = {
+export const CONSONANT_INTERVALS = {
   "1": {
     name: "Unison",
     colour: "red",
-    fraction: 1
+    fraction: 1.000
   },
   "1.5": {
     name: "Perfect Fifth",
     colour: "yellow",
-    fraction: 1.5
+    fraction: 1.500
   },
   "1.333": {
     name: "Perfect Fourth",
@@ -25,22 +25,22 @@ export const NOTE_MAP = {
   "1.25": {
     name: "Major Third",
     colour: "blue",
-    fraction: 1.25
+    fraction: 1.250
   },
   "1.2": {
     name: "Minor Third",
     colour: "indigo",
-    fraction: 1.2
+    fraction: 1.200
   },
   "1.75": {
     name: "Harmonic Seventh",
     colour: "violet",
-    fraction: 1.75
+    fraction: 1.750
   },
   "1.6": {
     name: "Minor Sixth",
     colour: "purple",
-    fraction: 1.6
+    fraction: 1.600
   },
   "1.125": {
     name: "PMajor Second",
