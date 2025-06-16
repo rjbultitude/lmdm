@@ -15,7 +15,8 @@ export const CONSONANT_INTERVALS = {
   "1.5": {
     name: "Perfect Fifth",
     colour: "yellow",
-    fraction: 1.500
+    fraction: 1.500,
+    subFraction: 1.666
   },
   "1.333": {
     name: "Perfect Fourth",
@@ -25,17 +26,20 @@ export const CONSONANT_INTERVALS = {
   "1.25": {
     name: "Major Third",
     colour: "blue",
-    fraction: 1.250
+    fraction: 1.250,
+    subFraction: 0.200
   },
   "1.2": {
     name: "Minor Third",
     colour: "indigo",
-    fraction: 1.200
+    fraction: 1.200,
+    subFraction: 0.100
   },
   "1.75": {
     name: "Harmonic Seventh",
     colour: "violet",
-    fraction: 1.750
+    fraction: 1.750,
+    subFraction: 0.142
   },
   "1.6": {
     name: "Minor Sixth",
@@ -45,7 +49,8 @@ export const CONSONANT_INTERVALS = {
   "1.125": {
     name: "PMajor Second",
     colour: "orange",
-    fraction: 1.125
+    fraction: 1.125,
+    subFraction: 0.111
   },
   "1.106": {
     name: "Minor Second",
