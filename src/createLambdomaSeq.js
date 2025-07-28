@@ -36,12 +36,14 @@ function getIntervalFromOctaves(intervalObj, maxNumDecimals, fractionFixedDecima
 function checkForOctaves(maxNumDecimals, fractionFixedDecimalNum) {
   const constantIntervalsArr = Object.keys(CONSONANT_INTERVALS);
   let colour;
+  // Going up
   for (const intervalKey of constantIntervalsArr) {
     const intervalObj = CONSONANT_INTERVALS[intervalKey];
     // check it is truthy
     colour = getIntervalFromOctaves(intervalObj, maxNumDecimals, fractionFixedDecimalNum, 2);
     if (colour) return colour;
   }
+  // Going down
   for (const intervalKey of constantIntervalsArr) {
     const intervalObj = CONSONANT_INTERVALS[intervalKey];
     colour = getIntervalFromOctaves(intervalObj, maxNumDecimals, fractionFixedDecimalNum, 0.5);
@@ -49,11 +51,22 @@ function checkForOctaves(maxNumDecimals, fractionFixedDecimalNum) {
   }
 }
 
-function getColour(fraction) {
-  const maxNumDecimals = 3;
-  const fractionFixedDecimal = fraction.toFixed(maxNumDecimals);
-  const fractionFixedDecimalNum = parseFloat(fractionFixedDecimal);
-  const fractionColour = CONSONANT_INTERVALS[fractionFixedDecimalNum]?.colour;
+function getColour(ratio, constantIntervalColours) {
+  //const maxNumDecimals = 3;
+  //const fractionFixedDecimal = fraction.toFixed(maxNumDecimals);
+  //const fractionFixedDecimalNum = parseFloat(fractionFixedDecimal);
+  /* This gives us a neat way to quicky get harmonics
+     from the CONSONANT_INTERVALS
+     but we still have to loop to get octaves
+     and we don't get any subharmonics */
+  /* Is it more efficient
+     to loop through each CONSONANT_INTERVAL
+     and check against the fraction and subfraction? */
+  //const intervalColours = new ConstantIntervalColours;
+  //const fractionColour = intervalColours[ratio]?.colour;
+  //const fractionColour = CONSONANT_INTERVALS[fractionFixedDecimalNum]?.colour;
+  const thisRatioString = ratio.ratioString();
+  const fractionColour = constantIntervalColours[thisRatioString]?.colour;
   if (fractionColour) return fractionColour;
   return checkForOctaves(maxNumDecimals, fractionFixedDecimalNum);
 }
@@ -63,6 +76,9 @@ class ratio {
     this.numerator = numerator;
     this.denominator = denominator;
     this.colour = colour;
+  }
+  get ratioString() {
+    return `${this.numerator}/${this.denominator}`;
   }
   get fraction() {
     return this.calcFraction();
@@ -97,6 +113,7 @@ function createMasterLamdomaSeq(maxLoopSize) {
 
 export function createLambdomaSequence({startingNumerator, startingDenominator, loopSize, type}) {
   const thisArray = [];
+  const constantIntervalColours = new ConstantIntervalColours();
   let numeratorCount = startingNumerator;
   let denominatorCount = startingDenominator;
   let numeratorCountAmt = 0;
@@ -117,8 +134,9 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
   }
   for (let index = 0; index < loopSize; index++) {
     const newRatio = new ratio(numeratorCount, denominatorCount);
-    const thisFraction = newRatio.calcFraction();
-    const thisColour = getColour(thisFraction);
+    //const thisFraction = newRatio.calcFraction();
+    //const thisColour = getColour(thisFraction);
+    const thisColour = getColour(newRatio, constantIntervalColours);
     newRatio.setColour = thisColour;
     thisArray.push(newRatio);
     numeratorCount += numeratorCountAmt;
