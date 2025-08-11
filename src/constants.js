@@ -70,7 +70,7 @@ export const constantIntervalColours = {
   "6/5": "blue", // minor third
   "4/3": "green", // perfect fourth
   "3/2": "yellow", // perfect fifth
-  "5/3": "light purple", // majorSixth
+  "5/3": "light_purple", // majorSixth
   "8/5": "purple", // minor Sixth
   "7/4": "violet", // harmonic seventh
   "16/9": "lilac", // flat seventh

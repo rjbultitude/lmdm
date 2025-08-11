@@ -44,7 +44,7 @@ function getFractionFromRatioString(ratioString) {
   return fraction;
 }
 
-function checkForOctaves({maxNumDecimals, fractionFixedDecimalNum}) {
+function checkForOctaves({ratio, maxNumDecimals, fractionFixedDecimalNum}) {
   let colour;
   // Going up
   for (const colourKey in constantIntervalColours) {
@@ -62,14 +62,16 @@ function checkForOctaves({maxNumDecimals, fractionFixedDecimalNum}) {
 }
 
 function getColour(ratio) {
+  const fractionColour = constantIntervalColours[ratio.ratioString];
+  if (fractionColour) return fractionColour;
+  /* Maybe we just check whether the ratio is double
+     or half, rather than the fraction 
+     for example, is 4/8 double 2/4 or 1/2 */
   const maxNumDecimals = 3;
   const fraction = ratio.fraction;
   const fractionFixedDecimal = fraction.toFixed(maxNumDecimals);
   const fractionFixedDecimalNum = parseFloat(fractionFixedDecimal);
-  const fractionColour = constantIntervalColours[ratio.ratioString];
-  console.log("fractionColour", fractionColour);
-  if (fractionColour) return fractionColour;
-  return checkForOctaves({maxNumDecimals, fractionFixedDecimalNum});
+  return checkForOctaves({ratio, maxNumDecimals, fractionFixedDecimalNum});
 }
 
 class Ratio {
