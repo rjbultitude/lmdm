@@ -3,8 +3,10 @@ export const AUDIO_CONFIG = {
   MAX_VOLUME: 0.5,
   WAVE_TYPE: "sine",
   MAX_NUM_OSC: 4,
-  SMOOTHING_INTERVAL: 0.002
+  SMOOTHING_INTERVAL: 0.02
 };
+
+export const GRID_SIZE = 9;
 
 /* Option one 
    Interval names are the keys */
@@ -60,25 +62,21 @@ export class ConstantIntervalRatios {
 
 /* Option two 
    Interval names are ratios */
-export class ConstantIntervalColours {
-  getSubHarmonicRatio(key) {
-    const subharmonicRatio = key.split(/(?=\/)|(?<=\/)/g).reverse().join("");
-    return this[subharmonicRatio];
-  }
-  "1/1" = "red" // unison
-  "9/8" = "orange" // major second
-  "16/15" = "pink" // minor second
-  "5/4" = "indigo" // major third
-  "6/5" = "blue" // minor third
-  "4/3" = "green" // perfect fourth
-  "3/2" = "yellow" // perfect fifth
-  "5/3" = "light purple" // majorSixth
-  "8/5" = "purple" // minor Sixth
-  "7/4" = "violet" // harmonic seventh
-  "16/9" = "lilac" // flat seventh
+export const constantIntervalColours = {
+  "1/1": "red", // unison
+  "9/8": "orange", // major second
+  "16/15": "pink", // minor second
+  "5/4": "indigo", // major third
+  "6/5": "blue", // minor third
+  "4/3": "green", // perfect fourth
+  "3/2": "yellow", // perfect fifth
+  "5/3": "light purple", // majorSixth
+  "8/5": "purple", // minor Sixth
+  "7/4": "violet", // harmonic seventh
+  "16/9": "lilac", // flat seventh
 }
 
-/* Option one 
+/* Option three 
    Interval names are the (calculated) fraction */
 export const CONSONANT_INTERVALS = {
   "1": {
@@ -135,5 +133,3 @@ export const CONSONANT_INTERVALS = {
     subFraction: 0.9375 // 15/16
   },
 };
-
-export const GRID_SIZE = 8;

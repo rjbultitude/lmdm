@@ -1,4 +1,4 @@
-import { GRID_SIZE, CONSONANT_INTERVALS } from "./constants.js";
+import { GRID_SIZE, CONSONANT_INTERVALS, constantIntervalColours } from "./constants.js";
 
 const numeration = "numeration";
 const denomination = "denomination";
@@ -20,65 +20,64 @@ function doubleOrHalveUntil(base, maxPower, scaleDirection) {
   return Math.pow(base, power);
 }
 
-function getIntervalFromOctaves(intervalObj, maxNumDecimals, fractionFixedDecimalNum, base) {
+function getSubHarmonicRatio(key) {
+  const subharmonicRatio = key.split(/(?=\/)|(?<=\/)/g).reverse().join("");
+  return this[subharmonicRatio];
+}
+
+function getIntervalFromOctaves(fraction, maxNumDecimals, fractionFixedDecimalNum, base) {
   const maxPower = 4;
   let intervalFractionPow;
     for (let exponentOctave = 0; exponentOctave < maxPower; exponentOctave++) {
-      intervalFractionPow = intervalObj.fraction * Math.pow(base, exponentOctave);
+      intervalFractionPow = fraction * Math.pow(base, exponentOctave);
       const intervalFractionPowFixed = intervalFractionPow.toFixed(maxNumDecimals);
       const intervalFractionPowFixedNum = parseFloat(intervalFractionPowFixed);
       if (intervalFractionPowFixedNum === fractionFixedDecimalNum) {
-        return CONSONANT_INTERVALS[intervalObj.fraction]?.colour;
+        return CONSONANT_INTERVALS[fraction]?.colour;
       }
     }
 }
 
-function checkForOctaves(maxNumDecimals, fractionFixedDecimalNum) {
-  const constantIntervalsArr = Object.keys(CONSONANT_INTERVALS);
+function getFractionFromRatioString(ratioString) {
+  const fractionArray = ratioString.split("/");
+  const fraction = fractionArray[0] / fractionArray[1];
+  return fraction;
+}
+
+function checkForOctaves({maxNumDecimals, fractionFixedDecimalNum}) {
   let colour;
   // Going up
-  for (const intervalKey of constantIntervalsArr) {
-    const intervalObj = CONSONANT_INTERVALS[intervalKey];
+  for (const colourKey in constantIntervalColours) {
+    const fraction = getFractionFromRatioString(colourKey);
     // check it is truthy
-    colour = getIntervalFromOctaves(intervalObj, maxNumDecimals, fractionFixedDecimalNum, 2);
+    colour = getIntervalFromOctaves(fraction, maxNumDecimals, fractionFixedDecimalNum, 2);
     if (colour) return colour;
   }
   // Going down
-  for (const intervalKey of constantIntervalsArr) {
-    const intervalObj = CONSONANT_INTERVALS[intervalKey];
-    colour = getIntervalFromOctaves(intervalObj, maxNumDecimals, fractionFixedDecimalNum, 0.5);
+  for (const colourKey in constantIntervalColours) {
+    const fraction = getFractionFromRatioString(colourKey);
+    colour = getIntervalFromOctaves(fraction, maxNumDecimals, fractionFixedDecimalNum, 0.5);
     return colour;
   }
 }
 
-function getColour(ratio, constantIntervalColours) {
-  //const maxNumDecimals = 3;
-  //const fractionFixedDecimal = fraction.toFixed(maxNumDecimals);
-  //const fractionFixedDecimalNum = parseFloat(fractionFixedDecimal);
-  /* This gives us a neat way to quicky get harmonics
-     from the CONSONANT_INTERVALS
-     but we still have to loop to get octaves
-     and we don't get any subharmonics */
-  /* Is it more efficient
-     to loop through each CONSONANT_INTERVAL
-     and check against the fraction and subfraction? */
-  //const intervalColours = new ConstantIntervalColours;
-  //const fractionColour = intervalColours[ratio]?.colour;
-  //const fractionColour = CONSONANT_INTERVALS[fractionFixedDecimalNum]?.colour;
-  const thisRatioString = ratio.ratioString();
-  const fractionColour = constantIntervalColours[thisRatioString]?.colour;
+function getColour(ratio) {
+  const maxNumDecimals = 3;
+  const fraction = ratio.fraction;
+  const fractionFixedDecimal = fraction.toFixed(maxNumDecimals);
+  const fractionFixedDecimalNum = parseFloat(fractionFixedDecimal);
+  const fractionColour = constantIntervalColours[ratio.ratioString];
+  console.log("fractionColour", fractionColour);
   if (fractionColour) return fractionColour;
-  return checkForOctaves(maxNumDecimals, fractionFixedDecimalNum);
+  return checkForOctaves({maxNumDecimals, fractionFixedDecimalNum});
 }
 
-class ratio {
+class Ratio {
   constructor(numerator, denominator, colour) {
     this.numerator = numerator;
     this.denominator = denominator;
     this.colour = colour;
-  }
-  get ratioString() {
-    return `${this.numerator}/${this.denominator}`;
+    this.ratioString = `${numerator}/${denominator}`;
   }
   get fraction() {
     return this.calcFraction();
@@ -113,7 +112,6 @@ function createMasterLamdomaSeq(maxLoopSize) {
 
 export function createLambdomaSequence({startingNumerator, startingDenominator, loopSize, type}) {
   const thisArray = [];
-  const constantIntervalColours = new ConstantIntervalColours();
   let numeratorCount = startingNumerator;
   let denominatorCount = startingDenominator;
   let numeratorCountAmt = 0;
@@ -133,10 +131,10 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
       break;
   }
   for (let index = 0; index < loopSize; index++) {
-    const newRatio = new ratio(numeratorCount, denominatorCount);
+    const newRatio = new Ratio(numeratorCount, denominatorCount);
     //const thisFraction = newRatio.calcFraction();
     //const thisColour = getColour(thisFraction);
-    const thisColour = getColour(newRatio, constantIntervalColours);
+    const thisColour = getColour(newRatio);
     newRatio.setColour = thisColour;
     thisArray.push(newRatio);
     numeratorCount += numeratorCountAmt;
