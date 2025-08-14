@@ -73,7 +73,7 @@ export const constantIntervalColours = {
   "5/3": "light_purple", // majorSixth
   "8/5": "purple", // minor Sixth
   "7/4": "violet", // harmonic seventh
-  "16/9": "lilac", // flat seventh
+  "2/9": "lilac", // flat seventh. 16.9
 }
 
 /* Option three 
