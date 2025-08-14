@@ -6,25 +6,6 @@ const ascendBoth = "ascendBoth";
 const maxLoopSize = GRID_SIZE;
 const UP = "up";
 
-// Don't we just want to use power (exponents) here?
-function doubleOrHalveUntil(base, maxPower, scaleDirection) {
-  // TODO Derive the exponentfrom the grid size
-  maxPower = 3;
-  let power;
-  if (scaleDirection === UP) {
-    power = 2;
-  } else {
-    power = 0.5;
-  }
-  if (power === maxPower) return;
-  return Math.pow(base, power);
-}
-
-function getSubHarmonicRatio(key) {
-  const subharmonicRatio = key.split(/(?=\/)|(?<=\/)/g).reverse().join("");
-  return this[subharmonicRatio];
-}
-
 function getIntervalFromOctaves(fraction, maxNumDecimals, fractionFixedDecimalNum, base) {
   const maxPower = 4;
   let intervalFractionPow;
@@ -44,34 +25,36 @@ function getFractionFromRatioString(ratioString) {
   return fraction;
 }
 
-function checkForOctaves({ratio, maxNumDecimals, fractionFixedDecimalNum}) {
+function checkForOctaves({maxNumDecimals, fractionFixedDecimalNum, up}) {
   let colour;
+  let octaveDirection;
+  if (up) {
+    octaveDirection = 2
+  } else {
+    octaveDirection = 0.5
+  };
   // Going up
   for (const colourKey in constantIntervalColours) {
     const fraction = getFractionFromRatioString(colourKey);
     // check it is truthy
-    colour = getIntervalFromOctaves(fraction, maxNumDecimals, fractionFixedDecimalNum, 2);
+    colour = getIntervalFromOctaves(fraction, maxNumDecimals, fractionFixedDecimalNum, octaveDirection);
     if (colour) return colour;
-  }
-  // Going down
-  for (const colourKey in constantIntervalColours) {
-    const fraction = getFractionFromRatioString(colourKey);
-    colour = getIntervalFromOctaves(fraction, maxNumDecimals, fractionFixedDecimalNum, 0.5);
-    return colour;
   }
 }
 
 function getColour(ratio) {
-  const fractionColour = constantIntervalColours[ratio.ratioString];
+  // If we can just find it via its key
+  let fractionColour = constantIntervalColours[ratio.ratioString];
   if (fractionColour) return fractionColour;
-  /* Maybe we just check whether the ratio is double
-     or half, rather than the fraction 
-     for example, is 4/8 double 2/4 or 1/2 */
+  // failing that match using fractions
   const maxNumDecimals = 3;
   const fraction = ratio.fraction;
   const fractionFixedDecimal = fraction.toFixed(maxNumDecimals);
   const fractionFixedDecimalNum = parseFloat(fractionFixedDecimal);
-  return checkForOctaves({ratio, maxNumDecimals, fractionFixedDecimalNum});
+  fractionColour = checkForOctaves({maxNumDecimals, fractionFixedDecimalNum, up: true});
+  if (fractionColour) return fractionColour;
+  fractionColour = checkForOctaves({maxNumDecimals, fractionFixedDecimalNum, up: false});
+  if (fractionColour) return fractionColour;
 }
 
 class Ratio {
