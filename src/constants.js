@@ -70,10 +70,13 @@ export const constantIntervalColours = {
   "6/5": "blue", // minor third
   "4/3": "green", // perfect fourth
   "3/2": "yellow", // perfect fifth
-  "5/3": "light_purple", // majorSixth
-  "8/5": "purple", // minor Sixth
+  "5/3": "light_purple", // major sixth
+  "8/5": "purple", // minor sixth
   "7/4": "violet", // harmonic seventh
   "2/9": "lilac", // flat seventh. 16.9
+  "7/3": "deep purple", // diminished 6th
+  "7/5": "beige", // lesser septimal tritone
+  "9/7": "grass", // septimal major third
 }
 
 /* Option three 
