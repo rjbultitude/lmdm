@@ -4,29 +4,20 @@ const numeration = "numeration";
 const denomination = "denomination";
 const ascendBoth = "ascendBoth";
 const maxLoopSize = GRID_SIZE;
-const UP = "up";
 
-function getIntervalFromOctaves({ratio, fraction, maxNumDecimals, fractionFixedDecimalNum, base}) {
+function getIntervalFromOctaves({ratio, colourKey, maxNumDecimals, base}) {
   const maxPower = 4;
-  let intervalFractionPow;
-  let debug;
-  if (ratio.numerator === 4 && ratio.denominator === 9) {
-    debug = true;
-    console.log("ratio", ratio);
-    console.log("fraction", fraction);
-  }
+  const colourKeyFraction = getFractionFromRatioString(colourKey);
+  const fraction = ratio.fraction;
+  const fractionFixedDecimal = fraction.toFixed(maxNumDecimals);
+  const fractionFixedDecimalNum = parseFloat(fractionFixedDecimal);
   for (let exponentOctave = 0; exponentOctave < maxPower; exponentOctave++) {
     // does this need to be fixed to 3 decimal places before being multiplied?
-    intervalFractionPow = fraction * Math.pow(base, exponentOctave);
-    const intervalFractionPowFixed = intervalFractionPow.toFixed(maxNumDecimals);
-    const intervalFractionPowFixedNum = parseFloat(intervalFractionPowFixed);
-    if (debug) {
-      console.log("intervalFractionPow", intervalFractionPow);
-      console.log("intervalFractionPowFixed", intervalFractionPowFixed);
-      console.log("intervalFractionPowFixedNum", intervalFractionPowFixedNum);
-    }
-    if (intervalFractionPowFixedNum === fractionFixedDecimalNum) {
-      return CONSONANT_INTERVALS[fraction]?.colour;
+    const colourKeyFractionPow = colourKeyFraction * Math.pow(base, exponentOctave);
+    const colourKeyFractionPowFixed = colourKeyFractionPow.toFixed(maxNumDecimals);
+    const colourKeyFractionPowFixedNum = parseFloat(colourKeyFractionPowFixed);
+    if (colourKeyFractionPowFixedNum === fractionFixedDecimalNum) {
+      return constantIntervalColours[colourKey];
     }
   }
 }
@@ -37,7 +28,7 @@ function getFractionFromRatioString(ratioString) {
   return fraction;
 }
 
-function checkForOctaves({ratio, maxNumDecimals, fractionFixedDecimalNum, up}) {
+function checkForOctaves({ratio, maxNumDecimals, up}) {
   let colour;
   let octaveDirection;
   if (up) {
@@ -47,9 +38,7 @@ function checkForOctaves({ratio, maxNumDecimals, fractionFixedDecimalNum, up}) {
   };
   // Going up
   for (const colourKey in constantIntervalColours) {
-    const fraction = getFractionFromRatioString(colourKey);
-    // check it is truthy
-    colour = getIntervalFromOctaves({ratio, fraction, maxNumDecimals, fractionFixedDecimalNum, base: octaveDirection});
+    colour = getIntervalFromOctaves({ratio, colourKey, maxNumDecimals, base: octaveDirection});
     if (colour) return colour;
   }
 }
@@ -60,12 +49,9 @@ function getColour(ratio) {
   if (fractionColour) return fractionColour;
   // failing that match using fractions
   const maxNumDecimals = 3;
-  const fraction = ratio.fraction;
-  const fractionFixedDecimal = fraction.toFixed(maxNumDecimals);
-  const fractionFixedDecimalNum = parseFloat(fractionFixedDecimal);
-  fractionColour = checkForOctaves({ratio, maxNumDecimals, fractionFixedDecimalNum, up: true});
+  fractionColour = checkForOctaves({ratio, maxNumDecimals, up: true});
   if (fractionColour) return fractionColour;
-  fractionColour = checkForOctaves({ratio, maxNumDecimals, fractionFixedDecimalNum, up: false});
+  fractionColour = checkForOctaves({ratio, maxNumDecimals, up: false});
   if (fractionColour) return fractionColour;
 }
 
