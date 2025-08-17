@@ -39,20 +39,24 @@
       background-color: #6a75dd;
     }
 
+    .keyboard__button.pale_blue {
+      background-color: #6e9ad4;
+    }
+
     .keyboard__button.violet {
-      background-color: #9f66ea;
+      background-color: #ca7efd;
     }
 
     .keyboard__button.indigo {
-      background-color: #8835bf;
+      background-color: #b062e4;
     }
     
     .keyboard__button.deep_purple {
-      background-color: #4b306a;
+      background-color: #9e5de8;
     }
 
     .keyboard__button.purple {
-      background-color: #800080;
+      background-color: #843fcf;
     }
 
     .keyboard__button.light_purple {
@@ -60,11 +64,11 @@
     }
 
     .keyboard__button.red {
-      background-color: #c9536b;
+      background-color: #d86a80;
     }
 
     .keyboard__button.pink {
-      background-color: #d539cd;
+      background-color: #e74fdf;
     }
 
     .keyboard__button.lilac {
@@ -105,6 +109,11 @@
   </style>
 </head>
 <body>
+  <form id="keyboard-settings-form" class="keyboard-form">
+    <label for="base-frequency-input">Base Frequency</label>
+    <input name="base-frequency-input" type="number" id="input-base-frequency">
+    <button id="keyboard-settings-submit">Submit</button>
+  </form>
   <main id="main">
   </main>
   <button id="stop">Stop All</button>

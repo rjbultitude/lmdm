@@ -1,18 +1,17 @@
-import { GRID_SIZE, CONSONANT_INTERVALS, constantIntervalColours } from "./constants.js";
+import { GRID_SIZE, constantIntervalColours } from "./constants.js";
 
 const numeration = "numeration";
 const denomination = "denomination";
 const ascendBoth = "ascendBoth";
 const maxLoopSize = GRID_SIZE;
 
-function getIntervalFromOctaves({ratio, colourKey, maxNumDecimals, base}) {
+function getIntervalColourFromOctaves({ratio, colourKey, maxNumDecimals, base}) {
   const maxPower = 4;
   const colourKeyFraction = getFractionFromRatioString(colourKey);
   const fraction = ratio.fraction;
   const fractionFixedDecimal = fraction.toFixed(maxNumDecimals);
   const fractionFixedDecimalNum = parseFloat(fractionFixedDecimal);
   for (let exponentOctave = 0; exponentOctave < maxPower; exponentOctave++) {
-    // does this need to be fixed to 3 decimal places before being multiplied?
     const colourKeyFractionPow = colourKeyFraction * Math.pow(base, exponentOctave);
     const colourKeyFractionPowFixed = colourKeyFractionPow.toFixed(maxNumDecimals);
     const colourKeyFractionPowFixedNum = parseFloat(colourKeyFractionPowFixed);
@@ -38,7 +37,7 @@ function checkForOctaves({ratio, maxNumDecimals, up}) {
   };
   // Going up
   for (const colourKey in constantIntervalColours) {
-    colour = getIntervalFromOctaves({ratio, colourKey, maxNumDecimals, base: octaveDirection});
+    colour = getIntervalColourFromOctaves({ratio, colourKey, maxNumDecimals, base: octaveDirection});
     if (colour) return colour;
   }
 }

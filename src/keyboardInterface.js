@@ -1,6 +1,7 @@
 import masterLamdomaSeq from "./createLambdomaSeq.js";
 import { getNote } from "./noteFunctions.js";
 import { AUDIO_CONFIG } from "./constants.js";
+import state from "./state.js";
 import { playNote, stopNote } from "./audio.js";
 
 const mainSection = document.getElementById("main");
@@ -14,7 +15,7 @@ export function noteBtnAddClickEvent(el, ratio) {
     const playing = (playingString === "true");
     if (playing === false) {
       const thisFreq = getNote({
-        rootNote: AUDIO_CONFIG.ROOT_NOTE,
+        rootNote: state.baseFrequency,
         ratio
       });
       playNote(noteId, thisFreq);
