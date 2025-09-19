@@ -1,4 +1,4 @@
-import { constantIntervalColours, DEFAULT_COLOUR, KEYBOARD_BTN_CLASSNAME } from "./constants.js";
+import { constantIntervalColours, DEFAULT_COLOUR } from "./constants.js";
 
 function getSubHarmonicRatio(key) {
   const subharmonicRatio = key.split(/(?=\/)|(?<=\/)/g).reverse().join("");
@@ -12,7 +12,6 @@ export function getColourMirrored(ratio) {
   const ratioReversed = getSubHarmonicRatio(ratio.ratioString);
   fractionColour = constantIntervalColours[ratioReversed];
   if (fractionColour) return fractionColour;
-  // TODO. Needs fixing
   const higherRatio = checkForRatioOctaves({ratio, up: true});
   fractionColour = constantIntervalColours[higherRatio];
   if (fractionColour) return fractionColour;
@@ -22,6 +21,9 @@ export function getColourMirrored(ratio) {
   return DEFAULT_COLOUR;
 }
 
+/* Is this ratio exactly double or half
+   one of the constantIntervalColours keys
+*/
 function checkForRatioOctaves({ratio, up}) {
   let colour;
   let octaveDirection;
@@ -31,20 +33,22 @@ function checkForRatioOctaves({ratio, up}) {
     octaveDirection = 0.5
   };
   for (const colourKey in constantIntervalColours) {
-    //const fraction = getFractionFromRatioString(colourKey); 
-    colour = getRatioOctaves(ratio, octaveDirection);
+    colour = getRatioOctaves(ratio, colourKey, octaveDirection);
     if (colour) return colour;
   }
 }
 
-function getRatioOctaves(ratio, base) {
+function getRatioOctaves(ratio, colourKey, base) {
   const maxPower = 4;
     for (let exponentOctave = 0; exponentOctave < maxPower; exponentOctave++) {
       const ratioNumeratorPow = ratio.numerator * Math.pow(base, exponentOctave);
       const ratioDenominatorPow = ratio.denominator * Math.pow(base, exponentOctave);
       // if whole numbers
       if (Number.isInteger(ratioNumeratorPow) && Number.isInteger(ratioDenominatorPow)) {
-        return `${ratioNumeratorPow}/${ratioDenominatorPow}`;
+        const wholeNumRatio = `${ratioNumeratorPow}/${ratioDenominatorPow}`;
+        if (wholeNumRatio === colourKey) {
+          return colourKey;
+        }
       }
     }
 }
