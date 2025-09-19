@@ -1,57 +1,14 @@
-import { GRID_SIZE, constantIntervalColours } from "./constants.js";
+import { GRID_SIZE } from "./constants.js";
+import { getColourMirrored } from "./keyboardColourMirrored.js";
+import { getColourOctavesMatter } from "./keyboardColourOctavesMatter.js";
 
 const numeration = "numeration";
 const denomination = "denomination";
 const ascendBoth = "ascendBoth";
 const maxLoopSize = GRID_SIZE;
 
-function getIntervalColourFromOctaves({ratio, colourKey, maxNumDecimals, base}) {
-  const maxPower = 4;
-  const colourKeyFraction = getFractionFromRatioString(colourKey);
-  const fraction = ratio.fraction;
-  const fractionFixedDecimal = fraction.toFixed(maxNumDecimals);
-  const fractionFixedDecimalNum = parseFloat(fractionFixedDecimal);
-  for (let exponentOctave = 0; exponentOctave < maxPower; exponentOctave++) {
-    const colourKeyFractionPow = colourKeyFraction * Math.pow(base, exponentOctave);
-    const colourKeyFractionPowFixed = colourKeyFractionPow.toFixed(maxNumDecimals);
-    const colourKeyFractionPowFixedNum = parseFloat(colourKeyFractionPowFixed);
-    if (colourKeyFractionPowFixedNum === fractionFixedDecimalNum) {
-      return constantIntervalColours[colourKey];
-    }
-  }
-}
-
-function getFractionFromRatioString(ratioString) {
-  const fractionArray = ratioString.split("/");
-  const fraction = fractionArray[0] / fractionArray[1];
-  return fraction;
-}
-
-function checkForOctaves({ratio, maxNumDecimals, up}) {
-  let colour;
-  let octaveDirection;
-  if (up) {
-    octaveDirection = 2
-  } else {
-    octaveDirection = 0.5
-  };
-  // Going up
-  for (const colourKey in constantIntervalColours) {
-    colour = getIntervalColourFromOctaves({ratio, colourKey, maxNumDecimals, base: octaveDirection});
-    if (colour) return colour;
-  }
-}
-
-function getColour(ratio) {
-  // If we can just find it via its key
-  let fractionColour = constantIntervalColours[ratio.ratioString];
-  if (fractionColour) return fractionColour;
-  // failing that match using fractions
-  const maxNumDecimals = 3;
-  fractionColour = checkForOctaves({ratio, maxNumDecimals, up: true});
-  if (fractionColour) return fractionColour;
-  fractionColour = checkForOctaves({ratio, maxNumDecimals, up: false});
-  if (fractionColour) return fractionColour;
+export function getFraction({ numerator, denominator }) {
+  return numerator / denominator;
 }
 
 class Ratio {
@@ -114,9 +71,8 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
   }
   for (let index = 0; index < loopSize; index++) {
     const newRatio = new Ratio(numeratorCount, denominatorCount);
-    //const thisFraction = newRatio.calcFraction();
-    //const thisColour = getColour(thisFraction);
-    const thisColour = getColour(newRatio);
+    //const thisColour = getColourOctavesMatter(newRatio);
+    const thisColour = getColourMirrored(newRatio);
     newRatio.setColour = thisColour;
     thisArray.push(newRatio);
     numeratorCount += numeratorCountAmt;

@@ -1,4 +1,4 @@
-import { constantIntervalColours } from "./constants.js";
+import { constantIntervalColours, DEFAULT_COLOUR, KEYBOARD_BTN_CLASSNAME } from "./constants.js";
 
 function getSubHarmonicRatio(key) {
   const subharmonicRatio = key.split(/(?=\/)|(?<=\/)/g).reverse().join("");
@@ -6,7 +6,7 @@ function getSubHarmonicRatio(key) {
 }
 
 // Mirrored overlay
-function getMirrorColour(ratio) {
+export function getColourMirrored(ratio) {
   let fractionColour = constantIntervalColours[ratio.ratioString];
   if (fractionColour) return fractionColour;
   const ratioReversed = getSubHarmonicRatio(ratio.ratioString);
@@ -19,6 +19,7 @@ function getMirrorColour(ratio) {
   const lowerRatio = checkForRatioOctaves({ratio, up: false});
   fractionColour = constantIntervalColours[lowerRatio];
   if (fractionColour) return fractionColour;
+  return DEFAULT_COLOUR;
 }
 
 function checkForRatioOctaves({ratio, up}) {

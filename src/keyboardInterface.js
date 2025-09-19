@@ -1,8 +1,8 @@
 import masterLamdomaSeq from "./createLambdomaSeq.js";
 import { getNote } from "./noteFunctions.js";
-import { AUDIO_CONFIG } from "./constants.js";
 import state from "./state.js";
 import { playNote, stopNote } from "./audio.js";
+import { KEYBOARD_BTN_CLASSNAME } from "./constants.js";
 
 const mainSection = document.getElementById("main");
 
@@ -34,7 +34,7 @@ export function resetPlaying(noteId) {
   playingButton.dataset.playing = "false";
 }
 
-export function createColumns() {
+export function createColumns(readyCallbacksArr) {
   masterLamdomaSeq.forEach((column, index) => {
     const thisRow = document.createElement("div");
     thisRow.setAttribute("id", `column-${index}`);
@@ -43,10 +43,14 @@ export function createColumns() {
     column.forEach((ratio) => {
       const thisButton = document.createElement("button");
       const thisTextWrapper = document.createElement("div");
-      thisTextWrapper.setAttribute("class", "keyboard__button__text");
-      thisTextWrapper.innerText = `${ratio.numerator}/${ratio.denominator}`;
+      thisTextWrapper.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME}__text`);
+      const ratiostr = `${ratio.numerator}/${ratio.denominator}`;
+      thisTextWrapper.innerText = ratiostr;
+      thisButton.dataset.ratioString = ratiostr;
+      thisButton.dataset.numerator = ratio.numerator;
+      thisButton.dataset.denominator = ratio.denominator;
       thisButton.setAttribute("id", `${ratio.numerator}-${ratio.denominator}`);
-      thisButton.setAttribute("class", `keyboard__button ${ratio.colour}`);
+      thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME} ${ratio.colour}`);
       thisButton.setAttribute("data-playing", "false");
       thisButton.insertAdjacentElement("afterbegin", thisTextWrapper);
       noteBtnAddClickEvent(thisButton, ratio);
@@ -54,4 +58,8 @@ export function createColumns() {
     });
     mainSection.insertAdjacentElement("afterbegin", thisRow);
   });
+  readyCallbacksArr.forEach((cb) => {
+    cb();
+  });
+  return masterLamdomaSeq;
 }

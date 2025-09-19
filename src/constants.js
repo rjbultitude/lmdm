@@ -6,7 +6,12 @@ export const AUDIO_CONFIG = {
   SMOOTHING_INTERVAL: 0.02
 };
 
+export const KEYBOARD_COLOURSCHEME_OCT = "Octaves matter";
+export const KEYBOARD_COLOURSCHEME_MIR = "Mirroed rarios";
+
 export const GRID_SIZE = 9;
+export const DEFAULT_COLOUR = "grey";
+export const KEYBOARD_BTN_CLASSNAME = "keyboard__button";
 
 /* Option two 
    Interval names are ratios */
@@ -21,9 +26,11 @@ export const constantIntervalColours = {
   "5/3": "light_purple", // major sixth
   "8/5": "purple", // minor sixth
   "7/4": "violet", // harmonic seventh
+  // Exception
   "2/9": "lilac", // flat seventh. 16.9
   "7/3": "deep_purple", // diminished 6th
   "7/5": "beige", // lesser septimal tritone
   "9/7": "grass", // septimal major third
+  // Exception
   "1/7": "pale_blue" // Subharmic 7th
 }
