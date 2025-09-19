@@ -34,4 +34,8 @@ export default class Voice {
       oscillator.stop();
     });
   }
+  update(newFrequency) {
+    this.frequency = newFrequency;
+    this.vco.frequency.value = newFrequency;
+  }
 }

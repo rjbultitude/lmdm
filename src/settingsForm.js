@@ -1,4 +1,5 @@
 import state from "./state.js";
+import { updateActiveVoices } from "./audio.js";
 
 export default function initSettingsForm() {
   const form = document.getElementById("keyboard-settings-form");
@@ -11,5 +12,6 @@ export default function initSettingsForm() {
   });
   submit.addEventListener("click", function() {
     state.baseFrequency = input.value;
+    updateActiveVoices();
   });
 }

@@ -20,8 +20,10 @@ export function noteBtnAddClickEvent(el, ratio) {
       });
       playNote(noteId, thisFreq);
       e.target.dataset.playing = "true";
+      state.activeVoices[noteId].ratio = ratio;
       console.log("this fraction is ", ratio.fraction);
       console.log("this note is ", thisFreq);
+      console.log("state.activeVoices", state.activeVoices);
       return;
     }
     stopNote(noteId);
