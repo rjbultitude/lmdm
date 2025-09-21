@@ -1,8 +1,9 @@
-import masterLamdomaSeq from "./createLambdomaSeq.js";
+import masterLamdomaSeq, { createMasterLamdomaSeq } from "./createLambdomaSeq.js";
 import { getNote } from "./noteFunctions.js";
 import state from "./state.js";
 import { playNote, stopNote } from "./audio.js";
 import { KEYBOARD_BTN_CLASSNAME } from "./constants.js";
+import { initColourSelect } from "./colourSelect.js";
 
 const mainSection = document.getElementById("main");
 
@@ -36,8 +37,16 @@ export function resetPlaying(noteId) {
   playingButton.dataset.playing = "false";
 }
 
-export function createColumns(readyCallbacksArr) {
-  masterLamdomaSeq.forEach((column, index) => {
+export function recreateColumns() {
+  mainSection.replaceChildren();
+  const doneCallbackArr = [initColourSelect];
+  console.debug("state.gridSize", state.gridSize);
+  const entireLambdoma = createMasterLamdomaSeq(state.gridSize);
+  createColumns(doneCallbackArr, entireLambdoma);
+}
+
+export function createColumns(readyCallbacksArr, entireLambdoma = masterLamdomaSeq) {
+  entireLambdoma.forEach((column, index) => {
     const thisRow = document.createElement("div");
     thisRow.setAttribute("id", `column-${index}`);
     thisRow.setAttribute("class", "keyboard__column");
@@ -63,5 +72,5 @@ export function createColumns(readyCallbacksArr) {
   readyCallbacksArr.forEach((cb) => {
     cb();
   });
-  return masterLamdomaSeq;
+  return entireLambdoma;
 }

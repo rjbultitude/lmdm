@@ -1,11 +1,12 @@
 import { GRID_SIZE } from "./constants.js";
 import { getColourMirrored } from "./keyboardColourMirrored.js";
 import { getColourOctavesMatter } from "./keyboardColourOctavesMatter.js";
+import state from "./state.js";
 
 const numeration = "numeration";
 const denomination = "denomination";
 const ascendBoth = "ascendBoth";
-const maxLoopSize = GRID_SIZE;
+const maxLoopSize = state.gridSize;
 
 export function getFraction({ numerator, denominator }) {
   return numerator / denominator;
@@ -33,14 +34,14 @@ class Ratio {
 /*  This creates a lambdoma sequence
     where the first row is ascending numerators
     columns are ascending denominators */
-function createMasterLamdomaSeq(maxLoopSize) {
+export function createMasterLamdomaSeq(maxLoopSize) {
   const masterLamdomaArr = [];
   let count = 1;
   for (let index = 0; index < maxLoopSize; index++) {
     const lambdomaSequence = createLambdomaSequence({
       startingNumerator: count,
       startingDenominator: 1, 
-      loopSize: GRID_SIZE,
+      loopSize: maxLoopSize,
       type: denomination
     });
     masterLamdomaArr.push(lambdomaSequence);

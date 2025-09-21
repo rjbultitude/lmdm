@@ -1,7 +1,8 @@
-import { AUDIO_CONFIG } from "./constants.js";
+import { AUDIO_CONFIG, GRID_SIZE } from "./constants.js";
 
 const state = {
   baseFrequency: AUDIO_CONFIG.ROOT_NOTE,
-  activeVoices: {}
+  activeVoices: {},
+  gridSize: GRID_SIZE
 }
 export default state;
