@@ -72,8 +72,8 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
   }
   for (let index = 0; index < loopSize; index++) {
     const newRatio = new Ratio(numeratorCount, denominatorCount);
-    //const thisColour = getColourOctavesMatter(newRatio);
-    const thisColour = getColourMirrored(newRatio);
+    const thisColour = getColourOctavesMatter(newRatio);
+    //const thisColour = getColourMirrored(newRatio);
     newRatio.setColour = thisColour;
     thisArray.push(newRatio);
     numeratorCount += numeratorCountAmt;

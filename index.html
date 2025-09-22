@@ -1,19 +1,84 @@
 <!DOCTYPE html>
 <head>
   <title>Lambdoma online keyboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
   <style>
+    html * > {
+      font-size: 0.75;
+      box-sizing: border-box;
+    }
+    body {
+      font-size: 1rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f9;
+      color: #2f4550;
+    }
+    a {
+      color: #2f4550;
+    }
+    a:hover,
+    a:focus {
+      text-decoration: none;
+    }
+    h1 {
+      font-family: "Abril Fatface", serif;
+      font-size: 2.2rem;
+      text-align: center;
+    }
+    .sub-heading {
+      display: block;
+      font-size: 1.3rem;
+    }
     :root {
-      --button-size: 60px;
+      --button-size: 52px;
       --transition-period: 200ms;
       --grid-size: 8;
+      --spacing: 16px;
+      --max-width: 768px;
+      --dark-green: #2f4550;
+      --mid-green: #586f7c;
+      --light-green: #b8dbd9;
+    }
+    .wrapper {
+      margin: 0 auto;
+      max-width: var(--max-width);
     }
     main {
       display: flex;
       flex-direction: row;
-      transform: rotate(45deg) translate(35%, 0%);
-      width: calc(var(--button-size) * var(--grid-size));
-      /* position: relative;
-      /* top: 480px; */
+      margin: 0 auto;
+      justify-content: center;
+      padding: var(--spacing) 0;
+    }
+
+    .keyboard-form {
+      background-color: #b8dbd9;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: var(--spacing);
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: var(--spacing);
+    }
+
+    .keyboard-form__fieldset {
+      width: fit-content;
+    }
+
+    .keyboard-form__submit {
+      background-color: var(--dark-green);
+      color: white;
+    }
+
+    .keyboard-form__fieldset input {
+      width: 60px;
+    }
+
+    .keyboard-form__fieldset {
+      display: inline-block;
     }
 
     .keyboard__column {
@@ -25,6 +90,7 @@
       width: var(--button-size);
       height: var(--button-size);
       border: 1px solid black;
+      transition: background-color var(--transition-period) linear;
     }
 
     .keyboard__button.green {
@@ -99,34 +165,59 @@
     
     .keyboard__button__text {
       pointer-events: none;
-      rotate: -45deg;
     }
 
     .keyboard__button[data-playing="true"] {
       background-color: coral;
       transition: background-color var(--transition-period) linear;
     }
+
+    @media screen and (min-width: 580px) {
+      main {
+        transform: rotate(45deg) translate(20%, 15%);
+        width: calc(var(--button-size) * var(--grid-size));
+      }
+
+      .keyboard__button__text {
+        rotate: -45deg;
+      }
+
+      .keyboard-form--footer {
+        margin-top: 180px;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="wrapper">
+  <h1>Lambdoma Matrix <span class="sub-heading">Online Keyboard</span></h1>
+  <p>Barbara Hero's matrix of wholenumber ratios made available for all to experience and learn from. 
+    Best enjoyed on larger screens. <a href="https://www.lambdoma.com/" target="_blank">Read about the original, physical keyboard here.</a></p>
   <form id="keyboard-settings-form" class="keyboard-form">
-    <label for="base-frequency-input">Base Frequency</label>
-    <input name="base-frequency-input" type="number" id="input-base-frequency">
-    <label for="grid-size-input">grid size</label>
-    <select name="grid-size-input" type="number" id="input-grid-size">
-      <option>9 x 9</option>
-      <option>12 x 12</option>
-      <option>15 x 15</option>
-      <option>18 x 18</option>
-    </select>
-    <button id="keyboard-settings-submit">Submit</button>
-  </form>
-  <form id="keyboard-colours-form" class="">
-    <select id="keyboard-colours-select">
-    </select>
+    <div class="keyboard-form__fieldset">
+      <label for="input-base-frequency" class="keyboard-form__label">Base Frequency</label>
+      <input name="base-frequency-input" type="number" min="20" max="20000" id="input-base-frequency">
+      <button id="keyboard-settings-submit" class="keyboard-form__submit">Submit</button> 
+    </div>
+    <button id="stop" class="keyboard-form__submit">Stop All</button>
   </form>
   <main id="main">
   </main>
-  <button id="stop">Stop All</button>
+  <form id="keyboard-colours-form" class="keyboard-form keyboard-form--footer">
+    <div class="keyboard-form__fieldset">
+      <label for="keyboard-colours-select" class="keyboard-form__label">Colour Scheme</label>
+      <select id="keyboard-colours-select" name="keyboard-colours-select">
+      </select>
+    </div>
+    <div class="keyboard-form__fieldset">
+      <label for="input-grid-size" class="keyboard-form__label">grid size</label>
+      <select name="grid-size-input" type="number" id="input-grid-size">
+        <option>8 x 8</option>
+        <option>16 x 16</option>
+        <option>20 x 20</option>
+      </select>
+      <!-- <button id="keyboard-settings-submit" class="keyboard-form__submit">Submit</button>  -->
+    </div>
+  </form>
   <script type="module" src="./src/index.js"></script>
 </body>

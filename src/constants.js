@@ -9,7 +9,7 @@ export const AUDIO_CONFIG = {
 export const KEYBOARD_COLOURSCHEME_OCT = "Octaves matter";
 export const KEYBOARD_COLOURSCHEME_MIR = "Mirroed rarios";
 
-export const GRID_SIZE = 9;
+export const GRID_SIZE = 8;
 export const DEFAULT_COLOUR = "grey";
 export const KEYBOARD_BTN_CLASSNAME = "keyboard__button";
 
