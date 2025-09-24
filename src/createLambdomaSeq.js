@@ -1,6 +1,7 @@
 import { GRID_SIZE } from "./constants.js";
 import { getColourMirrored } from "./keyboardColourMirrored.js";
-import { getColourOctavesMatter } from "./keyboardColourOctavesMatter.js";
+//import { getColourOctavesMatter } from "./keyboardColourOctavesMatter.js";
+import { getColourGraduated } from "./keyboardColourGraduated.js";
 import state from "./state.js";
 
 const numeration = "numeration";
@@ -13,10 +14,13 @@ export function getFraction({ numerator, denominator }) {
 }
 
 class Ratio {
-  constructor(numerator, denominator, colour) {
+  constructor({numerator, denominator, colour, colourHSL, column, row}) {
     this.numerator = numerator;
     this.denominator = denominator;
     this.colour = colour;
+    this.colourHSL = colourHSL;
+    this.column = column;
+    this.row = row;
     this.ratioString = `${numerator}/${denominator}`;
   }
   get fraction() {
@@ -25,6 +29,10 @@ class Ratio {
 
   set setColour(colour) {
     this.colour = colour;
+  }
+
+  set setColourHSL(colourHSL) {
+    this.colourHSL = colourHSL;
   }
 
   calcFraction() {
@@ -42,7 +50,8 @@ export function createMasterLamdomaSeq(maxLoopSize) {
       startingNumerator: count,
       startingDenominator: 1, 
       loopSize: maxLoopSize,
-      type: denomination
+      type: denomination,
+      column: index
     });
     masterLamdomaArr.push(lambdomaSequence);
     count += 1;
@@ -50,7 +59,7 @@ export function createMasterLamdomaSeq(maxLoopSize) {
   return masterLamdomaArr.reverse();
 }
 
-export function createLambdomaSequence({startingNumerator, startingDenominator, loopSize, type}) {
+export function createLambdomaSequence({startingNumerator, startingDenominator, loopSize, type, column}) {
   const thisArray = [];
   let numeratorCount = startingNumerator;
   let denominatorCount = startingDenominator;
@@ -71,10 +80,18 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
       break;
   }
   for (let index = 0; index < loopSize; index++) {
-    const newRatio = new Ratio(numeratorCount, denominatorCount);
-    const thisColour = getColourOctavesMatter(newRatio);
+    const newRatio = new Ratio({
+      numerator: numeratorCount,
+      denominator: denominatorCount,
+      column,
+      row: index
+    });
+    const thisColourHSL = getColourGraduated(newRatio);
+    const thisColour = `HSL(${thisColourHSL.hue},${thisColourHSL.saturation},${thisColourHSL.lightness})`;
+    //const thisColour = getColourOctavesMatter(newRatio);
     //const thisColour = getColourMirrored(newRatio);
-    newRatio.setColour = thisColour;
+    // newRatio.setColour = thisColour;
+    newRatio.setColourHSL = thisColour;
     thisArray.push(newRatio);
     numeratorCount += numeratorCountAmt;
     denominatorCount += denominatorCountAmt;

@@ -40,8 +40,8 @@ export function resetPlaying(noteId) {
 export function recreateColumns() {
   mainSection.replaceChildren();
   const doneCallbackArr = [initColourSelect];
-  console.debug("state.gridSize", state.gridSize);
   const entireLambdoma = createMasterLamdomaSeq(state.gridSize);
+  state.entireLambdoma = entireLambdoma;
   createColumns(doneCallbackArr, entireLambdoma);
 }
 
@@ -61,7 +61,7 @@ export function createColumns(readyCallbacksArr, entireLambdoma = masterLamdomaS
       thisButton.dataset.numerator = ratio.numerator;
       thisButton.dataset.denominator = ratio.denominator;
       thisButton.setAttribute("id", `${ratio.numerator}-${ratio.denominator}`);
-      thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME} ${ratio.colour}`);
+      thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME} ${ratio.colourHSL}`);
       thisButton.setAttribute("data-playing", "false");
       thisButton.insertAdjacentElement("afterbegin", thisTextWrapper);
       noteBtnAddClickEvent(thisButton, ratio);

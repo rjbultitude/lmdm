@@ -1,0 +1,42 @@
+import { constantIntervalColours, DEFAULT_COLOUR } from "./constants.js";
+import state from "./state.js";
+
+const colorGradientArr = generateGradientArray();
+
+export function generateHSLFromNumber(i, j) {
+  const totalGridSize = state.gridSize * state.gridSize;
+  const increment = i * j / totalGridSize;
+  const hue = 0 + increment * 240; // 0° (red) → 240° (blue)
+  const saturation = 100;            // full spectrum
+  const lightness = 50;              // mid brightness
+  return {
+    hue, saturation, lightness
+  };
+}
+
+export function generateGradientArray() {
+  const colorGradientArr = [];
+  const colorGradientChildArr = [];
+  // use lambdome arrays as model
+  for (let index = 0; index < state.gridSize; index++) {
+    for (let j = 0; j < state.gridSize; j++) {
+      const newColour = generateHSLFromNumber(index, j);
+      colorGradientChildArr.push(newColour);
+    }
+    colorGradientArr.push(colorGradientChildArr);
+  }
+  return colorGradientArr;
+}
+
+// Graduated overlay
+export function getColourGraduated(ratio) {
+  /* make an array of colours
+     starting at the lowest
+     and apply it to the matrix array
+     to set the color */
+  const column = ratio.column;
+  const row = ratio.row;
+  console.debug("column", column);
+  console.debug("colorGradientArr[column][row]", colorGradientArr[column][row]);
+  return colorGradientArr[column][row];
+}
