@@ -3,7 +3,7 @@
   <title>Lambdoma online keyboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Caprasimo&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caprasimo&display=swap" rel="stylesheet">
   <style>
     html * > {
       font-size: 0.75;
@@ -14,6 +14,8 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f4f4f9;
       color: #2f4550;
+      padding: 0;
+      margin: 0;
     }
     a {
       color: #2f4550;
@@ -23,9 +25,10 @@
       text-decoration: none;
     }
     h1 {
-      font-family: "Abril Fatface", serif;
-      font-size: 2.2rem;
+      font-family: "Caprasimo", serif;
+      font-size: 3.2rem;
       text-align: center;
+      margin: 0;
     }
     .sub-heading {
       display: block;
@@ -41,9 +44,16 @@
       --mid-green: #586f7c;
       --light-green: #b8dbd9;
     }
+    header {
+      background-color: var(--dark-green);
+      color: white;
+    }
+    header p {
+      margin-bottom: 0;
+    }
     .wrapper {
-      margin: 0 auto;
-      max-width: var(--max-width);
+      /* margin: 0 auto;
+      max-width: var(--max-width); */
     }
     main {
       display: flex;
@@ -55,8 +65,8 @@
 
     .keyboard-form {
       background-color: #b8dbd9;
-      max-width: var(--max-width);
-      margin: 0 auto;
+      /* max-width: var(--max-width); */
+      margin: 0;
       padding: var(--spacing);
       display: flex;
       flex-direction: row;
@@ -71,10 +81,14 @@
     .keyboard-form__submit {
       background-color: var(--dark-green);
       color: white;
+      height: 1.8rem;
+      border-radius: 0.3rem;
     }
 
     .keyboard-form__fieldset input {
       width: 60px;
+      height: 1.4rem;
+      border-radius: 0.3rem;
     }
 
     .keyboard-form__fieldset {
@@ -189,11 +203,13 @@
   </style>
 </head>
 <body>
-  <div class="wrapper">
-  <h1>Lambdoma Matrix <span class="sub-heading">Harmanically consonant Keyboard</span></h1>
-  <p>Barbara Hero's matrix of wholenumber ratios organises the harmonic series into a unique keyboard. 
+  <header>
+    <h1>Lambdoma Matrix <span class="sub-heading">Harmanically consonant Keyboard</span></h1>
+    <p>Barbara Hero's matrix of wholenumber ratios organises the harmonic series into a unique keyboard. 
     This online version aims to reproduce her innovative work and make it accessible to anyone.
     Best enjoyed on larger screens. <a href="https://www.lambdoma.com/" target="_blank">Read about the original, physical keyboard here.</a></p>
+  </header>
+  <div class="wrapper">
   <form id="keyboard-settings-form" class="keyboard-form">
     <div class="keyboard-form__fieldset">
       <label for="input-base-frequency" class="keyboard-form__label">Base Frequency</label>

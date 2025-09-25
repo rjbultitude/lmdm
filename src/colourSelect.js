@@ -2,6 +2,7 @@ import { getColourMirrored } from "./keyboardColourMirrored.js";
 import { getColourOctavesMatter } from "./keyboardColourOctavesMatter.js";
 import { KEYBOARD_COLOURSCHEME_OCT, KEYBOARD_COLOURSCHEME_MIR, KEYBOARD_COLOURSCHEME_GRA, KEYBOARD_BTN_CLASSNAME } from "./constants.js";
 import { getColourGraduated } from "./keyboardColourGraduated.js";
+import state from "./state.js";
 const colourOptions = [KEYBOARD_COLOURSCHEME_OCT, KEYBOARD_COLOURSCHEME_MIR, KEYBOARD_COLOURSCHEME_GRA];
 
 export function getHSLCSSFromRatio(thisColourHSL) {
@@ -73,6 +74,8 @@ export function getAllKeyboardBtns() {
 
 export function initColourSelect() {
   const colourSelect = document.getElementById("keyboard-colours-select");
+  colourSelect.value = KEYBOARD_COLOURSCHEME_GRA;
+  state.colourScheme = KEYBOARD_COLOURSCHEME_GRA;
   const allKeyboardBtns = getAllKeyboardBtns();
   colourOptions.forEach((colourOption) => {
     const colourOptionEl = document.createElement("option");
