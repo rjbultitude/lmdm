@@ -87,7 +87,7 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
       row: index
     });
     const thisColourHSL = getColourGraduated(newRatio);
-    const thisColour = `HSL(${thisColourHSL.hue},${thisColourHSL.saturation},${thisColourHSL.lightness})`;
+    const thisColour = `hsl(${thisColourHSL.hue},${thisColourHSL.saturation}%,${thisColourHSL.lightness}%)`;
     //const thisColour = getColourOctavesMatter(newRatio);
     //const thisColour = getColourMirrored(newRatio);
     // newRatio.setColour = thisColour;

@@ -61,7 +61,10 @@ export function createColumns(readyCallbacksArr, entireLambdoma = masterLamdomaS
       thisButton.dataset.numerator = ratio.numerator;
       thisButton.dataset.denominator = ratio.denominator;
       thisButton.setAttribute("id", `${ratio.numerator}-${ratio.denominator}`);
-      thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME} ${ratio.colourHSL}`);
+      //thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME} ${ratio.colour}`);
+      thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME}`);
+      console.debug("ratio.colourHSL", ratio.colourHSL);
+      thisButton.style.backgroundColor = ratio.colourHSL;
       thisButton.setAttribute("data-playing", "false");
       thisButton.insertAdjacentElement("afterbegin", thisTextWrapper);
       noteBtnAddClickEvent(thisButton, ratio);

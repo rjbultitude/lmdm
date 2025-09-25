@@ -22,7 +22,6 @@ export default function initSettingsForm() {
     // Grid size
     const gridSizeNum = parseInt(inputGrid.value.split(" ")[0]);
     if (state.gridSize !== gridSizeNum) {
-      console.debug("no change in grid size");
       state.gridSize = gridSizeNum;
       recreateColumns();
     }

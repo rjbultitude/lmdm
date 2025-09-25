@@ -16,11 +16,11 @@ export function generateHSLFromNumber(i, j) {
 
 export function generateGradientArray() {
   const colorGradientArr = [];
-  const colorGradientChildArr = [];
   // use lambdome arrays as model
-  for (let index = 0; index < state.gridSize; index++) {
+  for (let i = 0; i < state.gridSize; i++) {
+    const colorGradientChildArr = [];
     for (let j = 0; j < state.gridSize; j++) {
-      const newColour = generateHSLFromNumber(index, j);
+      const newColour = generateHSLFromNumber(i, j);
       colorGradientChildArr.push(newColour);
     }
     colorGradientArr.push(colorGradientChildArr);
@@ -36,7 +36,5 @@ export function getColourGraduated(ratio) {
      to set the color */
   const column = ratio.column;
   const row = ratio.row;
-  console.debug("column", column);
-  console.debug("colorGradientArr[column][row]", colorGradientArr[column][row]);
   return colorGradientArr[column][row];
 }
