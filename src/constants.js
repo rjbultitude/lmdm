@@ -7,7 +7,8 @@ export const AUDIO_CONFIG = {
 };
 
 export const KEYBOARD_COLOURSCHEME_OCT = "Octaves matter";
-export const KEYBOARD_COLOURSCHEME_MIR = "Mirroed rarios";
+export const KEYBOARD_COLOURSCHEME_MIR = "Mirroed ratios";
+export const KEYBOARD_COLOURSCHEME_GRA = "Graduated";
 
 export const GRID_SIZE = 8;
 export const DEFAULT_COLOUR = "grey";

@@ -57,13 +57,15 @@ export function createColumns(readyCallbacksArr, entireLambdoma = masterLamdomaS
       thisTextWrapper.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME}__text`);
       const ratiostr = `${ratio.numerator}/${ratio.denominator}`;
       thisTextWrapper.innerText = ratiostr;
+      // set button data state
       thisButton.dataset.ratioString = ratiostr;
       thisButton.dataset.numerator = ratio.numerator;
       thisButton.dataset.denominator = ratio.denominator;
+      thisButton.dataset.row = ratio.row;
+      thisButton.dataset.column = ratio.column;
       thisButton.setAttribute("id", `${ratio.numerator}-${ratio.denominator}`);
       //thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME} ${ratio.colour}`);
       thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME}`);
-      console.debug("ratio.colourHSL", ratio.colourHSL);
       thisButton.style.backgroundColor = ratio.colourHSL;
       thisButton.setAttribute("data-playing", "false");
       thisButton.insertAdjacentElement("afterbegin", thisTextWrapper);

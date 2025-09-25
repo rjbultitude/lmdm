@@ -2,6 +2,7 @@ import { GRID_SIZE } from "./constants.js";
 import { getColourMirrored } from "./keyboardColourMirrored.js";
 //import { getColourOctavesMatter } from "./keyboardColourOctavesMatter.js";
 import { getColourGraduated } from "./keyboardColourGraduated.js";
+import { getHSLCSSFromRatio } from "./colourSelect.js"; 
 import state from "./state.js";
 
 const numeration = "numeration";
@@ -86,8 +87,9 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
       column,
       row: index
     });
+    // Default colour scheme
     const thisColourHSL = getColourGraduated(newRatio);
-    const thisColour = `hsl(${thisColourHSL.hue},${thisColourHSL.saturation}%,${thisColourHSL.lightness}%)`;
+    const thisColour = getHSLCSSFromRatio(thisColourHSL);
     //const thisColour = getColourOctavesMatter(newRatio);
     //const thisColour = getColourMirrored(newRatio);
     // newRatio.setColour = thisColour;

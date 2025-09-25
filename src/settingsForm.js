@@ -15,7 +15,6 @@ export default function initSettingsForm() {
   submit.addEventListener("click", function() {
     // Pitch of all notes
     if (state.baseFrequency !== inputFreq.value) {
-      console.debug("no change in frequency");
       state.baseFrequency = inputFreq.value;
       updateActiveVoices();
     }

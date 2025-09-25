@@ -1,4 +1,3 @@
-import { constantIntervalColours, DEFAULT_COLOUR } from "./constants.js";
 import state from "./state.js";
 
 const colorGradientArr = generateGradientArray();
