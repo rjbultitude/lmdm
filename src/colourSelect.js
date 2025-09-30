@@ -83,6 +83,7 @@ export function initColourSelect() {
     colourOptionEl.innerText = colourOption;
     colourSelect.insertAdjacentElement("afterbegin", colourOptionEl);
   });
+  colourSelect.value = state.colourScheme;
   colourSelect.addEventListener("change", function(e) {
     const selectedColourOption = e.target.value;
     updateColours(selectedColourOption, allKeyboardBtns);
