@@ -2,7 +2,7 @@ import masterLamdomaSeq, { createMasterLamdomaSeq } from "./createLambdomaSeq.js
 import { getNote } from "./noteFunctions.js";
 import state from "./state.js";
 import { playNote, stopNote } from "./audio.js";
-import { KEYBOARD_BTN_CLASSNAME } from "./constants.js";
+import { KEYBOARD_COLOURSCHEME_OCT, KEYBOARD_COLOURSCHEME_MIR, KEYBOARD_COLOURSCHEME_GRA, KEYBOARD_BTN_CLASSNAME} from "./constants.js";
 import { initColourSelect } from "./colourSelect.js";
 
 const mainSection = document.getElementById("main");
@@ -64,9 +64,20 @@ export function createColumns(readyCallbacksArr, entireLambdoma = masterLamdomaS
       thisButton.dataset.row = ratio.row;
       thisButton.dataset.column = ratio.column;
       thisButton.setAttribute("id", `${ratio.numerator}-${ratio.denominator}`);
-      //thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME} ${ratio.colour}`);
       thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME}`);
-      thisButton.style.backgroundColor = ratio.colourHSL;
+      switch (state.colourScheme) {
+        case KEYBOARD_COLOURSCHEME_OCT:
+          thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME} ${ratio.colour}`);
+          break;
+        case KEYBOARD_COLOURSCHEME_MIR:
+          thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME} ${ratio.colour}`);
+          break;
+        case KEYBOARD_COLOURSCHEME_GRA:
+          thisButton.style.backgroundColor = ratio.colourHSL;
+          break;
+        default:
+          console.debug("no colour scheme found");
+      }
       thisButton.setAttribute("data-playing", "false");
       thisButton.insertAdjacentElement("afterbegin", thisTextWrapper);
       noteBtnAddClickEvent(thisButton, ratio);

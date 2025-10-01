@@ -33,7 +33,6 @@ export function playNote(noteId, frequency) {
 export function stopNote(noteId) {
   state.activeVoices[noteId].voice.stop();
   delete state.activeVoices[noteId];
-  console.debug("STOP state.activeVoices", state.activeVoices);
 }
 
 export function updateActiveVoices() {
@@ -46,7 +45,6 @@ export function updateActiveVoices() {
 
 stopBtn.addEventListener('click', function(e) {
   e.preventDefault();
-  console.debug("state.activeVoices", state.activeVoices);
   Object.keys(state.activeVoices).forEach((activeVoiceKey) => {
     stopNote(activeVoiceKey);
     resetPlaying(activeVoiceKey);

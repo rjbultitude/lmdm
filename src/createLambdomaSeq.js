@@ -66,7 +66,6 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
   let denominatorCount = startingDenominator;
   let numeratorCountAmt = 0;
   let denominatorCountAmt = 0;
-  console.debug("state.colourScheme", state.colourScheme);
   switch (type) {
     case numeration: 
       numeratorCountAmt = 1;
@@ -104,6 +103,8 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
         thisColour = getHSLCSSFromRatio(thisColourHSL);
         newRatio.setColourHSL = thisColour;
         break;
+      default:
+        console.debug("no colour scheme found");
     }
     thisArray.push(newRatio);
     numeratorCount += numeratorCountAmt;
