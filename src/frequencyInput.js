@@ -1,11 +1,9 @@
 import state from "./state.js";
 import { updateActiveVoices } from "./audio.js";
-import { recreateColumns } from "./keyboardInterface.js";
 
-export default function initSettingsForm() {
+export default function initFrequencyInput() {
   const form = document.getElementById("keyboard-settings-form");
   const inputFreq = document.getElementById("input-base-frequency");
-  const inputGrid = document.getElementById("input-grid-size");
   const submit = document.getElementById("keyboard-settings-submit");
   const baseFreqStr = parseInt(state.baseFrequency);
   inputFreq.value = baseFreqStr;
@@ -17,12 +15,6 @@ export default function initSettingsForm() {
     if (state.baseFrequency !== inputFreq.value) {
       state.baseFrequency = inputFreq.value;
       updateActiveVoices();
-    }
-    // Grid size
-    const gridSizeNum = parseInt(inputGrid.value.split(" ")[0]);
-    if (state.gridSize !== gridSizeNum) {
-      state.gridSize = gridSizeNum;
-      recreateColumns();
     }
   });
 }
