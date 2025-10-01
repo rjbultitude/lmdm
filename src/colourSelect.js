@@ -77,8 +77,7 @@ export function getAllKeyboardBtns() {
 
 export function initColourSelect() {
   const colourSelect = document.getElementById("keyboard-colours-select");
-  colourSelect.value = KEYBOARD_COLOURSCHEME_GRA;
-  state.colourScheme = KEYBOARD_COLOURSCHEME_GRA;
+  colourSelect.value = state.colourScheme;
   const allKeyboardBtns = getAllKeyboardBtns();
   colourSelect.replaceChildren();
   colourOptions.forEach((colourOption) => {
