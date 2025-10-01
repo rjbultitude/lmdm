@@ -1,7 +1,7 @@
-import { GRID_SIZE } from "./constants.js";
+import { KEYBOARD_COLOURSCHEME_OCT, KEYBOARD_COLOURSCHEME_MIR, KEYBOARD_COLOURSCHEME_GRA } from "./constants.js";
 import { getColourMirrored } from "./keyboardColourMirrored.js";
-//import { getColourOctavesMatter } from "./keyboardColourOctavesMatter.js";
-import { getColourGraduated } from "./keyboardColourGraduated.js";
+import { getColourOctavesMatter } from "./keyboardColourOctavesMatter.js";
+import { getColourGraduated, generateGradientArray } from "./keyboardColourGraduated.js";
 import { getHSLCSSFromRatio } from "./colourSelect.js"; 
 import state from "./state.js";
 
@@ -87,13 +87,22 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
       column,
       row: index
     });
-    // Default colour scheme
-    const thisColourHSL = getColourGraduated(newRatio);
-    const thisColour = getHSLCSSFromRatio(thisColourHSL);
-    //const thisColour = getColourOctavesMatter(newRatio);
-    //const thisColour = getColourMirrored(newRatio);
-    // newRatio.setColour = thisColour;
-    newRatio.setColourHSL = thisColour;
+    let thisColour;
+    switch (state.colourScheme) {
+      case KEYBOARD_COLOURSCHEME_OCT:
+        thisColour = getColourOctavesMatter(newRatio);
+        newRatio.setColour = thisColour;
+        break;
+      case KEYBOARD_COLOURSCHEME_MIR:
+        thisColour = getColourMirrored(newRatio);
+        newRatio.setColour = thisColour;
+        break;
+      case KEYBOARD_COLOURSCHEME_GRA:
+        const colorGradientArr = generateGradientArray();
+        const thisColourHSL = getColourGraduated(newRatio, colorGradientArr);
+        thisColour = getHSLCSSFromRatio(thisColourHSL);
+        newRatio.setColourHSL = thisColour;
+    }
     thisArray.push(newRatio);
     numeratorCount += numeratorCountAmt;
     denominatorCount += denominatorCountAmt;

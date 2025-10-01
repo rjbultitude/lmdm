@@ -42,18 +42,21 @@ function updateColours(selectedColourOption, allKeyboardBtns) {
       case KEYBOARD_COLOURSCHEME_OCT:
         colour = getColourOctavesMatter(ratio);
         setNewButtonColour({ keyboardBtn, colourSchemeName: KEYBOARD_COLOURSCHEME_OCT, colour });
+        state.colourScheme = KEYBOARD_COLOURSCHEME_OCT;
         break;
       case KEYBOARD_COLOURSCHEME_MIR:
         colour = getColourMirrored(ratio);
         setNewButtonColour({ keyboardBtn, colourSchemeName: KEYBOARD_COLOURSCHEME_MIR, colour });
+        state.colourScheme = KEYBOARD_COLOURSCHEME_MIR;
         break;
       case KEYBOARD_COLOURSCHEME_GRA:
         colour = getColourGraduated(ratio);
         setNewButtonColour({ keyboardBtn, colourSchemeName: KEYBOARD_COLOURSCHEME_GRA, colour });
+        state.colourScheme = KEYBOARD_COLOURSCHEME_GRA;
         break;
       default:
         colour = getColourOctavesMatter(ratio);
-        setNewButtonColour({ keyboardBtn, colourSchemeName: KEYBOARD_COLOURSCHEME_OCT, colour });
+        setNewButtonColour({ keyboardBtn, colourSchemeName: state.colourScheme, colour });
         break;
     }
   });
@@ -77,6 +80,7 @@ export function initColourSelect() {
   colourSelect.value = KEYBOARD_COLOURSCHEME_GRA;
   state.colourScheme = KEYBOARD_COLOURSCHEME_GRA;
   const allKeyboardBtns = getAllKeyboardBtns();
+  colourSelect.replaceChildren();
   colourOptions.forEach((colourOption) => {
     const colourOptionEl = document.createElement("option");
     colourOptionEl.value = colourOption;

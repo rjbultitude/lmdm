@@ -1,6 +1,6 @@
 import state from "./state.js";
 
-const colorGradientArr = generateGradientArray();
+const colourGradientArr = generateGradientArray();
 
 export function generateHSLFromNumber(i, j) {
   const totalGridSize = state.gridSize * state.gridSize;
@@ -28,12 +28,12 @@ export function generateGradientArray() {
 }
 
 // Graduated overlay
-export function getColourGraduated(ratio) {
+export function getColourGraduated(ratio, _colourGradientArr = colourGradientArr) {
   /* make an array of colours
      starting at the lowest
      and apply it to the matrix array
      to set the color */
   const column = ratio.column;
   const row = ratio.row;
-  return colorGradientArr[column][row];
+  return _colourGradientArr[column][row];
 }
