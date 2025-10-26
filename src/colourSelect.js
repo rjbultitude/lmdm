@@ -15,7 +15,8 @@ export function setNewButtonColour({ keyboardBtn, colourSchemeName, colour }) {
   keyboardBtn.classList.add(KEYBOARD_BTN_CLASSNAME);
   if (colourSchemeName === KEYBOARD_COLOURSCHEME_GRA) {
     const hslColour = getHSLCSSFromRatio(colour);
-    keyboardBtn.style.backgroundColor = hslColour;
+    //keyboardBtn.style.backgroundColor = hslColour;
+    keyboardBtn.style.setProperty('--button-color', hslColour);
     return;
   }
   keyboardBtn.classList.add(colour);
