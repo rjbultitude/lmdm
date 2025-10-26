@@ -26,6 +26,7 @@
     }
     h1 {
       font-family: "Caprasimo", serif;
+      font-weight: 200;
       font-size: 3.2rem;
       text-align: center;
       margin: 0;
@@ -47,13 +48,14 @@
     header {
       background-color: var(--dark-green);
       color: white;
+      padding: calc(var(--spacing) / 2) 0;
     }
     header p {
       margin-bottom: 0;
     }
-    .wrapper {
-      /* margin: 0 auto;
-      max-width: var(--max-width); */
+    .inner-wrapper {
+      margin: 0 auto;
+      max-width: var(--max-width);
     }
     main {
       display: flex;
@@ -88,7 +90,12 @@
     .keyboard-form__fieldset input {
       width: 60px;
       height: 1.4rem;
+      font-size: 1rem;
       border-radius: 0.3rem;
+    }
+
+    .keyboard-form__fieldset select {
+      font-size: 1rem;
     }
 
     .keyboard-form__fieldset {
@@ -247,10 +254,12 @@
 </head>
 <body>
   <header>
-    <h1>Lambdoma Matrix <span class="sub-heading">Harmanically consonant Keyboard</span></h1>
-    <p>Barbara Hero's matrix of wholenumber ratios organises the harmonic series into a unique keyboard. 
-    This online version aims to reproduce her innovative work and make it accessible to anyone.
-    Best enjoyed on larger screens. <a href="https://www.lambdoma.com/" target="_blank">Read about the original, physical keyboard here.</a></p>
+    <div class="inner-wrapper">
+      <h1>Lambdoma Matrix <span class="sub-heading">Harmanically consonant Keyboard</span></h1>
+      <p>Barbara Hero's matrix of wholenumber ratios organises the harmonic series into a unique keyboard. 
+      This online version aims to reproduce her innovative work and make it accessible to anyone.
+      Best enjoyed on larger screens. <a href="https://www.lambdoma.com/" target="_blank">Read about the original, physical keyboard here.</a></p>
+    </div>
   </header>
   <div class="wrapper">
   <form id="keyboard-settings-form" class="keyboard-form">
