@@ -88,6 +88,8 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
       row: index
     });
     let thisColour;
+    /* TODO Why don't we just get all the colours once
+       and set the one to show using state? */
     switch (state.colourScheme) {
       case KEYBOARD_COLOURSCHEME_OCT:
         thisColour = getColourOctavesMatter(newRatio);

@@ -8,7 +8,6 @@ Run `npm install` then `npm start`
 
 ## To do 
 1. Fill in missing colours for mirrored ratios
-2. Solve hover/focus/active state problem
 2. Validate keyboard grid sizes from original documentation
 3. Add computer keyboard input
 4. Add MIDI keyboard input

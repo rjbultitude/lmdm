@@ -15,7 +15,6 @@ export function setNewButtonColour({ keyboardBtn, colourSchemeName, colour }) {
   keyboardBtn.classList.add(KEYBOARD_BTN_CLASSNAME);
   if (colourSchemeName === KEYBOARD_COLOURSCHEME_GRA) {
     const hslColour = getHSLCSSFromRatio(colour);
-    //keyboardBtn.style.backgroundColor = hslColour;
     keyboardBtn.style.setProperty('--button-color', hslColour);
     return;
   }
@@ -33,8 +32,8 @@ function updateColours(selectedColourOption, allKeyboardBtns) {
     // create new ratio object
     const ratio = {
       ratioString: btnRatio,
-      denominator: btnDenominator,
-      numerator: btnNumerator,
+      denominator: parseInt(btnDenominator),
+      numerator: parseInt(btnNumerator),
       row: btnRow,
       column: btnColumn,
     };
