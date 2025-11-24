@@ -5,9 +5,9 @@ const colourGradientArr = generateGradientArray();
 export function generateHSLFromNumber(i, j) {
   const totalGridSize = state.gridSize * state.gridSize;
   const increment = i * j / totalGridSize;
-  const hue = 0 + increment * 240; // 0° (red) → 240° (blue)
-  const saturation = 90;            // full spectrum
-  const lightness = 70;              // mid brightness
+  const hue = 0 + increment * 360;
+  const saturation = 90;
+  const lightness = 70;
   return {
     hue, saturation, lightness
   };
