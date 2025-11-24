@@ -6,6 +6,9 @@ import { KEYBOARD_COLOURSCHEME_OCT, KEYBOARD_COLOURSCHEME_MIR, KEYBOARD_COLOURSC
 import { initColourSelect } from "./colourSelect.js";
 
 const mainSection = document.getElementById("main");
+const noteNameEl = document.getElementById("note-data-notename");
+const noteFreqEl = document.getElementById("note-data-freq");
+const noteNumberEl = document.getElementById("note-data-num");
 
 export function noteBtnAddClickEvent(el, ratio) {
   el.addEventListener("click", function(e) {
@@ -22,9 +25,9 @@ export function noteBtnAddClickEvent(el, ratio) {
       playNote(noteId, thisFreq);
       e.target.dataset.playing = "true";
       state.activeVoices[noteId].ratio = ratio;
-      console.log("this fraction is ", ratio.fraction);
-      console.log("this note is ", thisFreq);
-      console.log("state.activeVoices", state.activeVoices);
+      noteNameEl.innerText = "TBC";
+      noteFreqEl.innerText = thisFreq.toFixed(2);
+      noteNumberEl.innerText = Object.keys(state.activeVoices).length;
       return;
     }
     stopNote(noteId);

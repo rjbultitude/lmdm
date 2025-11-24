@@ -29,9 +29,11 @@ export const constantIntervalColours = {
   "7/4": "violet", // harmonic seventh
   // Exception
   "2/9": "lilac", // flat seventh. 16.9
-  "7/3": "deep_purple", // diminished 6th
-  "7/5": "beige", // lesser septimal tritone
-  "9/7": "grass", // septimal major third
-  // Exception
-  "1/7": "pale_blue" // Subharmic 7th
+  // "7/3": "deep_purple", // diminished 6th
+  // "7/5": "beige", // lesser septimal tritone
+  // "9/7": "grass", // septimal major third
+  // // Exception
+  // "1/7": "pale_blue", // Subharmic 7th
+  //"3/7": "grass", // septimal minor third
+  //"5/7": "grass", // Septimal Tritone
 }
