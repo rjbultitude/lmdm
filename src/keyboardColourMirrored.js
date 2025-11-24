@@ -6,12 +6,13 @@ function getSubHarmonicRatio(key) {
 }
 
 // Mirrored overlay
+// Called on each button in a loop
 export function getColourMirrored(ratio) {
-  if (ratio.numerator === 6 && ratio.denominator === 8) console.debug("6/8");
-  // Find an exact match just using key
+  //if (ratio.numerator === 6 && ratio.denominator === 8) console.debug("6/8");
+  // Find an exact match just using key string
   const fractionColourExactMatch = constantIntervalColours[ratio.ratioString];
   if (fractionColourExactMatch) return fractionColourExactMatch;
-  // Find the reversed match using key
+  // Find the reversed match using key string
   const ratioReversed = getSubHarmonicRatio(ratio.ratioString);
   const fractionColourReversedMatch = constantIntervalColours[ratioReversed];
   if (fractionColourReversedMatch) return fractionColourReversedMatch;
@@ -19,12 +20,10 @@ export function getColourMirrored(ratio) {
   const higherRatio = checkForRatioOctaves({ratio, up: true});
   const fractionColourHigherMatch = constantIntervalColours[higherRatio];
   if (fractionColourHigherMatch) return fractionColourHigherMatch;
-  // TODO check reversed higher ration too!
   // find a match where numerator and denominator are half
   const lowerRatio = checkForRatioOctaves({ratio, up: false});
   const fractionColourLowerMatch = constantIntervalColours[lowerRatio];
   if (fractionColourLowerMatch) return fractionColourLowerMatch;
-  // TODO check reversed lower ration too!
   // Use default when no matches
   return DEFAULT_COLOUR;
 }
@@ -57,8 +56,8 @@ function getRatioOctaves(ratio, colourKey, base) {
     // if whole numbers
     if (Number.isInteger(ratioNumeratorPow) && Number.isInteger(ratioDenominatorPow)) {
       const wholeNumRatio = `${ratioNumeratorPow}/${ratioDenominatorPow}`;
-      if (wholeNumRatio === "3/4") console.debug("6/8 is 3/4", colourKey);
-      if (wholeNumRatio === colourKey) {
+      const wholeNumRatioReversed = `${ratioDenominatorPow}/${ratioNumeratorPow}`;
+      if (wholeNumRatio === colourKey || wholeNumRatioReversed === colourKey) {
         return colourKey;
       }
     }
