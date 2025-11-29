@@ -6,9 +6,9 @@ export const AUDIO_CONFIG = {
   SMOOTHING_INTERVAL: 0.02
 };
 
-export const KEYBOARD_COLOURSCHEME_OCT = "Octaves matter";
-export const KEYBOARD_COLOURSCHEME_MIR = "Mirroed ratios";
-export const KEYBOARD_COLOURSCHEME_GRA = "Graduated";
+export const KEYBOARD_COLOURSCHEME_OCT = "colourOctaves";
+export const KEYBOARD_COLOURSCHEME_MIR = "colourMirroed";
+export const KEYBOARD_COLOURSCHEME_GRA = "colourGraduated";
 
 export const GRID_SIZE = 8;
 export const DEFAULT_COLOUR = "grey";
@@ -17,26 +17,26 @@ export const KEYBOARD_BTN_CLASSNAME = "keyboard__button";
 /* Option two 
    Interval names are ratios */
 export const constantIntervalColours = {
-  "1/1": "red", // unison
-  "9/8": "orange", // major second
-  "16/15": "pink", // minor second
-  "5/4": "indigo", // major third
-  "6/5": "blue", // minor third
-  "4/3": "green", // perfect fourth
-  "3/2": "yellow", // perfect fifth
-  "5/3": "light_purple", // major sixth
-  "8/5": "purple", // minor sixth
-  "7/4": "violet", // harmonic seventh
+  "1/1": "d86a80", // unison
+  "9/8": "d2b534", // major second
+  "16/15": "e74fdf", // minor second
+  "5/4": "b062e4", // major third
+  "6/5": "6a75dd", // minor third
+  "4/3": "6cd9af", // perfect fourth
+  "3/2": "c2d951", // perfect fifth
+  "5/3": "bca1ed", // major sixth
+  "8/5": "9d71f0", // minor sixth
+  "7/4": "ca7efd", // harmonic seventh
   // Exception
-  "2/9": "lilac", // flat seventh. 16.9
+  "2/9": "65b4f8", // flat seventh. 16.9
 }
 
 export const constantIntervalOutlierColours = {
-  "7/3": "deep_purple", // diminished 6th
-  "7/5": "beige", // lesser septimal tritone
-  "9/7": "grass", // septimal major third
+  "7/3": "9e5de8", // diminished 6th
+  "7/5": "c1bf81", // lesser septimal tritone
+  "9/7": "9dc181", // septimal major third
   // Exception
-  "1/7": "pale_blue", // Subharmic 7th
-  "3/7": "grass", // septimal minor third
-  "5/7": "grass", // Septimal Tritone
+  "1/7": "6e9ad4", // Subharmic 7th
+  "3/7": "c8cfcc", // septimal minor third
+  "5/7": "c8cfcc", // Septimal Tritone
 }

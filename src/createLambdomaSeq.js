@@ -15,11 +15,10 @@ export function getFraction({ numerator, denominator }) {
 }
 
 class Ratio {
-  constructor({numerator, denominator, colour, colourHSL, column, row}) {
+  constructor({numerator, denominator, colours, column, row}) {
     this.numerator = numerator;
     this.denominator = denominator;
-    this.colour = colour;
-    this.colourHSL = colourHSL;
+    this.colours = colours || {}; 
     this.column = column;
     this.row = row;
     this.ratioString = `${numerator}/${denominator}`;
@@ -28,16 +27,12 @@ class Ratio {
     return this.calcFraction();
   }
 
-  set setColour(colour) {
-    this.colour = colour;
-  }
-
-  set setColourHSL(colourHSL) {
-    this.colourHSL = colourHSL;
-  }
-
   calcFraction() {
     return this.numerator / this.denominator;
+  }
+
+  setColours(colours) {
+    this.colours = colours;
   }
 }
 /*  This creates a lambdoma sequence
@@ -87,27 +82,13 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
       column,
       row: index
     });
-    let thisColour;
-    /* TODO Why don't we just get all the colours once
-       and set the one to show using state? */
-    switch (state.colourScheme) {
-      case KEYBOARD_COLOURSCHEME_OCT:
-        thisColour = getColourOctavesMatter(newRatio);
-        newRatio.setColour = thisColour;
-        break;
-      case KEYBOARD_COLOURSCHEME_MIR:
-        thisColour = getColourMirrored(newRatio);
-        newRatio.setColour = thisColour;
-        break;
-      case KEYBOARD_COLOURSCHEME_GRA:
-        const colorGradientArr = generateGradientArray();
-        const thisColourHSL = getColourGraduated(newRatio, colorGradientArr);
-        thisColour = getHSLCSSFromRatio(thisColourHSL);
-        newRatio.setColourHSL = thisColour;
-        break;
-      default:
-        console.debug("no colour scheme found");
-    }
+    const theseColours = {octaves: null, mirrored: null, graduated: null};
+    const colorGradientArr = generateGradientArray();
+    const thisColourHSL = getColourGraduated(newRatio, colorGradientArr);
+    theseColours.graduated = getHSLCSSFromRatio(thisColourHSL);
+    theseColours.octaves = getColourOctavesMatter(newRatio);
+    theseColours.mirrored = getColourMirrored(newRatio);
+    newRatio.setColours(theseColours);
     thisArray.push(newRatio);
     numeratorCount += numeratorCountAmt;
     denominatorCount += denominatorCountAmt;

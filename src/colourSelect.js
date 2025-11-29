@@ -23,42 +23,7 @@ export function setNewButtonColour({ keyboardBtn, colourSchemeName, colour }) {
 
 function updateColours(selectedColourOption, allKeyboardBtns) {
   allKeyboardBtns.forEach((keyboardBtn) => {
-    // get button data state
-    const btnRatio = keyboardBtn.dataset.ratioString;
-    const btnDenominator = keyboardBtn.dataset.denominator;
-    const btnNumerator = keyboardBtn.dataset.numerator;
-    const btnRow = keyboardBtn.dataset.row;
-    const btnColumn = keyboardBtn.dataset.column;
-    // create new ratio object
-    const ratio = {
-      ratioString: btnRatio,
-      denominator: parseInt(btnDenominator),
-      numerator: parseInt(btnNumerator),
-      row: btnRow,
-      column: btnColumn,
-    };
-    let colour;
-    switch (selectedColourOption) {
-      case KEYBOARD_COLOURSCHEME_OCT:
-        colour = getColourOctavesMatter(ratio);
-        setNewButtonColour({ keyboardBtn, colourSchemeName: KEYBOARD_COLOURSCHEME_OCT, colour });
-        state.colourScheme = KEYBOARD_COLOURSCHEME_OCT;
-        break;
-      case KEYBOARD_COLOURSCHEME_MIR:
-        colour = getColourMirrored(ratio);
-        setNewButtonColour({ keyboardBtn, colourSchemeName: KEYBOARD_COLOURSCHEME_MIR, colour });
-        state.colourScheme = KEYBOARD_COLOURSCHEME_MIR;
-        break;
-      case KEYBOARD_COLOURSCHEME_GRA:
-        colour = getColourGraduated(ratio);
-        setNewButtonColour({ keyboardBtn, colourSchemeName: KEYBOARD_COLOURSCHEME_GRA, colour });
-        state.colourScheme = KEYBOARD_COLOURSCHEME_GRA;
-        break;
-      default:
-        colour = getColourOctavesMatter(ratio);
-        setNewButtonColour({ keyboardBtn, colourSchemeName: state.colourScheme, colour });
-        break;
-    }
+    keyboardBtn.style.setProperty('--button-color', keyboardBtn.dataset[selectedColourOption]);
   });
 }
 

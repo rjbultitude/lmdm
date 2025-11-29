@@ -66,6 +66,9 @@ export function createColumns(readyCallbacksArr, entireLambdoma = masterLamdomaS
       thisButton.dataset.denominator = ratio.denominator;
       thisButton.dataset.row = ratio.row;
       thisButton.dataset.column = ratio.column;
+      thisButton.dataset.colourGraduated = ratio.colours.graduated;
+      thisButton.dataset.colourMirrored = ratio.colours.mirrored;
+      thisButton.dataset.colourOcataves = ratio.colours.ocataves;
       thisButton.setAttribute("id", `${ratio.numerator}-${ratio.denominator}`);
       thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME}`);
       switch (state.colourScheme) {
