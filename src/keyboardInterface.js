@@ -68,22 +68,10 @@ export function createColumns(readyCallbacksArr, entireLambdoma = masterLamdomaS
       thisButton.dataset.column = ratio.column;
       thisButton.dataset.colourGraduated = ratio.colours.graduated;
       thisButton.dataset.colourMirrored = ratio.colours.mirrored;
-      thisButton.dataset.colourOcataves = ratio.colours.ocataves;
+      thisButton.dataset.colourOctaves = ratio.colours.octaves;
       thisButton.setAttribute("id", `${ratio.numerator}-${ratio.denominator}`);
       thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME}`);
-      switch (state.colourScheme) {
-        case KEYBOARD_COLOURSCHEME_OCT:
-          thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME} ${ratio.colour}`);
-          break;
-        case KEYBOARD_COLOURSCHEME_MIR:
-          thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME} ${ratio.colour}`);
-          break;
-        case KEYBOARD_COLOURSCHEME_GRA:
-          thisButton.style.backgroundColor = ratio.colourHSL;
-          break;
-        default:
-          console.debug("no colour scheme found");
-      }
+      thisButton.style.setProperty('--button-color', thisButton.dataset[state.colourScheme]);
       thisButton.setAttribute("data-playing", "false");
       thisButton.insertAdjacentElement("afterbegin", thisTextWrapper);
       noteBtnAddClickEvent(thisButton, ratio);
