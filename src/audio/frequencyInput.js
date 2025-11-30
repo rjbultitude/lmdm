@@ -7,7 +7,7 @@ export default function initFrequencyInput() {
   const submit = document.getElementById("keyboard-settings-submit");
   const baseFreqStr = parseInt(state.baseFrequency);
   inputFreq.value = baseFreqStr;
-  form.addEventListener("submit", function(e) {
+  form.addEventListener("submit", function(event) {
     event.preventDefault();
   });
   submit.addEventListener("click", function() {
