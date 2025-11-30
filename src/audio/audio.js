@@ -1,6 +1,6 @@
 import Voice from "./VoiceClass.js";
-import { resetPlaying } from "./keyboardInterface.js";
-import state from "./state.js";
+import { resetPlaying } from "../keyboard/keyboardInterface.js";
+import state from "../state.js";
 import { getNote } from "./noteFunctions.js";
 
 const stopBtn = document.getElementById("stop");

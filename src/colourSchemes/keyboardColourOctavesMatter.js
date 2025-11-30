@@ -1,6 +1,6 @@
 //keyboardColourOctavesMatter
-import { constantIntervalColours, constantIntervalOutlierColours, DEFAULT_COLOUR } from "./constants.js";
-import { getFraction } from "./createLambdomaSeq.js";
+import { constantIntervalColours, constantIntervalOutlierColours, DEFAULT_COLOUR } from "../constants.js";
+import { getFraction } from "../createLambdomaSeq.js";
 
 function checkForOctaves({ratio, maxNumDecimals, up, constantIntervalColoursCombined}) {
   let colour;

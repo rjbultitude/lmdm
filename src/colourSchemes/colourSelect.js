@@ -1,8 +1,5 @@
-import { getColourMirrored } from "./keyboardColourMirrored.js";
-import { getColourOctavesMatter } from "./keyboardColourOctavesMatter.js";
-import { KEYBOARD_COLOURSCHEME_OCT, KEYBOARD_COLOURSCHEME_MIR, KEYBOARD_COLOURSCHEME_GRA, KEYBOARD_BTN_CLASSNAME } from "./constants.js";
-import { getColourGraduated } from "./keyboardColourGraduated.js";
-import state from "./state.js";
+import { KEYBOARD_COLOURSCHEME_OCT, KEYBOARD_COLOURSCHEME_MIR, KEYBOARD_COLOURSCHEME_GRA, KEYBOARD_BTN_CLASSNAME } from "../constants.js";
+import state from "../state.js";
 const colourOptions = [KEYBOARD_COLOURSCHEME_OCT, KEYBOARD_COLOURSCHEME_MIR, KEYBOARD_COLOURSCHEME_GRA];
 
 export function getHSLCSSFromRatio(thisColourHSL) {

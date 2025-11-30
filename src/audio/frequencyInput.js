@@ -1,4 +1,4 @@
-import state from "./state.js";
+import state from "../state.js";
 import { updateActiveVoices } from "./audio.js";
 
 export default function initFrequencyInput() {

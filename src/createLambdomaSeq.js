@@ -1,8 +1,7 @@
-import { KEYBOARD_COLOURSCHEME_OCT, KEYBOARD_COLOURSCHEME_MIR, KEYBOARD_COLOURSCHEME_GRA } from "./constants.js";
-import { getColourMirrored } from "./keyboardColourMirrored.js";
-import { getColourOctavesMatter } from "./keyboardColourOctavesMatter.js";
-import { getColourGraduated, generateGradientArray } from "./keyboardColourGraduated.js";
-import { getHSLCSSFromRatio } from "./colourSelect.js"; 
+import { getColourMirrored } from "./colourSchemes/keyboardColourMirrored.js";
+import { getColourOctavesMatter } from "./colourSchemes/keyboardColourOctavesMatter.js";
+import { getColourGraduated, generateGradientArray } from "./colourSchemes/keyboardColourGraduated.js";
+import { getHSLCSSFromRatio } from "./colourSchemes/colourSelect.js"; 
 import state from "./state.js";
 
 const numeration = "numeration";

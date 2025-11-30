@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "test",
+    "lint": "eslint",
     "start": "http-server ./ -c-1"
   },
   "keywords": [

@@ -1,4 +1,4 @@
-import { AUDIO_CONFIG } from "./constants.js";
+import { AUDIO_CONFIG } from "../constants.js";
 
 export default class Voice {
   constructor(context, freq) {

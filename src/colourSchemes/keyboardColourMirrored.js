@@ -1,4 +1,4 @@
-import { constantIntervalColours, DEFAULT_COLOUR } from "./constants.js";
+import { constantIntervalColours, DEFAULT_COLOUR } from "../constants.js";
 
 function getSubHarmonicRatio(key) {
   const subharmonicRatio = key.split(/(?=\/)|(?<=\/)/g).reverse().join("");

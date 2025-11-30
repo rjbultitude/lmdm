@@ -1,9 +1,9 @@
-import masterLamdomaSeq, { createMasterLamdomaSeq } from "./createLambdomaSeq.js";
-import { getNote } from "./noteFunctions.js";
-import state from "./state.js";
-import { playNote, stopNote } from "./audio.js";
-import { KEYBOARD_COLOURSCHEME_OCT, KEYBOARD_COLOURSCHEME_MIR, KEYBOARD_COLOURSCHEME_GRA, KEYBOARD_BTN_CLASSNAME} from "./constants.js";
-import { initColourSelect } from "./colourSelect.js";
+import masterLamdomaSeq, { createMasterLamdomaSeq } from "../createLambdomaSeq.js";
+import { getNote } from "../audio/noteFunctions.js";
+import state from "../state.js";
+import { playNote, stopNote } from "../audio/audio.js";
+import { KEYBOARD_BTN_CLASSNAME} from "../constants.js";
+import { initColourSelect } from "../colourSchemes/colourSelect.js";
 
 const mainSection = document.getElementById("main");
 const noteNameEl = document.getElementById("note-data-notename");
