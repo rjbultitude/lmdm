@@ -1,13 +1,13 @@
-import { noteOn, noteOff } from './keyboard-utils';
-import { MIDI_NOTE_MIDDLE_C, ONESHOT } from '../utils/constants';
+import { MIDI_NOTE_MIDDLE_C, ONE_SHOT } from '../constants.js';
+import state from '../state.js';
 
-export function offsetMIDIRange(config, note) {
-  return Math.abs(config.intervalsRange.lower) + note - MIDI_NOTE_MIDDLE_C;
+export function offsetMIDIRange(note) {
+  return Math.abs(state.intervalsRange.lower) + note - MIDI_NOTE_MIDDLE_C;
 }
 
-export function MIDIKeyInRange(config, note) {
-  const lowestNoteAbs = Math.abs(config.intervalsRange.lower);
-  const highestNote = lowestNoteAbs + config.intervalsRange.upper;
+export function MIDIKeyInRange(note) {
+  const lowestNoteAbs = Math.abs(state.intervalsRange.lower);
+  const highestNote = lowestNoteAbs + state.intervalsRange.upper;
   if (note < 0) {
     return false;
   }
@@ -22,26 +22,22 @@ export function getVelocity(message) {
   return message.data.length > 2 ? message.data[2] : 0;
 }
 
-export function getMIDIMessage(
-  message,
-  config,
-  _noteOn = noteOn,
-  _noteOff = noteOff
-) {
+export function getMIDIMessage(message) {
   const command = message.data[0];
   const note = message.data[1];
   const velocity = getVelocity(message);
-  const thisNote = offsetMIDIRange(config, note);
+  const thisNote = offsetMIDIRange(note);
 
   switch (command) {
     case 144: // noteOn
-      if (velocity > 0 && MIDIKeyInRange(config, thisNote)) {
-        _noteOn(config, thisNote);
+      if (velocity > 0 && MIDIKeyInRange(thisNote)) {
+        console.debug("thisNote", thisNote);
+        //clickButton(thisNote, play);
       }
       break;
     case 128: // noteOff
-      if (MIDIKeyInRange(config, thisNote) && config.playMode === ONESHOT) {
-        _noteOff(config, thisNote);
+      if (MIDIKeyInRange(thisNote) && state.playMode === ONE_SHOT) {
+        //clickButton(thisNote, stop);
       }
       break;
   }
@@ -49,12 +45,11 @@ export function getMIDIMessage(
 
 export function onMIDISuccess(
   midiAccess,
-  config,
   _getMIDIMessage = getMIDIMessage
 ) {
   for (let input of midiAccess.inputs.values()) {
     input.onmidimessage = (message) => {
-      _getMIDIMessage(message, config);
+      _getMIDIMessage(message);
     };
   }
   return midiAccess;
@@ -64,15 +59,14 @@ export function onMIDIFailure() {
   console.warn('Could not access your MIDI devices.');
 }
 
-export function initMIDIAccess(config) {
+export function initMIDIAccess() {
   if (navigator.requestMIDIAccess) {
-    config.MIDINotSupported = false;
+    state.MIDINotSupported = false;
     navigator.requestMIDIAccess().then((midiAccess) => {
-      onMIDISuccess(midiAccess, config);
+      onMIDISuccess(midiAccess);
     }, onMIDIFailure);
   } else {
-    config.MIDINotSupported = true;
+    state.MIDINotSupported = true;
     console.warn('WebMIDI is not supported in this browser.');
   }
-  return config;
 }

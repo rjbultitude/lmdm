@@ -2,7 +2,7 @@ import masterLamdomaSeq, { createMasterLamdomaSeq } from "../createLambdomaSeq.j
 import { getNote } from "../audio/noteFunctions.js";
 import state from "../state.js";
 import { playNote, stopNote } from "../audio/audio.js";
-import { KEYBOARD_BTN_CLASSNAME} from "../constants.js";
+import { KEYBOARD_BTN_CLASSNAME } from "../constants.js";
 import { initColourSelect } from "../colourSchemes/colourSelect.js";
 
 const mainSection = document.getElementById("main");
@@ -16,6 +16,7 @@ export function noteBtnAddClickEvent(el, ratio) {
     e.stopPropagation();
     const noteId = e.target.id;
     const playingString = e.target.dataset.playing;
+    // coerce to boolean
     const playing = (playingString === "true");
     if (playing === false) {
       const thisFreq = getNote({

@@ -10,6 +10,10 @@ export const KEYBOARD_COLOURSCHEME_OCT = "colourOctaves";
 export const KEYBOARD_COLOURSCHEME_MIR = "colourMirrored";
 export const KEYBOARD_COLOURSCHEME_GRA = "colourGraduated";
 
+export const ONE_SHOT = "One Shot";
+export const RELEASE = "Release";
+export const MIDI_NOTE_MIDDLE_C = 60;
+
 export const GRID_SIZE = 8;
 export const DEFAULT_COLOUR = "#cccccc";
 export const KEYBOARD_BTN_CLASSNAME = "keyboard__button";
