@@ -3,7 +3,6 @@ import { getNote } from "../audio/noteFunctions.js";
 import state from "../state.js";
 import { playNote, stopNote } from "../audio/audio.js";
 import { KEYBOARD_BTN_CLASSNAME } from "../constants.js";
-import { initColourSelect } from "../colourSchemes/colourSelect.js";
 
 const mainSection = document.getElementById("main");
 const noteNameEl = document.getElementById("note-data-notename");
@@ -43,13 +42,12 @@ export function resetPlaying(noteId) {
 
 export function recreateColumns() {
   mainSection.replaceChildren();
-  const doneCallbackArr = [initColourSelect];
   const entireLambdoma = createMasterLamdomaSeq(state.gridSize);
   state.entireLambdoma = entireLambdoma;
-  createColumns(doneCallbackArr, entireLambdoma);
+  createColumns(entireLambdoma);
 }
 
-export function createColumns(readyCallbacksArr, entireLambdoma = masterLamdomaSeq) {
+export function createColumns(entireLambdoma = masterLamdomaSeq) {
   entireLambdoma.forEach((column, index) => {
     const thisRow = document.createElement("div");
     thisRow.setAttribute("id", `column-${index}`);
@@ -79,9 +77,6 @@ export function createColumns(readyCallbacksArr, entireLambdoma = masterLamdomaS
       thisRow.insertAdjacentElement("afterbegin", thisButton);
     });
     mainSection.insertAdjacentElement("afterbegin", thisRow);
-  });
-  readyCallbacksArr.forEach((cb) => {
-    cb();
   });
   return entireLambdoma;
 }

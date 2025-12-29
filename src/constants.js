@@ -44,3 +44,14 @@ export const constantIntervalOutlierColours = {
   "3/7": "#c8cfcc", // septimal minor third
   "5/7": "#c8cfcc", // Septimal Tritone
 }
+
+const harmonicScale = {
+  "8:8": "P",
+  "9:8": "Q",
+  "10:8": "R",
+  "11:8": "S",
+  "12:8": "T",
+  "13:8": "U",
+  "14:8": "V",
+  "15:8": "W"
+}

@@ -39,7 +39,6 @@ export function getAllKeyboardBtns() {
 
 export function initColourSelect() {
   const colourSelect = document.getElementById("keyboard-colours-select");
-  colourSelect.value = state.colourScheme;
   const allKeyboardBtns = getAllKeyboardBtns();
   colourSelect.replaceChildren();
   colourOptions.forEach((colourOption) => {
@@ -51,6 +50,7 @@ export function initColourSelect() {
   colourSelect.value = state.colourScheme;
   colourSelect.addEventListener("change", function(e) {
     const selectedColourOption = e.target.value;
+    state.colourScheme = selectedColourOption;
     updateColours(selectedColourOption, allKeyboardBtns);
   });
   return colourSelect;

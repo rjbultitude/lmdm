@@ -6,8 +6,8 @@ import { initMIDIAccess } from "./keyboard/midi-keyboard.js";
 
 // Generate keyboard interface and bind click events
 //TODO do we still need this callback?
-const doneCallbackArr = [initColourSelect];
-createColumns(doneCallbackArr);
+createColumns();
+initColourSelect();
 initGridSizeSelect();
 initFrequencyInput();
 initMIDIAccess();
