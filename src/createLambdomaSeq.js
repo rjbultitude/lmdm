@@ -1,8 +1,19 @@
 import { getColourMirrored } from "./colourSchemes/keyboardColourMirrored.js";
 import { getColourOctavesMatter } from "./colourSchemes/keyboardColourOctavesMatter.js";
+import { getColourHarmonicScale } from "./colourSchemes/keyboardColourHarmonicScale.js";
+import { getColourOverTones } from "./colourSchemes/keyboardColourOvertones.js";
 import { getColourGraduated, generateGradientArray } from "./colourSchemes/keyboardColourGraduated.js";
 import { getHSLCSSFromRatio } from "./colourSchemes/colourSelect.js"; 
 import state from "./state.js";
+
+// Colour Schemes
+const theseColours = {
+  octaves: null,
+  mirrored: null,
+  graduated: null,
+  harmonicScale: null,
+  overtones: null
+};
 
 const numeration = "numeration";
 const denomination = "denomination";
@@ -81,12 +92,13 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
       column,
       row: index
     });
-    const theseColours = {octaves: null, mirrored: null, graduated: null};
     const colorGradientArr = generateGradientArray();
     const thisColourHSL = getColourGraduated(newRatio, colorGradientArr);
     theseColours.graduated = getHSLCSSFromRatio(thisColourHSL);
     theseColours.octaves = getColourOctavesMatter(newRatio);
     theseColours.mirrored = getColourMirrored(newRatio);
+    theseColours.harmonicScale = getColourHarmonicScale(newRatio);
+    theseColours.overtones = getColourOverTones(newRatio);
     newRatio.setColours(theseColours);
     thisArray.push(newRatio);
     numeratorCount += numeratorCountAmt;

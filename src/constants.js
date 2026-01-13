@@ -9,6 +9,8 @@ export const AUDIO_CONFIG = {
 export const KEYBOARD_COLOURSCHEME_OCT = "colourOctaves";
 export const KEYBOARD_COLOURSCHEME_MIR = "colourMirrored";
 export const KEYBOARD_COLOURSCHEME_GRA = "colourGraduated";
+export const KEYBOARD_COLOURSCHEME_RHS = "colourHarmonicScale";
+export const KEYBOARD_COLOURSCHEME_OVR = "colourOvertones";
 
 export const ONE_SHOT = "One Shot";
 export const RELEASE = "Release";
@@ -45,13 +47,13 @@ export const constantIntervalOutlierColours = {
   "5/7": "#c8cfcc", // Septimal Tritone
 }
 
-const harmonicScale = {
-  "8:8": "P",
-  "9:8": "Q",
-  "10:8": "R",
-  "11:8": "S",
-  "12:8": "T",
-  "13:8": "U",
-  "14:8": "V",
-  "15:8": "W"
+export const harmonicScale = {
+  "8/8": "P",
+  "9/8": "Q",
+  "10/8": "R",
+  "11/8": "S",
+  "12/8": "T",
+  "13/8": "U",
+  "14/8": "V",
+  "15/8": "W"
 }

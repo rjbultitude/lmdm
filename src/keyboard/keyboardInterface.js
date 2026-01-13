@@ -65,9 +65,12 @@ export function createColumns(entireLambdoma = masterLamdomaSeq) {
       thisButton.dataset.denominator = ratio.denominator;
       thisButton.dataset.row = ratio.row;
       thisButton.dataset.column = ratio.column;
+      // colour scheme
       thisButton.dataset.colourGraduated = ratio.colours.graduated;
       thisButton.dataset.colourMirrored = ratio.colours.mirrored;
       thisButton.dataset.colourOctaves = ratio.colours.octaves;
+      thisButton.dataset.colourHarmonicScale = ratio.colours.harmonicScale;
+      thisButton.dataset.colourOvertones = ratio.colours.overtones;
       thisButton.setAttribute("id", `${ratio.numerator}-${ratio.denominator}`);
       thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME}`);
       thisButton.style.setProperty('--button-color', thisButton.dataset[state.colourScheme]);
