@@ -2,10 +2,9 @@ import { harmonicScaleRatiosToLetters, constantIntervalColours } from "../consta
 
 export function getColourHarmonicScale(ratio) {
   let colour;
-  Object.keys(harmonicScale).forEach((harmonicScaleNoteKey) => {
+  Object.keys(harmonicScaleRatiosToLetters).forEach((harmonicScaleNoteKey) => {
     if (ratio.ratioString === harmonicScaleNoteKey) {
       colour = constantIntervalColours["1/1"];
-      console.debug("ratio.ratioString === harmonicScaleNoteKey", colour);
       return;
     }
     colour = "#cccccc";

@@ -35,7 +35,8 @@ export function setNewButtonColour({ keyboardBtn, colourSchemeName, colour }) {
 
 function updateColours(selectedColourOption, allKeyboardBtns) {
   allKeyboardBtns.forEach((keyboardBtn) => {
-    keyboardBtn.style.setProperty('--button-color', keyboardBtn.dataset[selectedColourOption]);
+    const selectedColourOptionDataSet = keyboardBtn.dataset[selectedColourOption];
+    keyboardBtn.style.setProperty('--button-color', selectedColourOptionDataSet);
   });
 }
 
@@ -54,7 +55,6 @@ export function getAllKeyboardBtns() {
 
 export function initColourSelect() {
   const colourSelect = document.getElementById("keyboard-colours-select");
-  const allKeyboardBtns = getAllKeyboardBtns();
   colourSelect.replaceChildren();
   colourOptions.forEach((colourOption) => {
     const colourOptionEl = document.createElement("option");
@@ -66,6 +66,7 @@ export function initColourSelect() {
   colourSelect.addEventListener("change", function(e) {
     const selectedColourOption = e.target.value;
     state.colourScheme = selectedColourOption;
+    const allKeyboardBtns = getAllKeyboardBtns();
     updateColours(selectedColourOption, allKeyboardBtns);
   });
   return colourSelect;
