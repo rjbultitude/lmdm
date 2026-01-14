@@ -10,5 +10,6 @@ Run `npm install` then `npm start`
 1. Validate keyboard grid sizes from original documentation
 2. Add computer keyboard input
 3. Add Lissajous visualiser
+4. Consider removing 20 x 20 grid
 5. Add playing guide
 6. Put controls in floating, expandable panels
