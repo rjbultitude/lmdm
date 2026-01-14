@@ -71,6 +71,7 @@ export function createColumns(entireLambdoma = masterLamdomaSeq) {
       thisButton.dataset.colourOctaves = ratio.colours.octaves;
       thisButton.dataset.colourHarmonicScale = ratio.colours.harmonicScale;
       thisButton.dataset.colourOvertones = ratio.colours.overtones;
+      // standard attributes
       thisButton.setAttribute("id", `${ratio.numerator}-${ratio.denominator}`);
       thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME}`);
       thisButton.style.setProperty('--button-color', thisButton.dataset[state.colourScheme]);

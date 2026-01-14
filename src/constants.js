@@ -47,7 +47,7 @@ export const constantIntervalOutlierColours = {
   "5/7": "#c8cfcc", // Septimal Tritone
 }
 
-export const harmonicScale = {
+export const harmonicScaleRatiosToLetters = {
   "8/8": "P",
   "9/8": "Q",
   "10/8": "R",
