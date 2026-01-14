@@ -5,9 +5,7 @@ export function getColourHarmonicScale(ratio) {
   Object.keys(harmonicScaleRatiosToLetters).forEach((harmonicScaleNoteKey) => {
     if (ratio.ratioString === harmonicScaleNoteKey) {
       colour = constantIntervalColours["1/1"];
-      return;
     }
-    colour = "#cccccc";
   });
-  return colour;
+  return colour || "#cccccc";
 }
