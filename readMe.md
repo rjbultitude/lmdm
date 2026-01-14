@@ -8,8 +8,7 @@ Run `npm install` then `npm start`
 
 ## To do 
 1. Validate keyboard grid sizes from original documentation
-2. Change breakpoint based on grid size
-3. Add computer keyboard input
-4. Add Lissajous visualiser
-4. Add playing guide
-5. Put controls in floating, expandable panels
+2. Add computer keyboard input
+3. Add Lissajous visualiser
+5. Add playing guide
+6. Put controls in floating, expandable panels

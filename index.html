@@ -145,7 +145,7 @@
     }
 
     @media screen and (min-width: 580px) {
-      main {
+      .grid-8 {
         transform: rotate(45deg) translate(20%, 15%);
         width: calc(var(--button-size) * var(--grid-size));
       }
@@ -158,6 +158,20 @@
         margin-top: 180px;
         position: relative;
         z-index: 2;
+      }
+    }
+
+    @media screen and (min-width: 1260px) {
+      .grid-16 {
+        transform: rotate(45deg) translate(20%, 15%);
+        width: calc(var(--button-size) * var(--grid-size));
+      }
+    }
+
+    @media screen and (min-width: 1340px) {
+      .grid-20 {
+        transform: rotate(45deg) translate(20%, 15%);
+        width: calc(var(--button-size) * var(--grid-size));
       }
     }
   </style>
