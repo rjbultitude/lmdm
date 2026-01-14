@@ -6,15 +6,6 @@ import { getColourGraduated, generateGradientArray } from "./colourSchemes/keybo
 import { getHSLCSSFromRatio } from "./colourSchemes/colourSelect.js"; 
 import state from "./state.js";
 
-// Colour Schemes
-const theseColours = {
-  octaves: null,
-  mirrored: null,
-  graduated: null,
-  harmonicScale: null,
-  overtones: null
-};
-
 const numeration = "numeration";
 const denomination = "denomination";
 const ascendBoth = "ascendBoth";
@@ -92,6 +83,14 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
       column,
       row: index
     });
+    // Colour Schemes
+    const theseColours = {
+      octaves: null,
+      mirrored: null,
+      graduated: null,
+      harmonicScale: null,
+      overtones: null
+    };
     const colorGradientArr = generateGradientArray();
     const thisColourHSL = getColourGraduated(newRatio, colorGradientArr);
     theseColours.graduated = getHSLCSSFromRatio(thisColourHSL);
