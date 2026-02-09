@@ -6,11 +6,15 @@ export const AUDIO_CONFIG = {
   SMOOTHING_INTERVAL: 0.02
 };
 
-export const KEYBOARD_COLOURSCHEME_OCT = "colourOctaves";
-export const KEYBOARD_COLOURSCHEME_MIR = "colourMirrored";
-export const KEYBOARD_COLOURSCHEME_GRA = "colourGraduated";
-export const KEYBOARD_COLOURSCHEME_RHS = "colourHarmonicScale";
-export const KEYBOARD_COLOURSCHEME_OVR = "colourOvertones";
+export class KeyboardColourScheme {
+  constructor({ oct, mir, gra, rhs, ovr }) {
+    this.oct = oct;
+    this.mir = mir;
+    this.gra = gra;
+    this.rhs = rhs;
+    this.ovr = ovr;
+  }
+}
 
 export const ONE_SHOT = "One Shot";
 export const RELEASE = "Release";

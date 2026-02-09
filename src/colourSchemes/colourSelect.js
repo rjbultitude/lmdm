@@ -1,21 +1,18 @@
 import { 
-  KEYBOARD_COLOURSCHEME_OCT,
-  KEYBOARD_COLOURSCHEME_MIR,
-  KEYBOARD_COLOURSCHEME_GRA,
-  KEYBOARD_COLOURSCHEME_RHS,
-  KEYBOARD_COLOURSCHEME_OVR,
+  KeyboardColourScheme,
   KEYBOARD_BTN_CLASSNAME 
 } from "../constants.js";
 
 import state from "../state.js";
 
-const colourOptions = [
-  KEYBOARD_COLOURSCHEME_OCT,
-  KEYBOARD_COLOURSCHEME_MIR,
-  KEYBOARD_COLOURSCHEME_GRA,
-  KEYBOARD_COLOURSCHEME_RHS,
-  KEYBOARD_COLOURSCHEME_OVR,
-];
+// Initialise colour schemes
+const KEYBOARD_COLOURSCHEME = new KeyboardColourScheme({
+  "oct": "Octaves",
+  "mir": "Mirrored",
+  "gra": "Graduated",
+  "rhs": "Harmonic Scale",
+  "ovr": "Overtones",
+});
 
 export function getHSLCSSFromRatio(thisColourHSL) {
   return `hsl(${thisColourHSL.hue},${thisColourHSL.saturation}%,${thisColourHSL.lightness}%)`;
@@ -25,7 +22,7 @@ export function setNewButtonColour({ keyboardBtn, colourSchemeName, colour }) {
   keyboardBtn.className = "";
   keyboardBtn.style.backgroundColor = "";
   keyboardBtn.classList.add(KEYBOARD_BTN_CLASSNAME);
-  if (colourSchemeName === KEYBOARD_COLOURSCHEME_GRA) {
+  if (colourSchemeName === KEYBOARD_COLOURSCHEME.gra) {
     const hslColour = getHSLCSSFromRatio(colour);
     keyboardBtn.style.setProperty('--button-color', hslColour);
     return;
@@ -56,10 +53,12 @@ export function getAllKeyboardBtns() {
 export function initColourSelect() {
   const colourSelect = document.getElementById("keyboard-colours-select");
   colourSelect.replaceChildren();
-  colourOptions.forEach((colourOption) => {
+  Object.keys(KEYBOARD_COLOURSCHEME).forEach((colourOptionKey) => {
     const colourOptionEl = document.createElement("option");
-    colourOptionEl.value = colourOption;
-    colourOptionEl.innerText = colourOption;
+    colourOptionEl.value = colourOptionKey;
+    console.debug("KEYBOARD_COLOURSCHEME", KEYBOARD_COLOURSCHEME);
+    console.debug("KEYBOARD_COLOURSCHEME[colourOptionKey]", KEYBOARD_COLOURSCHEME[colourOptionKey]);
+    colourOptionEl.innerText = KEYBOARD_COLOURSCHEME[colourOptionKey];
     colourSelect.insertAdjacentElement("afterbegin", colourOptionEl);
   });
   colourSelect.value = state.colourScheme;

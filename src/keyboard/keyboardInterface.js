@@ -66,11 +66,9 @@ export function createColumns(entireLambdoma = masterLamdomaSeq) {
       thisButton.dataset.row = ratio.row;
       thisButton.dataset.column = ratio.column;
       // colour scheme
-      thisButton.dataset.colourGraduated = ratio.colours.graduated;
-      thisButton.dataset.colourMirrored = ratio.colours.mirrored;
-      thisButton.dataset.colourOctaves = ratio.colours.octaves;
-      thisButton.dataset.colourHarmonicScale = ratio.colours.harmonicScale;
-      thisButton.dataset.colourOvertones = ratio.colours.overtones;
+      Object.keys(ratio.colours).forEach((colourSchemeKey) => {
+        thisButton.dataset[colourSchemeKey] = ratio.colours[colourSchemeKey];
+      });
       // standard attributes
       thisButton.setAttribute("id", `${ratio.numerator}-${ratio.denominator}`);
       thisButton.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME}`);
