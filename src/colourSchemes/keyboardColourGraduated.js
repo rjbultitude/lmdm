@@ -3,11 +3,17 @@ import state from "../state.js";
 const colourGradientArr = generateGradientArray();
 
 export function generateHSLFromNumber(i, j) {
+  // highest j inside lowest i is lowest note
+  // lowest j inside highest i is highest note
+  // when in i 1 gridSize is number of notes
+  const columnNum = i + 1;
+  const rowNum = j + 1;
   const totalGridSize = state.gridSize * state.gridSize;
-  const increment = i * j / totalGridSize;
-  const hue = 0 + increment * 360;
-  const saturation = 90;
-  const lightness = 70;
+  const hueIncrement = columnNum * rowNum / totalGridSize;
+  const hue = 0 + hueIncrement * 360;
+  const saturation = 70;
+  const lightnessIncrement = columnNum * rowNum / totalGridSize;
+  const lightness = 60 + lightnessIncrement; //70 max
   return {
     hue, saturation, lightness
   };
@@ -18,7 +24,7 @@ export function generateGradientArray() {
   // use lambdome arrays as model
   for (let i = 0; i < state.gridSize; i++) {
     const colorGradientChildArr = [];
-    for (let j = 0; j < state.gridSize; j++) {
+    for (let j = state.gridSize; j > 0; j--) {
       const newColour = generateHSLFromNumber(i, j);
       colorGradientChildArr.push(newColour);
     }
@@ -35,5 +41,6 @@ export function getColourGraduated(ratio, _colourGradientArr = colourGradientArr
      to set the color */
   const column = ratio.column;
   const row = ratio.row;
+  console.debug("ratio", ratio);
   return _colourGradientArr[column][row];
 }
