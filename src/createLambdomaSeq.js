@@ -3,8 +3,8 @@ import { getColourMirrored } from "./colourSchemes/keyboardColourMirrored.js";
 import { getColourOctavesMatter } from "./colourSchemes/keyboardColourOctavesMatter.js";
 import { getColourHarmonicScale } from "./colourSchemes/keyboardColourHarmonicScale.js";
 import { getColourOverTones } from "./colourSchemes/keyboardColourOvertones.js";
-import { getColourGraduated, generateGradientArray } from "./colourSchemes/keyboardColourGraduated.js";
-import { getHSLCSSFromRatio } from "./colourSchemes/colourSelect.js"; 
+import { getColourGraduated, getColourGraduatedFreq, generateGradientArray } from "./colourSchemes/keyboardColourGraduated.js";
+//import { getHSLCSSFromRatio } from "./colourSchemes/colourSelect.js"; 
 import state from "./state.js";
 
 const numeration = "numeration";
@@ -86,11 +86,12 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
     });
     // Colour Schemes
     const colorGradientArr = generateGradientArray();
-    const thisColourHSL = getColourGraduated(newRatio, colorGradientArr);
+    //const thisColourHSL = getColourGraduated(newRatio, colorGradientArr);
     const thisTonesColours = new KeyboardColourScheme({
       oct: getColourOctavesMatter(newRatio),
       mir: getColourMirrored(newRatio),
-      gra: getHSLCSSFromRatio(thisColourHSL),
+      //gra: getHSLCSSFromRatio(thisColourHSL),
+      gra: getColourGraduatedFreq(newRatio),
       rhs: getColourHarmonicScale(newRatio),
       ovr: getColourOverTones(newRatio),
     });

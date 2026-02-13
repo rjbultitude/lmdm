@@ -1,4 +1,5 @@
 import state from "../state.js";
+import { getHSLCSSFromRatio } from "./colourSelect.js";
 
 const colourGradientArr = generateGradientArray();
 
@@ -41,6 +42,18 @@ export function getColourGraduated(ratio, _colourGradientArr = colourGradientArr
      to set the color */
   const column = ratio.column;
   const row = ratio.row;
-  console.debug("ratio", ratio);
   return _colourGradientArr[column][row];
+}
+
+export function getColourGraduatedFreq(ratio) {
+  const hueMax = 360;
+  let hue = 0 + (ratio.fraction / 7.5) * hueMax;
+  if (hue > hueMax) {
+    hue = hueMax;
+    console.debug("hue is greater than 360");
+  }
+  const saturation = 70;
+  const hslObject = { hue, saturation, lightness: 70 };
+  const hslColour = getHSLCSSFromRatio(hslObject);
+  return hslColour;
 }
