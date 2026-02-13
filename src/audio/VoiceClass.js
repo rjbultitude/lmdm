@@ -9,7 +9,8 @@ export default class Voice {
     this.vco = null;
     this.vca = null;
   }
-  start() {
+  start(volume) {
+    this.volume = volume ?? AUDIO_CONFIG.MAX_VOLUME;
     this.vco = this.context.createOscillator();
     this.vco.type = AUDIO_CONFIG.WAVE_TYPE;
     this.vco.frequency.value = this.frequency;
@@ -21,11 +22,12 @@ export default class Voice {
     /* connections */
     this.vco.connect(this.vca);
     this.vca.connect(this.context.destination);
-    this.vca.gain.setTargetAtTime(AUDIO_CONFIG.MAX_VOLUME, this.now, AUDIO_CONFIG.SMOOTHING_INTERVAL);
+    this.vca.gain.setTargetAtTime(this.volume, this.now, AUDIO_CONFIG.SMOOTHING_INTERVAL);
     this.vco.start(0);
 
     /* Keep track of the oscillators used */
     this.oscillators.push(this.vco);
+    console.log("this.volume", this.volume);
   }
 
   stop() {
@@ -34,10 +36,7 @@ export default class Voice {
       this.vca.gain.cancelScheduledValues(this.now);
       this.vca.gain.setValueAtTime(this.vca.gain.value, this.now);
       this.vca.gain.setTargetAtTime(0, this.now, AUDIO_CONFIG.SMOOTHING_INTERVAL);
-      // does't seem to be synchronous
-      setTimeout(() => {
-        oscillator.stop();
-      }, AUDIO_CONFIG.SMOOTHING_INTERVAL * 50);
+      oscillator.stop(stopTime);
     });
   }
   update(newFrequency) {

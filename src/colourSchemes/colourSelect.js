@@ -56,8 +56,6 @@ export function initColourSelect() {
   Object.keys(KEYBOARD_COLOURSCHEME).forEach((colourOptionKey) => {
     const colourOptionEl = document.createElement("option");
     colourOptionEl.value = colourOptionKey;
-    console.debug("KEYBOARD_COLOURSCHEME", KEYBOARD_COLOURSCHEME);
-    console.debug("KEYBOARD_COLOURSCHEME[colourOptionKey]", KEYBOARD_COLOURSCHEME[colourOptionKey]);
     colourOptionEl.innerText = KEYBOARD_COLOURSCHEME[colourOptionKey];
     colourSelect.insertAdjacentElement("afterbegin", colourOptionEl);
   });

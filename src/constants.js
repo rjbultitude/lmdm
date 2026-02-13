@@ -1,6 +1,7 @@
 export const AUDIO_CONFIG = {
   ROOT_NOTE: 256,
   MAX_VOLUME: 0.5,
+  MIN_VOLUME: 0.05,
   WAVE_TYPE: "sine",
   MAX_NUM_OSC: 4,
   SMOOTHING_INTERVAL: 0.2

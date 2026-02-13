@@ -2,6 +2,7 @@ import Voice from "./VoiceClass.js";
 import { resetPlaying } from "../keyboard/keyboardInterface.js";
 import state from "../state.js";
 import { getNote } from "./noteFunctions.js";
+import { AUDIO_CONFIG } from "../constants.js";
 
 const stopBtn = document.getElementById("stop");
 let contextNotSet = true;
@@ -16,6 +17,12 @@ export function createVoice(frequency) {
   return thisVoice;
 }
 
+function getThisVoiceVolume(numActiveVoices) {
+  const thisVolume = AUDIO_CONFIG.MAX_VOLUME - (0.05 * numActiveVoices);
+  if (thisVolume < AUDIO_CONFIG.MIN_VOLUME) return AUDIO_CONFIG.MIN_VOLUME;
+  return thisVolume;
+}
+
 export function playNote(noteId, frequency) {
   if (contextNotSet) {
     setAudioContext();
@@ -27,7 +34,10 @@ export function playNote(noteId, frequency) {
   };
   state.activeVoices[noteId] = newVoiceObj;
   state.activeVoices[noteId].voice = thisVoice;
-  thisVoice.start();
+  const numActiveVoices = Object.keys(state.activeVoices).length;
+  console.log("numActiveVoices", numActiveVoices);
+  const thisVoiceVolume = getThisVoiceVolume(numActiveVoices);
+  thisVoice.start(thisVoiceVolume);
 };
 
 export function stopNote(noteId) {
