@@ -37,6 +37,7 @@
     }
     :root {
       --button-size: 52px;
+      --button-size-small: 42px;
       --transition-period: 200ms;
       --grid-size: 8;
       --spacing: 16px;
@@ -142,6 +143,16 @@
     .keyboard__button[data-playing="true"] {
       background-color: coral;
       transition: background-color var(--transition-period) linear;
+    }
+
+    .grid-16 .keyboard__column,
+    .grid-20 .keyboard__column {
+      width: var(--button-size-small);
+    }
+    .grid-16 .keyboard__button,
+    .grid-20 .keyboard__button {
+      width: var(--button-size-small);
+      height: var(--button-size-small);
     }
 
     @media screen and (min-width: 580px) {

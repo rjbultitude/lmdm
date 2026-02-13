@@ -35,7 +35,6 @@ export function playNote(noteId, frequency) {
   state.activeVoices[noteId] = newVoiceObj;
   state.activeVoices[noteId].voice = thisVoice;
   const numActiveVoices = Object.keys(state.activeVoices).length;
-  console.log("numActiveVoices", numActiveVoices);
   const thisVoiceVolume = getThisVoiceVolume(numActiveVoices);
   thisVoice.start(thisVoiceVolume);
 };
