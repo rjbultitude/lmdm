@@ -47,7 +47,7 @@ export function getColourGraduated(ratio, _colourGradientArr = colourGradientArr
 
 export function getColourGraduatedFreq(ratio) {
   const hueMax = 360;
-  let hue = 0 + (ratio.fraction / 7.5) * hueMax;
+  let hue = 0 + (ratio.fraction / 8.6) * hueMax;
   if (hue > hueMax) {
     hue = hueMax;
     console.debug("hue is greater than 360");
