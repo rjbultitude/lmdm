@@ -85,7 +85,7 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
       row: index
     });
     // Colour Schemes
-    const colorGradientArr = generateGradientArray();
+    //const colorGradientArr = generateGradientArray();
     //const thisColourHSL = getColourGraduated(newRatio, colorGradientArr);
     const thisTonesColours = new KeyboardColourScheme({
       oct: getColourOctavesMatter(newRatio),

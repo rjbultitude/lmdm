@@ -27,17 +27,18 @@ export function getMIDIMessage(message) {
   const note = message.data[1];
   const velocity = getVelocity(message);
   const thisNote = offsetMIDIRange(note);
+  const noteButton = document.querySelector(`[data-number='${thisNote}']`);
 
   switch (command) {
     case 144: // noteOn
       if (velocity > 0 && MIDIKeyInRange(thisNote)) {
         console.debug("thisNote", thisNote);
-        //clickButton(thisNote, play);
+        noteButton.click();
       }
       break;
     case 128: // noteOff
       if (MIDIKeyInRange(thisNote) && state.playMode === ONE_SHOT) {
-        //clickButton(thisNote, stop);
+        noteButton.click();
       }
       break;
   }

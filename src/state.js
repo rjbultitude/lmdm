@@ -1,4 +1,4 @@
-import { AUDIO_CONFIG, GRID_SIZE, ONE_SHOT } from "./constants.js";
+import { AUDIO_CONFIG, GRID_SIZE, ONE_SHOT, LOWEST_NOTE } from "./constants.js";
 
 const state = {
   baseFrequency: AUDIO_CONFIG.ROOT_NOTE,
@@ -8,8 +8,8 @@ const state = {
   playMode: ONE_SHOT,
   MIDINotSupported: false,
   intervalsRange: {
-    upper: GRID_SIZE * GRID_SIZE,
-    lower: -36
+    upper: LOWEST_NOTE + (GRID_SIZE * GRID_SIZE),
+    lower: LOWEST_NOTE
   }
 }
 export default state;

@@ -18,6 +18,7 @@ export function noteBtnAddClickEvent(el, ratio) {
     // coerce to boolean
     const playing = (playingString === "true");
     if (playing === false) {
+      // PLAY
       const thisFreq = getNote({
         rootNote: state.baseFrequency,
         ratio
@@ -30,6 +31,7 @@ export function noteBtnAddClickEvent(el, ratio) {
       noteNumberEl.innerText = Object.keys(state.activeVoices).length;
       return;
     }
+    // STOP
     stopNote(noteId);
     e.target.dataset.playing = "false";
   }, false);
@@ -48,12 +50,16 @@ export function recreateColumns() {
 }
 
 export function createColumns(entireLambdoma = masterLamdomaSeq) {
+  const totalGridCount = state.gridSize * state.gridSize;
+  let lastTotal = totalGridCount;
   entireLambdoma.forEach((column, index) => {
     const thisRow = document.createElement("div");
     thisRow.setAttribute("id", `column-${index}`);
     thisRow.setAttribute("class", "keyboard__column");
+    lastTotal = totalGridCount - (index * entireLambdoma.length);
+    console.debug("lastTotal", lastTotal);
     // Buttons
-    column.forEach((ratio) => {
+    column.forEach((ratio, rowIndex) => {
       const thisButton = document.createElement("button");
       const thisTextWrapper = document.createElement("div");
       thisTextWrapper.setAttribute("class", `${KEYBOARD_BTN_CLASSNAME}__text`);
@@ -65,6 +71,7 @@ export function createColumns(entireLambdoma = masterLamdomaSeq) {
       thisButton.dataset.denominator = ratio.denominator;
       thisButton.dataset.row = ratio.row;
       thisButton.dataset.column = ratio.column;
+      thisButton.dataset.number = lastTotal - ratio.row;
       // colour scheme
       Object.keys(ratio.colours).forEach((colourSchemeKey) => {
         thisButton.dataset[colourSchemeKey] = ratio.colours[colourSchemeKey];
