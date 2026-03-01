@@ -4,7 +4,7 @@ export const AUDIO_CONFIG = {
   MIN_VOLUME: 0.05,
   WAVE_TYPE: "sine",
   MAX_NUM_OSC: 4,
-  SMOOTHING_INTERVAL: 0.2
+  SMOOTHING_INTERVAL: 0.5
 };
 
 export class KeyboardColourScheme {

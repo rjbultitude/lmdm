@@ -3,6 +3,7 @@ import { initColourSelect } from "./colourSchemes/colourSelect.js";
 import initGridSizeSelect from "./keyboard/gridSelect.js";
 import initFrequencyInput from "./audio/frequencyInput.js";
 import { initMIDIAccess } from "./keyboard/midi-keyboard.js";
+//import { initCanvas } from "./visual/lissajous.js";
 
 // Generate keyboard interface and bind click events
 //TODO do we still need this callback?
@@ -11,3 +12,4 @@ initColourSelect();
 initGridSizeSelect();
 initFrequencyInput();
 initMIDIAccess();
+//initCanvas();

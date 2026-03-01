@@ -3,7 +3,7 @@
   <title>Lambdoma online keyboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caprasimo&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100..900&family=Funnel+Display:wght@300&display=swap" rel="stylesheet">
   <style>
     html * > {
       font-size: 0.75;
@@ -11,7 +11,9 @@
     }
     body {
       font-size: 1rem;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Encode Sans", serif;
+      font-weight: 300;
+      /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
       background-color: #f4f4f9;
       color: #2f4550;
       padding: 0;
@@ -25,11 +27,23 @@
       text-decoration: none;
     }
     h1 {
-      font-family: "Caprasimo", serif;
-      font-weight: 200;
+      font-family: "Encode Sans", serif;
+      font-weight: 300;
       font-size: 3.2rem;
       text-align: center;
       margin: 0;
+    }
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 300;
+      margin: 0 0 6px;
+    }
+    dt {
+      margin-right: 6px;
+    }
+    dd {
+      margin: 0;
+      min-width: 60px;
     }
     .sub-heading {
       display: block;
@@ -45,6 +59,8 @@
       --dark-green: #2f4550;
       --mid-green: #586f7c;
       --light-green: #b8dbd9;
+      --panel-bg: #d3d8e0;
+      --panel-width: 136px;
     }
     header {
       background-color: var(--dark-green);
@@ -52,13 +68,14 @@
       padding: calc(var(--spacing) / 2) 0;
     }
     header p {
-      margin-bottom: 0;
+      margin: calc(var(--spacing) / 2) auto;
     }
     .wrapper {
       position: relative;
     }
     .inner-wrapper {
       margin: 0 auto;
+      padding: var(--spacing);
       max-width: var(--max-width);
     }
     main {
@@ -70,18 +87,57 @@
     }
 
     .keyboard-form {
-      background-color: #b8dbd9;
-      /* max-width: var(--max-width); */
+      background-color: var(--panel-bg);
+      position: relative;
       margin: 0;
-      padding: var(--spacing);
+      padding: calc(var(--spacing)/2);
       display: flex;
-      flex-direction: row;
-      justify-content: center;
-      gap: var(--spacing);
+      width: var(--panel-width);
+      position: absolute;
+      z-index: 2;
+      top: 50px;
     }
 
+    .keyboard-form--appearance {
+      /* right: calc(var(--panel-width) * -1); */
+      right: 0;
+    }
+
+    .keyboard-form--appearance:after {
+      background-color: var(--panel-bg);
+      content: "";
+      background-image: url("img/dark-theme.svg");
+      background-size: contain;
+      width: 20px;
+      height: 20px;
+      left: -20px;
+      position: absolute;
+    }
+
+    .keyboard-form--sound {
+      /* left: calc(var(--panel-width) * -1); */
+      left: 0;
+    }
+
+    .keyboard-form--sound:after {
+      background-color: var(--panel-bg);
+      content: "";
+      background-image: url("img/Speaker_Icon.svg");
+      background-size: contain;
+      width: 20px;
+      height: 20px;
+      right: -20px;
+      position: absolute;
+    }
+
+    .keyboard-form--appearance .keyboard-form__fieldset {
+      align-items: end;
+    }
+
+    .keyboard-form,
     .keyboard-form__fieldset {
-      width: fit-content;
+      flex-direction: column;
+      gap: var(--spacing);
     }
 
     .keyboard-form__submit {
@@ -114,7 +170,7 @@
     .keyboard__button {
       width: var(--button-size);
       height: var(--button-size);
-      border: 1px solid black;
+      border: 1px solid white;
       transition: background-color var(--transition-period) linear;
       position: relative;
       background-color: var(--button-color);
@@ -130,10 +186,11 @@
       transition: background-color var(--transition-period) linear;
     }
 
-    .section__note-data {
-      position: absolute;
-      left: 0;
-      top: 60px;
+    .section__note-data dl {
+      display: flex;
+      max-width: 540px;
+      margin: 0 auto;
+      justify-content: center;
     }
     
     .keyboard__button__text {
@@ -164,12 +221,6 @@
       .keyboard__button__text {
         rotate: -45deg;
       }
-
-      .keyboard-form--footer {
-        margin-top: 180px;
-        position: relative;
-        z-index: 2;
-      }
     }
 
     @media screen and (min-width: 1260px) {
@@ -197,9 +248,10 @@
     </div>
   </header>
   <div class="wrapper">
-  <form id="keyboard-settings-form" class="keyboard-form">
+  <form id="keyboard-settings-form" class="keyboard-form keyboard-form--sound">
     <div class="keyboard-form__fieldset">
-      <label for="input-base-frequency" class="keyboard-form__label">Base Frequency</label>
+      <h2>Sound</h2>
+      <label for="input-base-frequency" class="keyboard-form__label">Base Freq</label>
       <input name="base-frequency-input" type="number" min="128" max="480" id="input-base-frequency">
       <button id="keyboard-settings-submit" class="keyboard-form__submit">Submit</button> 
     </div>
@@ -214,9 +266,10 @@
   </section>
   <main id="main">
   </main>
-  <form id="keyboard-colours-form" class="keyboard-form keyboard-form--footer">
+  <form id="keyboard-colours-form" class="keyboard-form keyboard-form--appearance">
+    <h2>Appearance</h2>
     <div class="keyboard-form__fieldset">
-      <label for="keyboard-colours-select" class="keyboard-form__label">Colour Scheme</label>
+      <label for="keyboard-colours-select" class="keyboard-form__label">Scheme</label>
       <select id="keyboard-colours-select" name="keyboard-colours-select">
       </select>
     </div>
@@ -227,8 +280,8 @@
         <option>16 x 16</option>
         <option>20 x 20</option>
       </select>
-      <!-- <button id="keyboard-settings-submit" class="keyboard-form__submit">Submit</button>  -->
     </div>
   </form>
+  <!-- <canvas id="canvas" width="768" height="768"> -->
   <script type="module" src="./src/index.js"></script>
 </body>
