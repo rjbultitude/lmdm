@@ -8,8 +8,8 @@ const state = {
   playMode: ONE_SHOT,
   MIDINotSupported: false,
   intervalsRange: {
-    upper: GRID_SIZE,
-    lower: 0
+    upper: GRID_SIZE * GRID_SIZE,
+    lower: -36
   }
 }
 export default state;
