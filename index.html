@@ -248,7 +248,7 @@
     </div>
   </header>
   <div class="wrapper">
-  <form id="keyboard-settings-form" class="keyboard-form keyboard-form--sound">
+  <form id="keyboard-settings-form" class="keyboard-form keyboard-form--sound active">
     <div class="keyboard-form__fieldset">
       <h2>Sound</h2>
       <label for="input-base-frequency" class="keyboard-form__label">Base Freq</label>
@@ -256,6 +256,7 @@
       <button id="keyboard-settings-submit" class="keyboard-form__submit">Submit</button> 
     </div>
     <button id="stop" class="keyboard-form__submit">Stop All</button>
+    <button id="side-panel-left" class="controls-sidebar controls-sidebar--sound"></button>
   </form>
   <section class="section__note-data">
     <dl>
@@ -266,7 +267,7 @@
   </section>
   <main id="main">
   </main>
-  <form id="keyboard-colours-form" class="keyboard-form keyboard-form--appearance">
+  <form id="keyboard-colours-form" class="keyboard-form keyboard-form--appearance active">
     <h2>Appearance</h2>
     <div class="keyboard-form__fieldset">
       <label for="keyboard-colours-select" class="keyboard-form__label">Scheme</label>
@@ -281,6 +282,7 @@
         <option>20 x 20</option>
       </select>
     </div>
+    <button id="side-panel-right" class="controls-sidebar controls-sidebar--appearance"></button>
   </form>
   <!-- <canvas id="canvas" width="768" height="768"> -->
   <script type="module" src="./src/index.js"></script>
