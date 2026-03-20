@@ -5,18 +5,18 @@ import { playNote, stopNote } from "../audio/audio.js";
 import { KEYBOARD_BTN_CLASSNAME } from "../constants.js";
 
 const mainSection = document.getElementById("main");
-const noteNameEl = document.getElementById("note-data-notename");
+//const noteNameEl = document.getElementById("note-data-notename");
 const noteFreqEl = document.getElementById("note-data-freq");
 const noteNumberEl = document.getElementById("note-data-num");
 
 function updateNoteDataUi(thisFreq) {
-  noteNameEl.innerText = "A";
+  //noteNameEl.innerText = "A";
   noteFreqEl.innerText = thisFreq.toFixed(2);
   noteNumberEl.innerText = Object.keys(state.activeVoices).length;
 }
 
-function clearNoteDataUi() {
-  noteNameEl.innerText = "";
+export function clearNoteDataUi() {
+  //noteNameEl.innerText = "";
   noteFreqEl.innerText = "";
   noteNumberEl.innerText = "";
 }

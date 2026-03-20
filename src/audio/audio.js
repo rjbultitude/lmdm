@@ -1,5 +1,5 @@
 import Voice from "./VoiceClass.js";
-import { resetPlaying } from "../keyboard/keyboardInterface.js";
+import { resetPlaying, clearNoteDataUi } from "../keyboard/keyboardInterface.js";
 import state from "../state.js";
 import { getNote } from "./noteFunctions.js";
 import { AUDIO_CONFIG } from "../constants.js";
@@ -57,5 +57,6 @@ stopBtn.addEventListener('click', function(e) {
   Object.keys(state.activeVoices).forEach((activeVoiceKey) => {
     stopNote(activeVoiceKey);
     resetPlaying(activeVoiceKey);
+    clearNoteDataUi();
   });
 });
