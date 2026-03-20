@@ -98,12 +98,7 @@
       top: 50px;
     }
 
-    .keyboard-form--appearance {
-      /* right: calc(var(--panel-width) * -1); */
-      right: 0;
-    }
-
-    .keyboard-form--appearance:after {
+    .controls-sidebar--appearance {
       background-color: var(--panel-bg);
       content: "";
       background-image: url("img/dark-theme.svg");
@@ -114,12 +109,7 @@
       position: absolute;
     }
 
-    .keyboard-form--sound {
-      /* left: calc(var(--panel-width) * -1); */
-      left: 0;
-    }
-
-    .keyboard-form--sound:after {
+    .controls-sidebar--sound {
       background-color: var(--panel-bg);
       content: "";
       background-image: url("img/Speaker_Icon.svg");
@@ -138,6 +128,26 @@
     .keyboard-form__fieldset {
       flex-direction: column;
       gap: var(--spacing);
+    }
+
+    .keyboard-form {
+      position: absolute;
+    }
+
+    .keyboard-form--sound {
+      left: -120px;
+    }
+
+    .keyboard-form--appearance {
+      right: -120px;
+    }
+
+    .keyboard-form--sound.active {
+      left: 0px;
+    }
+
+    .keyboard-form--appearance.active {
+      right: 0px;
     }
 
     .keyboard-form__submit {
@@ -256,7 +266,7 @@
       <button id="keyboard-settings-submit" class="keyboard-form__submit">Submit</button> 
     </div>
     <button id="stop" class="keyboard-form__submit">Stop All</button>
-    <button id="side-panel-left" class="controls-sidebar controls-sidebar--sound"></button>
+    <button type="button" id="side-panel-left" class="controls-sidebar controls-sidebar--sound">Open</button>
   </form>
   <section class="section__note-data">
     <dl>
@@ -282,7 +292,7 @@
         <option>20 x 20</option>
       </select>
     </div>
-    <button id="side-panel-right" class="controls-sidebar controls-sidebar--appearance"></button>
+    <button type="button" id="side-panel-right" class="controls-sidebar controls-sidebar--appearance">Open</button>
   </form>
   <!-- <canvas id="canvas" width="768" height="768"> -->
   <script type="module" src="./src/index.js"></script>
