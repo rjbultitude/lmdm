@@ -9,6 +9,18 @@ const noteNameEl = document.getElementById("note-data-notename");
 const noteFreqEl = document.getElementById("note-data-freq");
 const noteNumberEl = document.getElementById("note-data-num");
 
+function updateNoteDataUi(thisFreq) {
+  noteNameEl.innerText = "A";
+  noteFreqEl.innerText = thisFreq.toFixed(2);
+  noteNumberEl.innerText = Object.keys(state.activeVoices).length;
+}
+
+function clearNoteDataUi() {
+  noteNameEl.innerText = "";
+  noteFreqEl.innerText = "";
+  noteNumberEl.innerText = "";
+}
+
 export function noteBtnAddClickEvent(el, ratio) {
   el.addEventListener("click", function(e) {
     e.preventDefault();
@@ -26,14 +38,13 @@ export function noteBtnAddClickEvent(el, ratio) {
       playNote(noteId, thisFreq);
       e.target.dataset.playing = "true";
       state.activeVoices[noteId].ratio = ratio;
-      noteNameEl.innerText = "TBC";
-      noteFreqEl.innerText = thisFreq.toFixed(2);
-      noteNumberEl.innerText = Object.keys(state.activeVoices).length;
+      updateNoteDataUi(thisFreq);
       return;
     }
     // STOP
     stopNote(noteId);
     e.target.dataset.playing = "false";
+    clearNoteDataUi();
   }, false);
 }
 

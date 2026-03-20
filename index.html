@@ -278,7 +278,7 @@
       }
     }
 
-    .visually-hidden {
+    .visually-hidden:not(:focus):not(:active) {
       clip: rect(0 0 0 0);
       clip-path: inset(50%);
       height: 1px;
@@ -318,28 +318,28 @@
         <dt>Number of notes</dt><dd id="note-data-num"></dd>
       </dl>
     </section>
-    <main id="main">
-    </main>
-    <form id="keyboard-colours-form" class="keyboard-form keyboard-form--appearance active">
-      <button type="button" id="side-panel-right" class="sidebar-btn sidebar-btn--appearance"><span class="sidebar-btn__text visually-hidden">Open</span></button>
-      <div class="keyboard-form__controls">
-        <h2>Appearance</h2>
-        <div class="keyboard-form__fieldset">
-          <label for="keyboard-colours-select" class="keyboard-form__label">Scheme</label>
-          <select id="keyboard-colours-select" name="keyboard-colours-select">
-          </select>
-        </div>
-        <div class="keyboard-form__fieldset">
-          <label for="input-grid-size" class="keyboard-form__label">grid size</label>
-          <select name="grid-size-input" id="input-grid-size">
-            <option>8 x 8</option>
-            <option>16 x 16</option>
-            <option>20 x 20</option>
-          </select>
-        </div>
+  </main>
+  <form id="keyboard-colours-form" class="keyboard-form keyboard-form--appearance active">
+    <button type="button" id="side-panel-right" class="sidebar-btn sidebar-btn--appearance"><span class="sidebar-btn__text visually-hidden">Open</span></button>
+    <div class="keyboard-form__controls">
+      <h2>Appearance</h2>
+      <div class="keyboard-form__fieldset">
+        <label for="keyboard-colours-select" class="keyboard-form__label">Scheme</label>
+        <select id="keyboard-colours-select" name="keyboard-colours-select">
+        </select>
       </div>
-    </form>
-  </div>
+      <div class="keyboard-form__fieldset">
+        <label for="input-grid-size" class="keyboard-form__label">grid size</label>
+        <select name="grid-size-input" id="input-grid-size">
+          <option>8 x 8</option>
+          <option>16 x 16</option>
+          <option>20 x 20</option>
+        </select>
+      </div>
+    </div>
+  </form>
+  <main id="main">
+</div>
   <!-- <canvas id="canvas" width="768" height="768"> -->
   <script type="module" src="./src/index.js"></script>
 </body>
