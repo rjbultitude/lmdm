@@ -55,12 +55,14 @@
       --transition-period: 200ms;
       --grid-size: 8;
       --spacing: 16px;
+      --spacing-small: 8px;
       --max-width: 768px;
       --dark-green: #2f4550;
       --mid-green: #586f7c;
       --light-green: #b8dbd9;
       --panel-bg: #d3d8e0;
-      --panel-width: 136px;
+      --panel-width: 170px;
+      --border-radius: 14px;
     }
     header {
       background-color: var(--dark-green);
@@ -88,58 +90,67 @@
 
     .keyboard-form {
       background-color: var(--panel-bg);
-      position: relative;
+      position: absolute;
       margin: 0;
       padding: calc(var(--spacing)/2);
       display: flex;
       width: var(--panel-width);
-      position: absolute;
       z-index: 2;
       top: 50px;
+      transition: all 0.5s;
+      min-height: 160px;
     }
 
-    .controls-sidebar--appearance {
+    .keyboard-form--sound {
+      left: calc((var(--panel-width) - var(--spacing)) * -1);
+      flex-direction: row-reverse;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    }
+
+    .keyboard-form--appearance {
+      right: calc((var(--panel-width) - var(--spacing)) * -1);
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+    }
+
+    .sidebar-btn {
+      height: calc(var(--spacing) * 2);
+      width: calc(var(--spacing) * 2);
+      background-repeat: no-repeat;
+      border: 0 none;
+    }
+
+    .sidebar-btn--appearance {
       background-color: var(--panel-bg);
-      content: "";
       background-image: url("img/dark-theme.svg");
       background-size: contain;
-      width: 20px;
-      height: 20px;
-      left: -20px;
-      position: absolute;
     }
-
-    .controls-sidebar--sound {
+    
+    .sidebar-btn--sound {
       background-color: var(--panel-bg);
-      content: "";
       background-image: url("img/Speaker_Icon.svg");
       background-size: contain;
-      width: 20px;
-      height: 20px;
-      right: -20px;
-      position: absolute;
     }
 
     .keyboard-form--appearance .keyboard-form__fieldset {
       align-items: end;
     }
 
-    .keyboard-form,
-    .keyboard-form__fieldset {
+    .keyboard-form__controls {
+      display: flex;
       flex-direction: column;
-      gap: var(--spacing);
+      gap: var(--spacing-small);
+      min-width: 116px;
     }
 
-    .keyboard-form {
-      position: absolute;
+    .keyboard-form__fieldset {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-small);
     }
 
-    .keyboard-form--sound {
-      left: -120px;
-    }
-
-    .keyboard-form--appearance {
-      right: -120px;
+    .keyboard-form__controls h2 {
+      width: 100%;
+      border-bottom: 1px solid var(--mid-green);
     }
 
     .keyboard-form--sound.active {
@@ -166,10 +177,6 @@
 
     .keyboard-form__fieldset select {
       font-size: 1rem;
-    }
-
-    .keyboard-form__fieldset {
-      display: inline-block;
     }
 
     .keyboard__column {
@@ -246,6 +253,12 @@
         width: calc(var(--button-size) * var(--grid-size));
       }
     }
+
+    .visually-hidden {
+      position: absolute;
+      left: -999em;
+      top: -999em;
+    }
   </style>
 </head>
 <body>
@@ -259,14 +272,16 @@
   </header>
   <div class="wrapper">
   <form id="keyboard-settings-form" class="keyboard-form keyboard-form--sound active">
-    <div class="keyboard-form__fieldset">
-      <h2>Sound</h2>
-      <label for="input-base-frequency" class="keyboard-form__label">Base Freq</label>
-      <input name="base-frequency-input" type="number" min="128" max="480" id="input-base-frequency">
-      <button id="keyboard-settings-submit" class="keyboard-form__submit">Submit</button> 
+    <button type="button" id="side-panel-left" class="sidebar-btn sidebar-btn--sound"><span class="sidebar-btn__text visually-hidden">Open</span></button>
+    <div class="keyboard-form__controls">
+      <div class="keyboard-form__fieldset">
+        <h2>Sound</h2>
+        <label for="input-base-frequency" class="keyboard-form__label">Base Freq</label>
+        <input name="base-frequency-input" type="number" min="128" max="480" id="input-base-frequency">
+        <button id="keyboard-settings-submit" class="keyboard-form__submit">Submit</button> 
+      </div>
+      <button id="stop" class="keyboard-form__submit">Stop All</button>
     </div>
-    <button id="stop" class="keyboard-form__submit">Stop All</button>
-    <button type="button" id="side-panel-left" class="controls-sidebar controls-sidebar--sound">Open</button>
   </form>
   <section class="section__note-data">
     <dl>
@@ -278,21 +293,23 @@
   <main id="main">
   </main>
   <form id="keyboard-colours-form" class="keyboard-form keyboard-form--appearance active">
-    <h2>Appearance</h2>
-    <div class="keyboard-form__fieldset">
-      <label for="keyboard-colours-select" class="keyboard-form__label">Scheme</label>
-      <select id="keyboard-colours-select" name="keyboard-colours-select">
-      </select>
+     <button type="button" id="side-panel-right" class="sidebar-btn sidebar-btn--appearance"><span class="sidebar-btn__text visually-hidden">Open</span></button>
+    <div class="keyboard-form__controls">
+      <h2>Appearance</h2>
+      <div class="keyboard-form__fieldset">
+        <label for="keyboard-colours-select" class="keyboard-form__label">Scheme</label>
+        <select id="keyboard-colours-select" name="keyboard-colours-select">
+        </select>
+      </div>
+      <div class="keyboard-form__fieldset">
+        <label for="input-grid-size" class="keyboard-form__label">grid size</label>
+        <select name="grid-size-input" type="number" id="input-grid-size">
+          <option>8 x 8</option>
+          <option>16 x 16</option>
+          <option>20 x 20</option>
+        </select>
+      </div>
     </div>
-    <div class="keyboard-form__fieldset">
-      <label for="input-grid-size" class="keyboard-form__label">grid size</label>
-      <select name="grid-size-input" type="number" id="input-grid-size">
-        <option>8 x 8</option>
-        <option>16 x 16</option>
-        <option>20 x 20</option>
-      </select>
-    </div>
-    <button type="button" id="side-panel-right" class="controls-sidebar controls-sidebar--appearance">Open</button>
   </form>
   <!-- <canvas id="canvas" width="768" height="768"> -->
   <script type="module" src="./src/index.js"></script>

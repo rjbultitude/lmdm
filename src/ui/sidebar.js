@@ -1,5 +1,5 @@
 export function initSidebarControls() {
-  const sideBars = document.getElementsByClassName("controls-sidebar");
+  const sideBars = document.getElementsByClassName("sidebar-btn");
   const ACTIVE = "active";
   console.log("sideBars", sideBars);
   Array.from(sideBars).forEach((sideBar) => {
