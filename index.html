@@ -1,19 +1,18 @@
 <!DOCTYPE html>
+<html dir="ltr" lang="en">
 <head>
   <title>Lambdoma online keyboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100..900&family=Funnel+Display:wght@300&display=swap" rel="stylesheet">
   <style>
-    html * > {
-      font-size: 0.75;
+    html > * {
       box-sizing: border-box;
     }
     body {
       font-size: 1rem;
       font-family: "Encode Sans", serif;
       font-weight: 300;
-      /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
       background-color: #f4f4f9;
       color: #2f4550;
       padding: 0;
@@ -60,6 +59,7 @@
       --dark-green: #2f4550;
       --mid-green: #586f7c;
       --light-green: #b8dbd9;
+      --mid-grey: #8591a6;
       --panel-bg: #d3d8e0;
       --panel-width: 170px;
       --border-radius: 14px;
@@ -113,22 +113,31 @@
     }
 
     .sidebar-btn {
-      height: calc(var(--spacing) * 2);
-      width: calc(var(--spacing) * 2);
+      height: calc(var(--spacing) * 1.5);
+      width: calc(var(--spacing) * 1.5);
       background-repeat: no-repeat;
       border: 0 none;
+      position: relative;
+    }
+
+    .sidebar-btn:hover,
+    .sidebar-btn:focus {
+      cursor: pointer;
     }
 
     .sidebar-btn--appearance {
       background-color: var(--panel-bg);
-      background-image: url("img/dark-theme.svg");
-      background-size: contain;
+      background-image: url("img/arrow-right-bold.svg");
+      background-size: calc(var(--spacing) * 1);
+      background-position: 50% 40%;
+      transform: rotate(180deg);
     }
     
     .sidebar-btn--sound {
       background-color: var(--panel-bg);
-      background-image: url("img/Speaker_Icon.svg");
-      background-size: contain;
+      background-image: url("img/arrow-right-bold.svg");
+      background-size: calc(var(--spacing) * 1);
+      background-position: 50% 40%;
     }
 
     .keyboard-form--appearance .keyboard-form__fieldset {
@@ -139,7 +148,7 @@
       display: flex;
       flex-direction: column;
       gap: var(--spacing-small);
-      min-width: 116px;
+      min-width: 138px;
     }
 
     .keyboard-form__fieldset {
@@ -150,7 +159,7 @@
 
     .keyboard-form__controls h2 {
       width: 100%;
-      border-bottom: 1px solid var(--mid-green);
+      border-bottom: 1px solid var(--mid-grey);
     }
 
     .keyboard-form--sound.active {
@@ -161,6 +170,14 @@
       right: 0px;
     }
 
+    .keyboard-form--sound.active .sidebar-btn--sound {
+      transform: rotate(180deg);
+    }
+
+    .keyboard-form--appearance.active .sidebar-btn--appearance {
+      transform: rotate(0deg);
+    }
+
     .keyboard-form__submit {
       background-color: var(--dark-green);
       color: white;
@@ -168,11 +185,17 @@
       border-radius: 0.3rem;
     }
 
+    .keyboard-form__submit:hover,
+    .keyboard-form__submit:focus {
+      filter: invert(100%);
+    }
+
     .keyboard-form__fieldset input {
       width: 60px;
       height: 1.4rem;
       font-size: 1rem;
       border-radius: 0.3rem;
+      border: 1px solid var(--mid-grey);
     }
 
     .keyboard-form__fieldset select {
@@ -192,12 +215,9 @@
       position: relative;
       background-color: var(--button-color);
     }
-
-    button:hover {
-      filter: brightness(1.2); /* or contrast/saturate/etc */
-    }
-
+    
     .keyboard__button:hover {
+      filter: brightness(1.2);
       cursor: pointer;
       background-color: bisque;
       transition: background-color var(--transition-period) linear;
@@ -255,9 +275,13 @@
     }
 
     .visually-hidden {
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      height: 1px;
+      overflow: hidden;
       position: absolute;
-      left: -999em;
-      top: -999em;
+      white-space: nowrap;
+      width: 1px;
     }
   </style>
 </head>
@@ -271,46 +295,48 @@
     </div>
   </header>
   <div class="wrapper">
-  <form id="keyboard-settings-form" class="keyboard-form keyboard-form--sound active">
-    <button type="button" id="side-panel-left" class="sidebar-btn sidebar-btn--sound"><span class="sidebar-btn__text visually-hidden">Open</span></button>
-    <div class="keyboard-form__controls">
-      <div class="keyboard-form__fieldset">
-        <h2>Sound</h2>
-        <label for="input-base-frequency" class="keyboard-form__label">Base Freq</label>
-        <input name="base-frequency-input" type="number" min="128" max="480" id="input-base-frequency">
-        <button id="keyboard-settings-submit" class="keyboard-form__submit">Submit</button> 
+    <form id="keyboard-settings-form" class="keyboard-form keyboard-form--sound active">
+      <button type="button" id="side-panel-left" class="sidebar-btn sidebar-btn--sound"><span class="sidebar-btn__text visually-hidden">Open</span></button>
+      <div class="keyboard-form__controls">
+        <div class="keyboard-form__fieldset">
+          <h2>Sound</h2>
+          <label for="input-base-frequency" class="keyboard-form__label">Base Freq</label>
+          <input name="base-frequency-input" type="number" min="128" max="480" id="input-base-frequency" />
+          <button id="keyboard-settings-submit" class="keyboard-form__submit">Submit</button> 
+        </div>
+        <button id="stop" class="keyboard-form__submit">Stop All</button>
       </div>
-      <button id="stop" class="keyboard-form__submit">Stop All</button>
-    </div>
-  </form>
-  <section class="section__note-data">
-    <dl>
-      <dt>Note</dt><dd id="note-data-notename"></dd>
-      <dt>Frequency</dt><dd id="note-data-freq"></dd>
-      <dt>Number of notes</dt><dd id="note-data-num"></dd>
-    </dl>
-  </section>
-  <main id="main">
-  </main>
-  <form id="keyboard-colours-form" class="keyboard-form keyboard-form--appearance active">
-     <button type="button" id="side-panel-right" class="sidebar-btn sidebar-btn--appearance"><span class="sidebar-btn__text visually-hidden">Open</span></button>
-    <div class="keyboard-form__controls">
-      <h2>Appearance</h2>
-      <div class="keyboard-form__fieldset">
-        <label for="keyboard-colours-select" class="keyboard-form__label">Scheme</label>
-        <select id="keyboard-colours-select" name="keyboard-colours-select">
-        </select>
+    </form>
+    <section class="section__note-data">
+      <dl>
+        <dt>Note</dt><dd id="note-data-notename"></dd>
+        <dt>Frequency</dt><dd id="note-data-freq"></dd>
+        <dt>Number of notes</dt><dd id="note-data-num"></dd>
+      </dl>
+    </section>
+    <main id="main">
+    </main>
+    <form id="keyboard-colours-form" class="keyboard-form keyboard-form--appearance active">
+      <button type="button" id="side-panel-right" class="sidebar-btn sidebar-btn--appearance"><span class="sidebar-btn__text visually-hidden">Open</span></button>
+      <div class="keyboard-form__controls">
+        <h2>Appearance</h2>
+        <div class="keyboard-form__fieldset">
+          <label for="keyboard-colours-select" class="keyboard-form__label">Scheme</label>
+          <select id="keyboard-colours-select" name="keyboard-colours-select">
+          </select>
+        </div>
+        <div class="keyboard-form__fieldset">
+          <label for="input-grid-size" class="keyboard-form__label">grid size</label>
+          <select name="grid-size-input" id="input-grid-size">
+            <option>8 x 8</option>
+            <option>16 x 16</option>
+            <option>20 x 20</option>
+          </select>
+        </div>
       </div>
-      <div class="keyboard-form__fieldset">
-        <label for="input-grid-size" class="keyboard-form__label">grid size</label>
-        <select name="grid-size-input" type="number" id="input-grid-size">
-          <option>8 x 8</option>
-          <option>16 x 16</option>
-          <option>20 x 20</option>
-        </select>
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
   <!-- <canvas id="canvas" width="768" height="768"> -->
   <script type="module" src="./src/index.js"></script>
 </body>
+</html>
