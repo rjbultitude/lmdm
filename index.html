@@ -187,7 +187,8 @@
 
     .keyboard-form__submit:hover,
     .keyboard-form__submit:focus {
-      filter: invert(100%);
+      cursor: pointer;
+      filter: brightness(80%);
     }
 
     .keyboard-form__fieldset input {
@@ -216,11 +217,13 @@
       background-color: var(--button-color);
     }
     
-    .keyboard__button:hover {
+    .keyboard__button:hover,
+    .keyboard__button:focus {
       filter: brightness(1.2);
       cursor: pointer;
       background-color: bisque;
       transition: background-color var(--transition-period) linear;
+      outline: 0 none;
     }
 
     .section__note-data dl {
@@ -228,6 +231,7 @@
       max-width: 540px;
       margin: 0 auto;
       justify-content: center;
+      padding: var(--spacing-small);
     }
     
     .keyboard__button__text {
@@ -302,7 +306,7 @@
           <h2>Sound</h2>
           <label for="input-base-frequency" class="keyboard-form__label">Base Freq</label>
           <input name="base-frequency-input" type="number" min="128" max="480" id="input-base-frequency" />
-          <button id="keyboard-settings-submit" class="keyboard-form__submit">Submit</button> 
+          <button id="keyboard-settings-submit" class="keyboard-form__submit">Update</button> 
         </div>
         <button id="stop" class="keyboard-form__submit">Stop All</button>
       </div>
