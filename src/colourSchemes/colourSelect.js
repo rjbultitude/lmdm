@@ -6,12 +6,14 @@ import {
 import state from "../state.js";
 
 // Initialise colour schemes
+// TODO use array for lookup?
 const KEYBOARD_COLOURSCHEME = new KeyboardColourScheme({
   "oct": "Octaves",
   "mir": "Mirrored",
   "gra": "Graduated",
   "rhs": "Harmonic Scale",
   "ovr": "Overtones",
+  "und": "Undertones"
 });
 
 export function getHSLCSSFromRatio(thisColourHSL) {

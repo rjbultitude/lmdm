@@ -8,12 +8,13 @@ export const AUDIO_CONFIG = {
 };
 
 export class KeyboardColourScheme {
-  constructor({ oct, mir, gra, rhs, ovr }) {
+  constructor({ oct, mir, gra, rhs, ovr, und }) {
     this.oct = oct;
     this.mir = mir;
     this.gra = gra;
     this.rhs = rhs;
     this.ovr = ovr;
+    this.und = und;
   }
 }
 

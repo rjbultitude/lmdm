@@ -2,7 +2,7 @@ import { KeyboardColourScheme } from "./constants.js";
 import { getColourMirrored } from "./colourSchemes/keyboardColourMirrored.js";
 import { getColourOctavesMatter } from "./colourSchemes/keyboardColourOctavesMatter.js";
 import { getColourHarmonicScale } from "./colourSchemes/keyboardColourHarmonicScale.js";
-import { getColourOverTones } from "./colourSchemes/keyboardColourOvertones.js";
+import { getColourOverTones, getColourUnderTones } from "./colourSchemes/keyboardColourOvertones.js";
 import { getColourGraduated, getColourGraduatedFreq, generateGradientArray } from "./colourSchemes/keyboardColourGraduated.js";
 //import { getHSLCSSFromRatio } from "./colourSchemes/colourSelect.js"; 
 import state from "./state.js";
@@ -94,6 +94,7 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
       gra: getColourGraduatedFreq(newRatio),
       rhs: getColourHarmonicScale(newRatio),
       ovr: getColourOverTones(newRatio),
+      und: getColourUnderTones(newRatio),
     });
     newRatio.setColours(thisTonesColours);
     thisArray.push(newRatio);
