@@ -60,7 +60,7 @@
     }
     dd {
       margin: 0;
-      min-width: 60px;
+      min-width: 52px;
     }
     dialog:modal {
       max-width: 740px;
@@ -69,6 +69,12 @@
     }
     dialog::backdrop {
       background-color: rgba(0, 0, 0, 0.5);
+    }
+    dialog:modal p:last-child {
+      margin-bottom: 0;
+    }
+    dialog h2:first-of-type {
+      margin-top: 10px;
     }
     dialog h2::after {
       display: block;
@@ -82,6 +88,9 @@
         var(--lambdoma-gradient-stop-4),
         var(--lambdoma-gradient-stop-5));
     }
+    .dialog__close {
+      float: right;
+    }
     .sub-heading {
       display: block;
       font-size: 1.3rem;
@@ -90,11 +99,12 @@
       background-color: var(--dark-green);
       color: white;
       padding: calc(var(--spacing) / 2) 0;
+      text-align: center;
     }
     header::before {
       width: 100%;
       display: block;
-      height: 4%;
+      height: 4px;
       content: " ";
       position: relative;
       bottom: 8px;
@@ -221,6 +231,7 @@
       transform: rotate(0deg);
     }
 
+    .dialog__close,
     .keyboard-form__submit {
       background-color: var(--dark-green);
       color: white;
@@ -383,13 +394,14 @@
   </form>
   <main id="main"></main>
   <dialog id="my-dialog" popover>
+    <button commandfor="my-dialog" command="close" class="dialog__close">Close</button>
     <h2>Historical Context</h2>
     <p>Arranging notes and designing instruments using ratios originated in multiple regions over two millennia ago. There is evidence of 
        them being used in ancient Mesopotamia, Egypt and later Greece. Though there's only a small number
       of surviving diagrams, the idea of a matrix (or table) arranged in a diamond was eventually realised as a musical
       <a href="https://www.lambdoma.com/keyboard.html" target="_blank">instrument</a> in the 1970s by Barbera Hero.</p>
-    <p>Hero's keyboard was designed to facilitate the study of pure harmonics or Just intonation but also to provide therapeutic sound experiences.</p>
-    <p>This is the next iteration of that legacy - an online musical instrument accessible to anyone</p>
+    <p>Hero's keyboard was designed to facilitate the study of pure harmonics or Just intonation but also to provide therapeutic sound experiences. 
+      This is the next iteration of that legacy - an online musical instrument accessible to anyone</p>
     <h2>Musical ratios</h2>
     <p>The Lambdoma matrix is a set of carefully arranged whole number ratios. Each ratio represents a musical frequency when given a fundamental. 
       For example, with a fundamental of 440Hz (A in Western music) the ratio 3:2 equates to 440 * 3/2 = 660Hz (or E). This allows us to hear the 
@@ -402,7 +414,6 @@
       To see and hear all the notes from Barbera Hero's <a href="https://www.lambdoma.com/pdfs/TheLambdomaResonantHarmonicScaleComposite.pdf" target="_blank">resonant <em>harmonic scale</em></a>, ensure the keyboard grid size is 16 x 16 or higher. 
       <em>Mirrored</em> shows chromatic overtones and their undertone counterpart. <em>Octaves</em> colours all notes that are the same regardless of octave. Overtones and undertones are hopefully self-explanatory</p>
     <p>Given the size of the keyboard it's best enjoyed on larger screens, in particular touch screens but the instrument is also compatible with MIDI devices</p>
-    <button commandfor="my-dialog" command="close">Close</button>
   </dialog>
 </div>
   <!-- <canvas id="canvas" width="768" height="768"> -->
