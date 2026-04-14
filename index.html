@@ -6,6 +6,27 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100..900&family=Funnel+Display:wght@300&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --button-size: 52px;
+      --button-size-small: 42px;
+      --transition-period: 200ms;
+      --grid-size: 8;
+      --spacing: 16px;
+      --spacing-small: 8px;
+      --max-width: 768px;
+      --dark-green: #2f4550;
+      --mid-green: #586f7c;
+      --light-green: #b8dbd9;
+      --mid-grey: #8591a6;
+      --panel-bg: #d3d8e0;
+      --panel-width: 170px;
+      --border-radius: 14px;
+      --lambdoma-gradient-stop-1: hsl(41.860465116279066,70%,70%) 0 20%; 
+      --lambdoma-gradient-stop-2: hsl(83.72093023255813,70%,70%) 20% 40%;
+      --lambdoma-gradient-stop-3: hsl(125.58139534883722,70%,70%) 40% 60%;
+      --lambdoma-gradient-stop-4: hsl(167.44186046511626,70%,70%) 60% 80%;
+      --lambdoma-gradient-stop-5: hsl(209.30232558139537,70%,70%) 80% 100%;
+    }
     html > * {
       box-sizing: border-box;
     }
@@ -49,30 +70,40 @@
     dialog::backdrop {
       background-color: rgba(0, 0, 0, 0.5);
     }
+    dialog h2::after {
+      display: block;
+      content: " ";
+      width: 100%;
+      height: 2px;
+      background-image: linear-gradient(to right,
+        var(--lambdoma-gradient-stop-1),
+        var(--lambdoma-gradient-stop-2),
+        var(--lambdoma-gradient-stop-3),
+        var(--lambdoma-gradient-stop-4),
+        var(--lambdoma-gradient-stop-5));
+    }
     .sub-heading {
       display: block;
       font-size: 1.3rem;
-    }
-    :root {
-      --button-size: 52px;
-      --button-size-small: 42px;
-      --transition-period: 200ms;
-      --grid-size: 8;
-      --spacing: 16px;
-      --spacing-small: 8px;
-      --max-width: 768px;
-      --dark-green: #2f4550;
-      --mid-green: #586f7c;
-      --light-green: #b8dbd9;
-      --mid-grey: #8591a6;
-      --panel-bg: #d3d8e0;
-      --panel-width: 170px;
-      --border-radius: 14px;
     }
     header {
       background-color: var(--dark-green);
       color: white;
       padding: calc(var(--spacing) / 2) 0;
+    }
+    header::before {
+      width: 100%;
+      display: block;
+      height: 4px;
+      content: " ";
+      position: relative;
+      bottom: 8px;
+      background-image: linear-gradient(to right,
+        var(--lambdoma-gradient-stop-1),
+        var(--lambdoma-gradient-stop-2),
+        var(--lambdoma-gradient-stop-3),
+        var(--lambdoma-gradient-stop-4),
+        var(--lambdoma-gradient-stop-5));
     }
     header p {
       margin: calc(var(--spacing) / 2) auto;
@@ -304,7 +335,7 @@
 <body>
   <header>
     <div class="inner-wrapper">
-      <h1>Lambdoma Matrix <span class="sub-heading">Harmanically consonant keyboard</span></h1>
+      <h1>Lambdoma Matrix <span class="sub-heading">harmanically consonant keyboard</span></h1>
       <p>Barbara Hero's matrix of wholenumber ratios organises the harmonic series into a unique keyboard. 
       This online version aims to reproduce her innovative work and make it accessible to anyone.
       Best enjoyed on larger screens. <button command="show-modal" commandfor="my-dialog">Learn more about what it is and how to use it here</button></p>
@@ -352,18 +383,18 @@
   </form>
   <main id="main"></main>
   <dialog id="my-dialog" popover>
-    <h2>Introduction</h2>
-    <p>The Lambdoma matrix is a set of carefully arranged whole number ratios. Each ratio represents a musical frequency when given a fundamental. 
-      For example, with a fundamental of 440 (A in Western music) the ratio 3:2 equates to 440 * 3/2 = 660 (or E). This allows us to hear the 
-      a form of the harmonic series. Moreover, its design means that notes are organised in ways that allow us to create consonant melodies.
-    </p>
     <h2>Historical Context</h2>
     <p>Arranging notes and designing instruments using ratios originated in multiple regions over two millennia ago. There is evidence of 
-       ratios being used in ancient Mesopotamia, Egypt and later Greece. Though there's only a small number
+       them being used in ancient Mesopotamia, Egypt and later Greece. Though there's only a small number
       of surviving diagrams, the idea of a matrix (or table) arranged in a diamond was eventually realised as a musical
       <a href="https://www.lambdoma.com/keyboard.html" target="_blank">instrument</a> in the 1970s by Barbera Hero.</p>
     <p>Hero's keyboard was designed to facilitate the study of pure harmonics or Just intonation but also to provide therapeutic sound experiences.</p>
     <p>This is the next iteration of that legacy - an online musical instrument accessible to anyone</p>
+    <h2>Musical ratios</h2>
+    <p>The Lambdoma matrix is a set of carefully arranged whole number ratios. Each ratio represents a musical frequency when given a fundamental. 
+      For example, with a fundamental of 440Hz (A in Western music) the ratio 3:2 equates to 440 * 3/2 = 660Hz (or E). This allows us to hear the 
+      a form of the harmonic series. Moreover, its design means that notes are organised in ways that allow us to create consonant melodies.
+    </p>
     <h2>Playing Guide</h2>
     <p>The base note can be set to any frequency, but between 128Hz and 480Hz is recommended as this limits the range 
       of overtones and undertones to be in the audible range while playing in quadrant 1 (1:1 through 8:8)</p>
