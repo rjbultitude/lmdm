@@ -107,5 +107,3 @@ export function createLambdomaSequence({startingNumerator, startingDenominator, 
 const masterLamdomaSeq = createMasterLamdomaSeq(maxLoopSize);
 
 export default masterLamdomaSeq;
-
-console.log(masterLamdomaSeq);

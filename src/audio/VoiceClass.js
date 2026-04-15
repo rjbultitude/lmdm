@@ -27,7 +27,6 @@ export default class Voice {
 
     /* Keep track of the oscillators used */
     this.oscillators.push(this.vco);
-    console.log("this.volume", this.volume);
   }
 
   stop() {

@@ -1,5 +1,6 @@
 import { MIDI_NOTE_MIDDLE_C, ONE_SHOT } from '../constants.js';
 import state from '../state.js';
+import { showToast } from '../ui/toast.js';
 
 export function offsetMIDIRange(note) {
   return Math.abs(state.intervalsRange.lower) + note - MIDI_NOTE_MIDDLE_C;
@@ -32,7 +33,6 @@ export function getMIDIMessage(message) {
   switch (command) {
     case 144: // noteOn
       if (velocity > 0 && MIDIKeyInRange(thisNote)) {
-        console.debug("thisNote", thisNote);
         noteButton.click();
       }
       break;
@@ -57,7 +57,7 @@ export function onMIDISuccess(
 }
 
 export function onMIDIFailure() {
-  console.warn('Could not access your MIDI devices.');
+  showToast('Could not access your MIDI devices.');
 }
 
 export function initMIDIAccess() {
@@ -68,6 +68,6 @@ export function initMIDIAccess() {
     }, onMIDIFailure);
   } else {
     state.MIDINotSupported = true;
-    console.warn('WebMIDI is not supported in this browser.');
+    showToast('WebMIDI is not supported in this browser.')
   }
 }

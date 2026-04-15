@@ -50,7 +50,6 @@ export function getColourGraduatedFreq(ratio) {
   let hue = 0 + (ratio.fraction / 8.6) * hueMax;
   if (hue > hueMax) {
     hue = hueMax;
-    console.debug("hue is greater than 360");
   }
   const saturation = 70;
   const hslObject = { hue, saturation, lightness: 70 };

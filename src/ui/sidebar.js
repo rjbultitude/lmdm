@@ -1,7 +1,6 @@
 export function initSidebarControls() {
   const sideBars = document.getElementsByClassName("sidebar-btn");
   const ACTIVE = "active";
-  console.log("sideBars", sideBars);
   Array.from(sideBars).forEach((sideBar) => {
     sideBar.addEventListener("click", function(e) {
       e.stopPropagation();

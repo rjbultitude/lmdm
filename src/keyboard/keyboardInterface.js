@@ -68,7 +68,6 @@ export function createColumns(entireLambdoma = masterLamdomaSeq) {
     thisRow.setAttribute("id", `column-${index}`);
     thisRow.setAttribute("class", "keyboard__column");
     lastTotal = totalGridCount - (index * entireLambdoma.length);
-    console.debug("lastTotal", lastTotal);
     // Buttons
     column.forEach((ratio, rowIndex) => {
       const thisButton = document.createElement("button");
