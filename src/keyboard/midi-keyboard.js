@@ -68,6 +68,6 @@ export function initMIDIAccess() {
     }, onMIDIFailure);
   } else {
     state.MIDINotSupported = true;
-    showToast('WebMIDI is not supported in this browser.')
+    showToast('WebMIDI is not supported in this browser.');
   }
 }

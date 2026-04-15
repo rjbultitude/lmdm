@@ -11,9 +11,9 @@ import { initToast } from "./ui/toast.js";
 //TODO do we still need this callback?
 createColumns();
 initColourSelect();
+initToast();
 initGridSizeSelect();
 initFrequencyInput();
 initMIDIAccess();
 initSidebarControls();
-initToast();
 //initCanvas();

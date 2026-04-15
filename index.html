@@ -27,7 +27,7 @@
       --lambdoma-gradient-stop-4: hsl(167.44186046511626,70%,70%) 60% 80%;
       --lambdoma-gradient-stop-5: hsl(209.30232558139537,70%,70%) 80% 100%;
     }
-    html > * {
+    body > * {
       box-sizing: border-box;
     }
     body {
@@ -126,7 +126,10 @@
       text-decoration: underline;
     }
     .wrapper {
-      position: relative;
+      position: absolute;
+      Overflow-x: hidden;
+      height: 400px;
+      width: 100%;
     }
     .inner-wrapper {
       margin: 0 auto;
@@ -239,6 +242,8 @@
       border-radius: 0.3rem;
     }
 
+    .dialog__close:hover,
+    .dialog__close:focus,
     .keyboard-form__submit:hover,
     .keyboard-form__submit:focus {
       cursor: pointer;
@@ -308,11 +313,23 @@
     }
 
     .toast-wrapper {
-      position: relative;
+      position: fixed;
+      bottom: 0;
+      display: none;
       z-index: 10;
       width: 100%;
-      min-height: 46px;
+      padding: 12px;
       background-color: hsl(125.58139534883722,70%,70%);
+      color: black;
+    }
+
+    .toast-wrapper p {
+      margin: 0;
+      line-height: 26px;
+    }
+
+    .toast-wrapper.active {
+      display: block;
     }
 
     @media screen and (min-width: 580px) {
@@ -400,12 +417,13 @@
       </div>
     </div>
   </form>
+  </div>
   <main id="main"></main>
   <dialog id="my-dialog" popover>
     <button commandfor="my-dialog" command="close" class="dialog__close">Close</button>
     <h2>Historical Context</h2>
     <p>Arranging notes and designing instruments using ratios originated in multiple regions over two millennia ago. There is evidence of 
-       them being used in ancient Mesopotamia, Egypt and later Greece. Though there's only a small number
+      them being used in ancient Mesopotamia, Egypt and later Greece. Though there's only a small number
       of surviving diagrams, the idea of a matrix (or table) arranged in a diamond was eventually realised as a musical
       <a href="https://www.lambdoma.com/keyboard.html" target="_blank">instrument</a> in the 1970s by Barbera Hero.</p>
     <p>Hero's keyboard was designed to facilitate the study of pure harmonics or Just intonation but also to provide therapeutic sound experiences. 
@@ -423,7 +441,6 @@
       <em>Mirrored</em> shows chromatic overtones and their undertone counterpart. <em>Octaves</em> colours all notes that are the same regardless of octave. Overtones and undertones are hopefully self-explanatory</p>
     <p>Given the size of the keyboard it's best enjoyed on larger screens, in particular touch screens but the instrument is also compatible with MIDI devices</p>
   </dialog>
-</div>
   <!-- <canvas id="canvas" width="768" height="768"> -->
   <script type="module" src="./src/index.js"></script>
 </body>
