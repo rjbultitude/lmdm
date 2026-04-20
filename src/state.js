@@ -1,6 +1,7 @@
 import { AUDIO_CONFIG, GRID_SIZE, ONE_SHOT, LOWEST_NOTE } from "./constants.js";
 
 const state = {
+  audioContext: null,
   baseFrequency: AUDIO_CONFIG.ROOT_NOTE,
   activeVoices: {},
   gridSize: GRID_SIZE,

@@ -8,8 +8,9 @@ const stopBtn = document.getElementById("stop");
 let contextNotSet = true;
 let audioContext;
 
-function setAudioContext() {
+export function setAudioContext() {
   audioContext = new AudioContext();
+  state.audioContext = audioContext;
 }
 
 export function createVoice(frequency) {

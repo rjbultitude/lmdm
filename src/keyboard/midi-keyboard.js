@@ -1,6 +1,8 @@
 import { MIDI_NOTE_MIDDLE_C, ONE_SHOT } from '../constants.js';
 import state from '../state.js';
-import { showToast } from '../ui/toast.js';
+import { showToastEl } from '../ui/ui-utils.js';
+import { UNLOCK_ID } from '../ui/unlock-toast.js'
+import { TOAST_ERROR_ID, TOAST_TEXT_ERROR_ID, } from '../ui/error-toast.js'
 
 export function offsetMIDIRange(note) {
   return Math.abs(state.intervalsRange.lower) + note - MIDI_NOTE_MIDDLE_C;
@@ -48,6 +50,10 @@ export function onMIDISuccess(
   midiAccess,
   _getMIDIMessage = getMIDIMessage
 ) {
+  if (state.audioContext.state !== "running") {
+      showToastEl({ elID: UNLOCK_ID, txtID: "", msg: "" });
+      return;
+  }
   for (let input of midiAccess.inputs.values()) {
     input.onmidimessage = (message) => {
       _getMIDIMessage(message);
@@ -57,7 +63,11 @@ export function onMIDISuccess(
 }
 
 export function onMIDIFailure() {
-  showToast('Could not access your MIDI devices.');
+  showToastEl({
+    elID: TOAST_ERROR_ID,
+    txtID: TOAST_TEXT_ERROR_ID,
+    msg: 'Could not access your MIDI devices.'
+  });
 }
 
 export function initMIDIAccess() {
@@ -68,6 +78,10 @@ export function initMIDIAccess() {
     }, onMIDIFailure);
   } else {
     state.MIDINotSupported = true;
-    showToast('WebMIDI is not supported in this browser.');
+    showToastEl({
+      elID: TOAST_ERROR_ID,
+      txtID: TOAST_TEXT_ERROR_ID,
+      msg: 'WebMIDI is not supported in this browser.'
+    });
   }
 }
