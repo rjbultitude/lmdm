@@ -1,4 +1,4 @@
-import { AUDIO_CONFIG, GRID_SIZE, ONE_SHOT, LOWEST_NOTE } from "./constants.js";
+import { AUDIO_CONFIG, GRID_SIZE, ONE_SHOT } from "./constants.js";
 
 const state = {
   audioContext: null,
@@ -7,10 +7,6 @@ const state = {
   gridSize: GRID_SIZE,
   colourScheme: "gra",
   playMode: ONE_SHOT,
-  MIDINotSupported: false,
-  intervalsRange: {
-    upper: LOWEST_NOTE + (GRID_SIZE * GRID_SIZE),
-    lower: LOWEST_NOTE
-  }
+  MIDINotSupported: false
 }
 export default state;

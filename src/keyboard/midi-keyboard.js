@@ -1,20 +1,35 @@
 import { MIDI_NOTE_MIDDLE_C, ONE_SHOT } from '../constants.js';
 import state from '../state.js';
 import { showToastEl } from '../ui/ui-utils.js';
-import { UNLOCK_ID } from '../ui/unlock-toast.js'
-import { TOAST_ERROR_ID, TOAST_TEXT_ERROR_ID, } from '../ui/error-toast.js'
+import { UNLOCK_ID } from '../ui/unlock-toast.js';
+import { TOAST_ERROR_ID, TOAST_TEXT_ERROR_ID, } from '../ui/error-toast.js';
 
-export function offsetMIDIRange(note) {
-  return Math.abs(state.intervalsRange.lower) + note - MIDI_NOTE_MIDDLE_C;
+// This should only be called on setGridSize
+function getRange() {
+  // assume always even
+  const totalNumNotes = state.gridSize * state.gridSize;
+  const midNote = totalNumNotes / 2;
+  const lowestNote = MIDI_NOTE_MIDDLE_C - midNote;
+  const highestNote = MIDI_NOTE_MIDDLE_C + midNote;
+  return {
+    lowestNote,
+    highestNote
+  }
 }
 
-export function MIDIKeyInRange(note) {
-  const lowestNoteAbs = Math.abs(state.intervalsRange.lower);
-  const highestNote = lowestNoteAbs + state.intervalsRange.upper;
-  if (note < 0) {
+// Offsets the centre note
+export function offsetMIDIRange(note) {
+  const notesRange = getRange()
+  const rawNote = note;
+  return rawNote - notesRange.lowestNote;
+}
+
+export function MIDIKeyInRange(offsetNote) {
+  const highestNote = state.gridSize * state.gridSize;
+  if (offsetNote < 1) {
     return false;
   }
-  if (note > highestNote) {
+  if (offsetNote > highestNote) {
     return false;
   }
   return true;
@@ -25,40 +40,45 @@ export function getVelocity(message) {
   return message.data.length > 2 ? message.data[2] : 0;
 }
 
-export function getMIDIMessage(message) {
+export function onMIDIMessage(message) {
   const command = message.data[0];
+  // Middle C is 60
   const note = message.data[1];
   const velocity = getVelocity(message);
-  const thisNote = offsetMIDIRange(note);
-  const noteButton = document.querySelector(`[data-number='${thisNote}']`);
+  const offsetNote = offsetMIDIRange(note);
+  console.debug("offsetNote", offsetNote);
+  // data number 1 (lowest note on lambdoma keyboard)
+  const noteButton = document.querySelector(`[data-number='${offsetNote}']`);
+  const noteInRange = MIDIKeyInRange(offsetNote);
+  //const noteInRange = true;
 
   switch (command) {
     case 144: // noteOn
-      if (velocity > 0 && MIDIKeyInRange(thisNote)) {
+      if (velocity > 0 && noteInRange) {
         noteButton.click();
       }
       break;
     case 128: // noteOff
-      if (MIDIKeyInRange(thisNote) && state.playMode === ONE_SHOT) {
+      if (noteInRange && state.playMode === ONE_SHOT) {
         noteButton.click();
       }
       break;
   }
 }
 
-export function onMIDISuccess(
-  midiAccess,
-  _getMIDIMessage = getMIDIMessage
-) {
+export function onMIDISuccess(midiAccess) {
   if (state.audioContext.state !== "running") {
       showToastEl({ elID: UNLOCK_ID, txtID: "", msg: "" });
       return;
   }
-  for (let input of midiAccess.inputs.values()) {
-    input.onmidimessage = (message) => {
-      _getMIDIMessage(message);
-    };
-  }
+  midiAccess.inputs.forEach(input => {
+    input.onmidimessage = onMIDIMessage;
+  });
+  midiAccess.onstatechange = (e) => {
+    if (e.port.type === "input" && e.port.state === "connected") {
+      e.port.onmidimessage = onMIDIMessage;
+    }
+  };
   return midiAccess;
 }
 
@@ -73,9 +93,7 @@ export function onMIDIFailure() {
 export function initMIDIAccess() {
   if (navigator.requestMIDIAccess) {
     state.MIDINotSupported = false;
-    navigator.requestMIDIAccess().then((midiAccess) => {
-      onMIDISuccess(midiAccess);
-    }, onMIDIFailure);
+    navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
   } else {
     state.MIDINotSupported = true;
     showToastEl({
