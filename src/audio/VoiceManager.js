@@ -1,11 +1,11 @@
 import Voice from "./VoiceClass";
-class VoiceManager {
-    constructor(context, masterDestination, poolSize = 32) {
+export default class VoiceManager {
+    constructor(context, poolSize = 32) {
         this.freeVoices = [];
         this.activeVoices = new Map(); // Key: Frequency, Value: Voice Object
 
         for (let i = 0; i < poolSize; i++) {
-            const voice = new Voice(context, masterDestination);
+            const voice = new Voice(context);
             this.freeVoices.push(voice);
         }
     }
