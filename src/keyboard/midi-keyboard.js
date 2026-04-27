@@ -46,7 +46,6 @@ export function onMIDIMessage(message) {
   const note = message.data[1];
   const velocity = getVelocity(message);
   const offsetNote = offsetMIDIRange(note);
-  console.debug("offsetNote", offsetNote);
   // data number 1 (lowest note on lambdoma keyboard)
   const noteButton = document.querySelector(`[data-number='${offsetNote}']`);
   const noteInRange = MIDIKeyInRange(offsetNote);
