@@ -18,10 +18,6 @@ export function createVoice(frequency) {
   return thisVoice;
 }
 
-export function createVoicePool() {
-  //TODO
-}
-
 function getThisVoiceVolume(numActiveVoices) {
   const thisVolume = AUDIO_CONFIG.MAX_VOLUME - (0.05 * numActiveVoices);
   if (thisVolume < AUDIO_CONFIG.MIN_VOLUME) return AUDIO_CONFIG.MIN_VOLUME;

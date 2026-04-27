@@ -6,13 +6,14 @@ export default class Voice {
     this.context = context;
     this.now = context.currentTime;
     this.volume = AUDIO_CONFIG.MAX_VOLUME;
-    /* VCA Node */
-    this.vca = this.context.createGain();
-    this.vca.gain.value = 0;
-    /* VCO Node */
-    this.vco = this.context.createOscillator();
-    this.vco.type = AUDIO_CONFIG.WAVE_TYPE;
-    this.vco.frequency.value = this.frequency;
+    this.vca = new GainNode(this.context, {
+      gain: 0
+    })
+    this.vco = new OscillatorNode(this.context, {
+      type: AUDIO_CONFIG.WAVE_TYPE,
+      frequency: this.frequency
+    });
+    
   }
   start(volume) {
     this.volume = volume ?? AUDIO_CONFIG.MAX_VOLUME;
@@ -31,7 +32,6 @@ export default class Voice {
     this.vca.gain.setValueAtTime(this.vca.gain.value, this.now);
     this.vca.gain.setTargetAtTime(0, this.now, AUDIO_CONFIG.SMOOTHING_INTERVAL);
     this.vco.stop(stopTime);
-
   }
   update(newFrequency) {
     this.frequency = newFrequency;
