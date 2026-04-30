@@ -34,14 +34,14 @@ function getThisVoiceVolume(numActiveVoices) {
   return thisVolume;
 }
 
-export function playNote(noteId, frequency) {
+export function playNote(noteId, frequency, ratio) {
   if (contextNotSet) {
     setAudioContext();
   }
   if (noVoicePool) {
     createVoicePool();
   }
-  const thisVoice = state.voiceManager.noteOn(noteId, frequency);
+  const thisVoice = state.voiceManager.noteOn(noteId, frequency, ratio);
   const newVoiceObj = {
     voice: null,
     ratio: null,
@@ -61,9 +61,10 @@ export function stopNote(noteId, frequency) {
 
 export function updateActiveVoices() {
   state.voiceManager.activeVoices.forEach((voice, key) => {
+    console.debug("voice", voice);
     // TODO need to add the ratio object to each voice
     const newNote = getNote({ rootNote: state.baseFrequency, ratio: voice.ratio });
-    state.activeVoices[key].update(newNote);
+    voice.update(newNote);
   });
   // Object.keys(state.activeVoices).forEach((activeVoiceKey) => {
   //   const activeVoiceRatio = state.activeVoices[activeVoiceKey].ratio;

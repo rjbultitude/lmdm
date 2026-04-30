@@ -35,9 +35,9 @@ export function noteBtnAddClickEvent(el, ratio) {
     });
     if (playing === false) {
       // PLAY
-      playNote(noteId, thisFreq);
+      playNote(noteId, thisFreq, ratio);
       e.target.dataset.playing = "true";
-      state.activeVoices[noteId].ratio = ratio;
+      // state.activeVoices[noteId].ratio = ratio;
       updateNoteDataUi(thisFreq);
       return;
     }

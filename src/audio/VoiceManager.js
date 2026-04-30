@@ -13,7 +13,7 @@ export default class VoiceManager {
         }
     }
 
-    noteOn(noteId, freq) {
+    noteOn(noteId, freq, ratio) {
         // 1. Don't play the same frequency twice
         if (this.activeVoices.has(noteId)) {
             console.debug("note already playing");
@@ -23,6 +23,7 @@ export default class VoiceManager {
         const voice = this.freeVoices.pop();
 
         if (voice) {
+            voice.updateRatio(ratio);
             voice.start(freq);
             this.activeVoices.set(noteId, voice);
         } else {

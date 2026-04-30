@@ -3,6 +3,7 @@ import { AUDIO_CONFIG } from "../constants.js";
 export default class Voice {
   constructor(context) {
     this.context = context;
+    this.ratio = null;
     this.now = context.currentTime;
     this.volume = AUDIO_CONFIG.MAX_VOLUME;
     this.vca = new GainNode(this.context, {
@@ -10,9 +11,13 @@ export default class Voice {
     })
     this.vco = new OscillatorNode(this.context, {
       type: AUDIO_CONFIG.WAVE_TYPE
-    });
-    
+    });  
   }
+
+  updateRatio(ratio) {
+    this.ratio = ratio;
+  }
+
   start(frequency, volume) {
     this.volume = volume ?? AUDIO_CONFIG.MAX_VOLUME;
     this.vco.frequency.value = frequency;
