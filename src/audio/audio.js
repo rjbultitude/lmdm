@@ -55,22 +55,13 @@ export function playNote(noteId, frequency, ratio) {
 
 export function stopNote(noteId, frequency) {
   state.voiceManager.noteOff(noteId, frequency);
-  //state.activeVoices[noteId].voice.stop();
-  delete state.activeVoices[noteId];
 }
 
 export function updateActiveVoices() {
   state.voiceManager.activeVoices.forEach((voice, key) => {
-    console.debug("voice", voice);
-    // TODO need to add the ratio object to each voice
     const newNote = getNote({ rootNote: state.baseFrequency, ratio: voice.ratio });
     voice.update(newNote);
   });
-  // Object.keys(state.activeVoices).forEach((activeVoiceKey) => {
-  //   const activeVoiceRatio = state.activeVoices[activeVoiceKey].ratio;
-  //   const newNote = getNote({ rootNote: state.baseFrequency, ratio: activeVoiceRatio });
-  //   state.activeVoices[activeVoiceKey].voice.update(newNote);
-  // });
 }
 
 stopBtn.addEventListener('click', function(e) {

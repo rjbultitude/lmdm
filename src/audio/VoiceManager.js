@@ -21,7 +21,7 @@ export default class VoiceManager {
         }
         // 2. Get a voice from the pool
         const voice = this.freeVoices.pop();
-
+        console.debug("Free voices ON", this.freeVoices);
         if (voice) {
             voice.updateRatio(ratio);
             voice.start(freq);
@@ -33,7 +33,6 @@ export default class VoiceManager {
     }
 
     noteOff(noteId, freq) {
-        console.debug("noteId", noteId);
         const voice = this.activeVoices.get(noteId);
         if (voice) {
             voice.stop(); // Fade out
@@ -41,7 +40,8 @@ export default class VoiceManager {
             // Wait for the fade-out to finish before making it "free" again
             setTimeout(() => {
                 this.freeVoices.push(voice);
-            }, 100); // Match this to your release time
+                console.debug("Free voices OFF", this.freeVoices);
+            }, 1000); // Match this to your release time
         }
     }
 }
