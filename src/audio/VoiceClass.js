@@ -1,8 +1,7 @@
 import { AUDIO_CONFIG } from "../constants.js";
 
 export default class Voice {
-  constructor(context, freq) {
-    this.frequency = freq || AUDIO_CONFIG.ROOT_NOTE;
+  constructor(context) {
     this.context = context;
     this.now = context.currentTime;
     this.volume = AUDIO_CONFIG.MAX_VOLUME;
@@ -10,13 +9,13 @@ export default class Voice {
       gain: 0
     })
     this.vco = new OscillatorNode(this.context, {
-      type: AUDIO_CONFIG.WAVE_TYPE,
-      frequency: this.frequency
+      type: AUDIO_CONFIG.WAVE_TYPE
     });
     
   }
-  start(volume) {
+  start(frequency, volume) {
     this.volume = volume ?? AUDIO_CONFIG.MAX_VOLUME;
+    this.vco.frequency.value = frequency;
     /* connect osciallator to gain */
     this.vco.connect(this.vca);
     /* connect gain to destination */

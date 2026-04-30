@@ -1,4 +1,3 @@
-import Voice from "./VoiceClass.js";
 import VoiceManager from "./VoiceManager.js";
 import { resetPlaying, clearNoteDataUi } from "../keyboard/keyboardInterface.js";
 import state from "../state.js";
@@ -7,20 +6,27 @@ import { AUDIO_CONFIG } from "../constants.js";
 
 const stopBtn = document.getElementById("stop");
 let contextNotSet = true;
+let noVoicePool = true;
 
 export function setAudioContext() {
   state.audioContext = new AudioContext();
+  contextNotSet = false;
 }
 
-export function createVoiceManager() {
+export function createVoicePool() {
+  if (!state.audioContext) {
+    console.debug("no audio contexr set yet")
+    setAudioContext()
+  }
   const Voices = new VoiceManager(state.audioContext);
   state.voiceManager = Voices;
+  noVoicePool = false;
 }
 
-export function createVoice(frequency) {
-  const thisVoice = new Voice(audioContext, frequency);
-  return thisVoice;
-}
+// export function createVoice(frequency) {
+//   const thisVoice = new Voice(audioContext, frequency);
+//   return thisVoice;
+// }
 
 function getThisVoiceVolume(numActiveVoices) {
   const thisVolume = AUDIO_CONFIG.MAX_VOLUME - (0.05 * numActiveVoices);
@@ -32,7 +38,10 @@ export function playNote(noteId, frequency) {
   if (contextNotSet) {
     setAudioContext();
   }
-  const thisVoice = state.voiceManager.noteOn(frequency);
+  if (noVoicePool) {
+    createVoicePool();
+  }
+  const thisVoice = state.voiceManager.noteOn(noteId, frequency);
   const newVoiceObj = {
     voice: null,
     ratio: null,
@@ -44,8 +53,8 @@ export function playNote(noteId, frequency) {
   //const thisVoiceVolume = getThisVoiceVolume(numActiveVoices);
 };
 
-export function stopNote(noteId) {
-  state.voiceManager.activeVoices.noteOff(freq);
+export function stopNote(noteId, frequency) {
+  state.voiceManager.noteOff(noteId, frequency);
   //state.activeVoices[noteId].voice.stop();
   delete state.activeVoices[noteId];
 }

@@ -29,12 +29,12 @@ export function noteBtnAddClickEvent(el, ratio) {
     const playingString = e.target.dataset.playing;
     // coerce to boolean
     const playing = (playingString === "true");
+    const thisFreq = getNote({
+      rootNote: state.baseFrequency,
+      ratio
+    });
     if (playing === false) {
       // PLAY
-      const thisFreq = getNote({
-        rootNote: state.baseFrequency,
-        ratio
-      });
       playNote(noteId, thisFreq);
       e.target.dataset.playing = "true";
       state.activeVoices[noteId].ratio = ratio;
@@ -42,7 +42,7 @@ export function noteBtnAddClickEvent(el, ratio) {
       return;
     }
     // STOP
-    stopNote(noteId);
+    stopNote(noteId, thisFreq);
     e.target.dataset.playing = "false";
     clearNoteDataUi();
   }, false);
