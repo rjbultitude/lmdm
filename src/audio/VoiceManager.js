@@ -15,7 +15,10 @@ export default class VoiceManager {
 
     noteOn(noteId, freq) {
         // 1. Don't play the same frequency twice
-        if (this.activeVoices.has(noteId)) return;
+        if (this.activeVoices.has(noteId)) {
+            console.debug("note already playing");
+            return;
+        }
         // 2. Get a voice from the pool
         const voice = this.freeVoices.pop();
 

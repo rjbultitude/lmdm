@@ -11,7 +11,7 @@ export default function initFrequencyInput() {
     event.preventDefault();
   });
   submit.addEventListener("click", function() {
-    // Pitch of all notes
+    // Pitch of all notes unless it's already set
     if (state.baseFrequency !== inputFreq.value) {
       state.baseFrequency = inputFreq.value;
       updateActiveVoices();

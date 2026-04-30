@@ -60,11 +60,16 @@ export function stopNote(noteId, frequency) {
 }
 
 export function updateActiveVoices() {
-  Object.keys(state.activeVoices).forEach((activeVoiceKey) => {
-    const activeVoiceRatio = state.activeVoices[activeVoiceKey].ratio;
-    const newNote = getNote({ rootNote: state.baseFrequency, ratio: activeVoiceRatio });
-    state.activeVoices[activeVoiceKey].voice.update(newNote);
+  state.voiceManager.activeVoices.forEach((voice, key) => {
+    // TODO need to add the ratio object to each voice
+    const newNote = getNote({ rootNote: state.baseFrequency, ratio: voice.ratio });
+    state.activeVoices[key].update(newNote);
   });
+  // Object.keys(state.activeVoices).forEach((activeVoiceKey) => {
+  //   const activeVoiceRatio = state.activeVoices[activeVoiceKey].ratio;
+  //   const newNote = getNote({ rootNote: state.baseFrequency, ratio: activeVoiceRatio });
+  //   state.activeVoices[activeVoiceKey].voice.update(newNote);
+  // });
 }
 
 stopBtn.addEventListener('click', function(e) {
