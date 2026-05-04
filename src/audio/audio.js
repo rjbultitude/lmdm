@@ -29,7 +29,7 @@ export function createVoicePool() {
 // }
 
 function getThisVoiceVolume(numActiveVoices) {
-  const thisVolume = AUDIO_CONFIG.MAX_VOLUME - (0.05 * numActiveVoices);
+  const thisVolume = AUDIO_CONFIG.MAX_VOLUME - (0.05 * numActiveVoices.size);
   if (thisVolume < AUDIO_CONFIG.MIN_VOLUME) return AUDIO_CONFIG.MIN_VOLUME;
   return thisVolume;
 }
@@ -41,16 +41,15 @@ export function playNote(noteId, frequency, ratio) {
   if (noVoicePool) {
     createVoicePool();
   }
-  const thisVoice = state.voiceManager.noteOn(noteId, frequency, ratio);
+  const volume = getThisVoiceVolume(state.voiceManager.activeVoices);
+  const thisVoice = state.voiceManager.noteOn({noteId, frequency, volume, ratio});
   const newVoiceObj = {
     voice: null,
     ratio: null,
   };
+  // TODO don't think we need this
   state.activeVoices[noteId] = newVoiceObj;
   state.activeVoices[noteId].voice = thisVoice;
-  // TODO move to VoiceManager
-  //const numActiveVoices = Object.keys(state.activeVoices).length;
-  //const thisVoiceVolume = getThisVoiceVolume(numActiveVoices);
 };
 
 export function stopNote(noteId, frequency) {

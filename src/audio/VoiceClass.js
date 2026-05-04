@@ -28,8 +28,10 @@ export default class Voice {
   start(frequency, volume) {
     this.volume = volume ?? AUDIO_CONFIG.MAX_VOLUME;
     /* set the frequency */
-    this.vco.frequency.setTargetAtTime(frequency, this.context.currentTime, 0.001);;
+    this.vco.frequency.setTargetAtTime(frequency, this.now, 0.001);;
     /* ADSR */
+    this.vca.gain.cancelScheduledValues(this.now);
+    this.vca.gain.setValueAtTime(this.vca.gain.value, this.now);
     this.vca.gain.setTargetAtTime(this.volume, this.now, AUDIO_CONFIG.SMOOTHING_INTERVAL);
   }
 
