@@ -11,7 +11,14 @@ export default class Voice {
     })
     this.vco = new OscillatorNode(this.context, {
       type: AUDIO_CONFIG.WAVE_TYPE
-    });  
+    });
+    /* connect osciallator to gain */
+    this.vco.connect(this.vca);
+    /* connect gain to destination */
+    this.vca.connect(this.context.destination);
+    /*  start the oscillator immediately
+        since we're using an audio pool */
+    this.vco.start(0);
   }
 
   updateRatio(ratio) {
@@ -20,14 +27,10 @@ export default class Voice {
 
   start(frequency, volume) {
     this.volume = volume ?? AUDIO_CONFIG.MAX_VOLUME;
-    this.vco.frequency.value = frequency;
-    /* connect osciallator to gain */
-    this.vco.connect(this.vca);
-    /* connect gain to destination */
-    this.vca.connect(this.context.destination);
+    /* set the frequency */
+    this.vco.frequency.setTargetAtTime(frequency, this.context.currentTime, 0.001);;
     /* ADSR */
     this.vca.gain.setTargetAtTime(this.volume, this.now, AUDIO_CONFIG.SMOOTHING_INTERVAL);
-    this.vco.start(0);
   }
 
   stop() {

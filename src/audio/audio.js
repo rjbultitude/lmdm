@@ -57,6 +57,7 @@ export function stopNote(noteId, frequency) {
   state.voiceManager.noteOff(noteId, frequency);
 }
 
+/* Used for the root note form */
 export function updateActiveVoices() {
   state.voiceManager.activeVoices.forEach((voice, key) => {
     const newNote = getNote({ rootNote: state.baseFrequency, ratio: voice.ratio });
