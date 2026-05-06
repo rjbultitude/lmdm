@@ -18,7 +18,7 @@ export function initUnlockMidi() {
   toastClose.innerText = "Unlock MIDI";
   toastClose.addEventListener("click", function(e) {
     state.audioContext.resume().then(() => {
-      document.getElementById("unlock").style.display = "none";
+      document.getElementById(UNLOCK_ID).style.display = "none";
       hideToastEl(e);
     });
   });
