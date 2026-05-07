@@ -24,3 +24,5 @@ initMIDIAccess();
 initSidebarControls();
 
 //initCanvas();
+
+console.debug("v1.8");
