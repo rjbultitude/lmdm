@@ -14,7 +14,6 @@ import { initAudioContext, createVoicePool } from "./audio/audio.js";
 createColumns();
 initColourSelect();
 initToast();
-initUnlockMidi();
 initGridSizeSelect();
 initFrequencyInput();
 initAudioContext();
@@ -24,4 +23,4 @@ initSidebarControls();
 
 //initCanvas();
 
-console.debug("v1.9");
+console.debug("v1.9.1");

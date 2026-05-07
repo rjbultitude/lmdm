@@ -21,7 +21,7 @@ const unlockAudio = async () => {
 export function initAudioContext() {
   state.audioContext = new AudioContext();
   contextNotSet = false;
-  initUnlockMidi();
+  initUnlockAudio();
   // Unintrusive solution
   // const keyboardContainer = document.getElementById("main");
   // keyboardContainer.addEventListener("mousedown", unlockAudio);
