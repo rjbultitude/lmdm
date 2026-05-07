@@ -17,10 +17,14 @@ export function initUnlockMidi() {
   toastClose.className = "dialog__close";
   toastClose.innerText = "Unlock MIDI";
   toastClose.addEventListener("click", function(e) {
-    state.audioContext.resume().then(() => {
-      document.getElementById(UNLOCK_ID).style.display = "none";
-      hideToastEl(e);
-    });
+    state.audioContext.resume()
+      .then(() => {
+        document.getElementById(UNLOCK_ID).style.display = "none";
+        hideToastEl(e);
+      })
+      .catch((e) => {
+        console.warn("Audio Context could not resume", e);
+      });
   });
   unlockEl.insertAdjacentElement("afterbegin", toastText);
   unlockEl.insertAdjacentElement("afterbegin", toastClose);

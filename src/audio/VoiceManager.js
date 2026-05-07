@@ -14,6 +14,7 @@ export default class VoiceManager {
     }
 
     noteOn({noteId, frequency, ratio, volume}) {
+        console.log("volume", volume);
         // 1. Don't play the same frequency twice
         if (this.activeVoices.has(noteId)) {
             console.debug("note already playing");
@@ -40,7 +41,7 @@ export default class VoiceManager {
             setTimeout(() => {
                 this.activeVoices.delete(noteId);
                 this.freeVoices.push(voice);
-            }, 2000); // TODO Match this to your release time
+            }, 3000); // TODO Match this to your release time
         }
     }
 }

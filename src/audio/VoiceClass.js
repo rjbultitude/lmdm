@@ -40,7 +40,6 @@ export default class Voice {
     this.vca.gain.cancelScheduledValues(this.now);
     this.vca.gain.setValueAtTime(this.vca.gain.value, this.now);
     this.vca.gain.setTargetAtTime(0, this.now, AUDIO_CONFIG.SMOOTHING_INTERVAL);
-    this.vco.stop(stopTime);
   }
   update(newFrequency) {
     this.frequency = newFrequency;

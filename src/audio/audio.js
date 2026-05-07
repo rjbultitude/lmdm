@@ -15,7 +15,7 @@ export function setAudioContext() {
 
 export function createVoicePool() {
   if (!state.audioContext) {
-    console.debug("no audio contexr set yet")
+    console.debug("no audio context set yet")
     setAudioContext()
   }
   const Voices = new VoiceManager(state.audioContext);
@@ -43,13 +43,6 @@ export function playNote(noteId, frequency, ratio) {
   }
   const volume = getThisVoiceVolume(state.voiceManager.activeVoices);
   const thisVoice = state.voiceManager.noteOn({noteId, frequency, volume, ratio});
-  const newVoiceObj = {
-    voice: null,
-    ratio: null,
-  };
-  // TODO don't think we need this
-  state.activeVoices[noteId] = newVoiceObj;
-  state.activeVoices[noteId].voice = thisVoice;
 };
 
 export function stopNote(noteId, frequency) {
