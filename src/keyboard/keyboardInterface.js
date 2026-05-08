@@ -11,14 +11,15 @@ const noteNumberEl = document.getElementById("note-data-num");
 
 function updateNoteDataUi(thisFreq) {
   //noteNameEl.innerText = "A";
-  noteFreqEl.innerText = thisFreq.toFixed(2);
-  noteNumberEl.innerText = Object.keys(state.activeVoices).length;
+  if (!!thisFreq) {
+    noteFreqEl.innerText = thisFreq.toFixed(2);
+  }
+  noteNumberEl.innerText = state.voiceManager.activeVoices.size;
 }
 
 export function clearNoteDataUi() {
   //noteNameEl.innerText = "";
   noteFreqEl.innerText = "";
-  noteNumberEl.innerText = "";
 }
 
 export function noteBtnAddClickEvent(el, ratio) {
@@ -37,13 +38,13 @@ export function noteBtnAddClickEvent(el, ratio) {
       // PLAY
       playNote(noteId, thisFreq, ratio);
       e.target.dataset.playing = "true";
-      // state.activeVoices[noteId].ratio = ratio;
       updateNoteDataUi(thisFreq);
       return;
     }
     // STOP
-    stopNote(noteId, thisFreq);
+    stopNote(noteId);
     e.target.dataset.playing = "false";
+    updateNoteDataUi();
     clearNoteDataUi();
   }, false);
 }

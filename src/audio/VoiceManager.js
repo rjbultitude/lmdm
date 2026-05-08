@@ -14,15 +14,14 @@ export default class VoiceManager {
     }
 
     noteOn({noteId, frequency, ratio, volume}) {
-        console.log("volume", volume);
-        // 1. Don't play the same frequency twice
-        if (this.activeVoices.has(noteId)) {
-            console.debug("note already playing");
-            return;
-        }
+        // 1. Optional. Don't play the same frequency twice
+        // if (this.activeVoices.has(noteId)) {
+        //     console.debug("note already playing");
+        //     return;
+        // }
+
         // 2. Get a voice from the pool
         const voice = this.freeVoices.pop();
-        // console.debug("Free voices ON", this.freeVoices);
         if (voice) {
             voice.updateRatio(ratio);
             voice.start(frequency, volume);
@@ -33,15 +32,15 @@ export default class VoiceManager {
         }
     }
 
-    noteOff(noteId, freq) {
+    noteOff(noteId) {
         const voice = this.activeVoices.get(noteId);
         if (voice) {
             voice.stop(); // Fade out
-            // Wait for the fade-out to finish before making it "free" again
+            this.activeVoices.delete(noteId);
             setTimeout(() => {
-                this.activeVoices.delete(noteId);
+                // Wait for the fade-out to finish before making it "free" again
                 this.freeVoices.push(voice);
-            }, 3000); // TODO Match this to your release time
+            }, 1000); // TODO Match this to your release time
         }
     }
 }

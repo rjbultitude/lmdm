@@ -9,14 +9,14 @@ const stopBtn = document.getElementById("stop");
 let contextNotSet = true;
 let noVoicePool = true;
 
-const unlockAudio = async () => {
-  if (state.audioContext.state === "suspended") {
-    await audioContext.resume();
-  }
-  // Remove these listeners so they don't fire every time
-  keyboardContainer.removeEventListener('mousedown', unlockAudio);
-  keyboardContainer.removeEventListener('touchstart', unlockAudio);
-};
+// const unlockAudio = async () => {
+//   if (state.audioContext.state === "suspended") {
+//     await audioContext.resume();
+//   }
+//   // Remove these listeners so they don't fire every time
+//   keyboardContainer.removeEventListener('mousedown', unlockAudio);
+//   keyboardContainer.removeEventListener('touchstart', unlockAudio);
+// };
 
 export function initAudioContext() {
   state.audioContext = new AudioContext();
@@ -55,8 +55,8 @@ export function playNote(noteId, frequency, ratio) {
   const thisVoice = state.voiceManager.noteOn({noteId, frequency, volume, ratio});
 };
 
-export function stopNote(noteId, frequency) {
-  state.voiceManager.noteOff(noteId, frequency);
+export function stopNote(noteId) {
+  state.voiceManager.noteOff(noteId);
 }
 
 /* Used for the root note form */
@@ -69,7 +69,7 @@ export function updateActiveVoices() {
 
 stopBtn.addEventListener('click', function(e) {
   e.preventDefault();
-  Object.keys(state.activeVoices).forEach((activeVoiceKey) => {
+  state.voiceManager.activeVoices.forEach((__value, activeVoiceKey) => {
     stopNote(activeVoiceKey);
     resetPlaying(activeVoiceKey);
     clearNoteDataUi();

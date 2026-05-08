@@ -49,7 +49,6 @@ export function onMIDIMessage(message) {
   // data number 1 (lowest note on lambdoma keyboard)
   const noteButton = document.querySelector(`[data-number='${offsetNote}']`);
   const noteInRange = MIDIKeyInRange(offsetNote);
-  //const noteInRange = true;
 
   switch (command) {
     case 144: // noteOn
@@ -70,6 +69,7 @@ export function onMIDISuccess(midiAccess) {
       showToastEl({ elID: UNLOCK_ID, txtID: "", msg: "" });
       return;
   }
+  console.debug("state.audioContext.state", state.audioContext.state);
   midiAccess.inputs.forEach(input => {
     input.onmidimessage = onMIDIMessage;
   });

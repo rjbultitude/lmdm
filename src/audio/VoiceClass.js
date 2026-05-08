@@ -35,8 +35,10 @@ export default class Voice {
     this.vca.gain.setTargetAtTime(this.volume, this.now, AUDIO_CONFIG.SMOOTHING_INTERVAL);
   }
 
+  /*  With the voice pool solution
+      we only reduce the gain. 
+      Do not stop the oscillator */
   stop() {
-    const stopTime = this.now + (AUDIO_CONFIG.SMOOTHING_INTERVAL * 10);
     this.vca.gain.cancelScheduledValues(this.now);
     this.vca.gain.setValueAtTime(this.vca.gain.value, this.now);
     this.vca.gain.setTargetAtTime(0, this.now, AUDIO_CONFIG.SMOOTHING_INTERVAL);
