@@ -23,4 +23,4 @@ initSidebarControls();
 
 //initCanvas();
 
-console.debug("v1.9.5");
+console.debug("v1.9.6");
