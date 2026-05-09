@@ -1,7 +1,7 @@
 const ACTIVE = "active";
 
 export function hideToastEl(e) {
-  const closeBtn = e.target ?? document.getElementById("toast-close");
+  const closeBtn = e?.target ?? document.getElementById("toast-close");
   const toastEl = closeBtn.parentElement;
   toastEl.classList.remove(ACTIVE);
 }
