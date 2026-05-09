@@ -6,6 +6,7 @@ import { AUDIO_CONFIG } from "../constants.js";
 import initUnlockAudio from '../ui/unlock-toast.js';
 import { hideToastEl } from "../ui/ui-utils.js";
 
+const keyboardContainer = document.getElementById("main");
 const stopBtn = document.getElementById("stop");
 let contextNotSet = true;
 let noVoicePool = true;
@@ -28,7 +29,6 @@ export function initAudioContext() {
   contextNotSet = false;
   initUnlockAudio();
   // Unintrusive solution
-  const keyboardContainer = document.getElementById("main");
   keyboardContainer.addEventListener("mousedown", unlockAudio);
   keyboardContainer.addEventListener("touchstart", unlockAudio);
 }
