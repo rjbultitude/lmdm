@@ -2,6 +2,11 @@ const ACTIVE = "active";
 
 export function hideToastEl(e) {
   const closeBtn = e?.target ?? document.getElementById("toast-close");
+  console.debug("closeBtn", closeBtn);
+  if (!closeBtn) {
+    console.debug("mo closeBtn");
+    return;
+  }
   const toastEl = closeBtn.parentElement;
   toastEl.classList.remove(ACTIVE);
 }

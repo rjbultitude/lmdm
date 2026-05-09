@@ -8,9 +8,6 @@ import { initToast } from "./ui/error-toast.js";
 import { initAudioContext, createVoicePool } from "./audio/audio.js";
 
 //import { initCanvas } from "./visual/lissajous.js";
-
-// Generate keyboard interface and bind click events
-//TODO do we still need this callback?
 createColumns();
 initColourSelect();
 initToast();
@@ -23,4 +20,4 @@ initSidebarControls();
 
 //initCanvas();
 
-console.debug("v1.9.8");
+console.debug("v1.9.9");
