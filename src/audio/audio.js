@@ -4,28 +4,33 @@ import state from "../state.js";
 import { getNote } from "./noteFunctions.js";
 import { AUDIO_CONFIG } from "../constants.js";
 import initUnlockAudio from '../ui/unlock-toast.js';
+import { hideToastEl } from "../ui/ui-utils.js";
 
 const stopBtn = document.getElementById("stop");
 let contextNotSet = true;
 let noVoicePool = true;
 
-// const unlockAudio = async () => {
-//   if (state.audioContext.state === "suspended") {
-//     await audioContext.resume();
-//   }
-//   // Remove these listeners so they don't fire every time
-//   keyboardContainer.removeEventListener('mousedown', unlockAudio);
-//   keyboardContainer.removeEventListener('touchstart', unlockAudio);
-// };
+function removeKeyboardListners() {
+  keyboardContainer.removeEventListener('mousedown', unlockAudio);
+  keyboardContainer.removeEventListener('touchstart', unlockAudio);
+}
+
+const unlockAudio = async () => {
+  if (state.audioContext.state === "suspended") {
+    await state.audioContext.resume();
+  }
+  removeKeyboardListners();
+  hideToastEl();
+};
 
 export function initAudioContext() {
   state.audioContext = new AudioContext();
   contextNotSet = false;
   initUnlockAudio();
   // Unintrusive solution
-  // const keyboardContainer = document.getElementById("main");
-  // keyboardContainer.addEventListener("mousedown", unlockAudio);
-  // keyboardContainer.addEventListener("touchstart", unlockAudio);
+  const keyboardContainer = document.getElementById("main");
+  keyboardContainer.addEventListener("mousedown", unlockAudio);
+  keyboardContainer.addEventListener("touchstart", unlockAudio);
 }
 
 export function createVoicePool() {

@@ -3,7 +3,6 @@ import { getNote } from "../audio/noteFunctions.js";
 import state from "../state.js";
 import { playNote, stopNote } from "../audio/audio.js";
 import { KEYBOARD_BTN_CLASSNAME } from "../constants.js";
-import { hideToastEl } from "../ui/ui-utils.js";
 
 const mainSection = document.getElementById("main");
 //const noteNameEl = document.getElementById("note-data-notename");
@@ -27,13 +26,6 @@ export function noteBtnAddClickEvent(el, ratio) {
   el.addEventListener("click", function(e) {
     e.preventDefault();
     e.stopPropagation();
-    /*  TODO check if it's the first click user has made
-        If it is, unlock audio and 
-        hideToastEl */
-    if (!state.keyClicked) {
-      hideToastEl();
-      state.keyClicked === true;
-    }
     const noteId = e.target.id;
     const playingString = e.target.dataset.playing;
     // coerce to boolean

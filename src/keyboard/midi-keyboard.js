@@ -67,7 +67,6 @@ export function onMIDIMessage(message) {
 export function onMIDISuccess(midiAccess) {
   if (state.audioContext.state !== "running") {
       showToastEl({ elID: UNLOCK_ID, txtID: "", msg: "" });
-      //return;
   }
   console.debug("state.audioContext.state", state.audioContext.state);
   midiAccess.inputs.forEach(input => {
