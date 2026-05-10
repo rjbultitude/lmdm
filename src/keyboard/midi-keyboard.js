@@ -2,7 +2,7 @@ import { MIDI_NOTE_MIDDLE_C, ONE_SHOT } from '../constants.js';
 import state from '../state.js';
 import { showToastEl } from '../ui/ui-utils.js';
 import { UNLOCK_ID } from '../ui/unlock-toast.js';
-import { TOAST_ERROR_ID, TOAST_TEXT_ERROR_ID, } from '../ui/error-toast.js';
+import { ERROR_TOAST_ID, ERROR_TOAST_TEXT_ID, } from '../ui/error-toast.js';
 
 // This should only be called on setGridSize
 function getRange() {
@@ -65,8 +65,8 @@ export function onMIDIMessage(message) {
 }
 
 export function onMIDISuccess(midiAccess) {
+  showToastEl({ elID: UNLOCK_ID, txtID: "", msg: "" });
   if (state.audioContext.state !== "running") {
-      showToastEl({ elID: UNLOCK_ID, txtID: "", msg: "" });
   }
   console.debug("state.audioContext.state", state.audioContext.state);
   midiAccess.inputs.forEach(input => {

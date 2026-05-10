@@ -2,9 +2,8 @@ import masterLamdomaSeq, { createMasterLamdomaSeq } from "../createLambdomaSeq.j
 import { getNote } from "../audio/noteFunctions.js";
 import state from "../state.js";
 import { playNote, stopNote } from "../audio/audio.js";
-import { KEYBOARD_BTN_CLASSNAME } from "../constants.js";
+import { MAIN_El, KEYBOARD_BTN_CLASSNAME } from "../constants.js";
 
-const mainSection = document.getElementById("main");
 //const noteNameEl = document.getElementById("note-data-notename");
 const noteFreqEl = document.getElementById("note-data-freq");
 const noteNumberEl = document.getElementById("note-data-num");
@@ -55,7 +54,7 @@ export function resetPlaying(noteId) {
 }
 
 export function recreateColumns() {
-  mainSection.replaceChildren();
+  MAIN_El.replaceChildren();
   const entireLambdoma = createMasterLamdomaSeq(state.gridSize);
   state.entireLambdoma = entireLambdoma;
   createColumns(entireLambdoma);
@@ -96,7 +95,7 @@ export function createColumns(entireLambdoma = masterLamdomaSeq) {
       noteBtnAddClickEvent(thisButton, ratio);
       thisRow.insertAdjacentElement("afterbegin", thisButton);
     });
-    mainSection.insertAdjacentElement("afterbegin", thisRow);
+    MAIN_El.insertAdjacentElement("afterbegin", thisRow);
   });
   return entireLambdoma;
 }

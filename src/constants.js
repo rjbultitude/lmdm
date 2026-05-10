@@ -24,6 +24,8 @@ export const MIDI_NOTE_MIDDLE_C = 60;
 
 export const GRID_SIZE = 8;
 export const DEFAULT_COLOUR = "#cccccc";
+
+export const MAIN_El = document.getElementById("main");
 export const KEYBOARD_BTN_CLASSNAME = "keyboard__button";
 
 /* Option two 

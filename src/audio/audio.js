@@ -2,18 +2,17 @@ import VoiceManager from "./VoiceManager.js";
 import { resetPlaying, clearNoteDataUi } from "../keyboard/keyboardInterface.js";
 import state from "../state.js";
 import { getNote } from "./noteFunctions.js";
-import { AUDIO_CONFIG } from "../constants.js";
-import initUnlockAudio from '../ui/unlock-toast.js';
+import { MAIN_El, AUDIO_CONFIG } from "../constants.js";
+import initUnlockAudio, { UNLOCK_TOAST_CLOSE_BTN_ID } from '../ui/unlock-toast.js';
 import { hideToastEl } from "../ui/ui-utils.js";
 
-const keyboardContainer = document.getElementById("main");
 const stopBtn = document.getElementById("stop");
 let contextNotSet = true;
 let noVoicePool = true;
 
 function removeKeyboardListners() {
-  keyboardContainer.removeEventListener('mousedown', unlockAudio);
-  keyboardContainer.removeEventListener('touchstart', unlockAudio);
+  MAIN_El.removeEventListener('mousedown', unlockAudio);
+  MAIN_El.removeEventListener('touchstart', unlockAudio);
 }
 
 const unlockAudio = async () => {
@@ -21,7 +20,7 @@ const unlockAudio = async () => {
     await state.audioContext.resume();
   }
   removeKeyboardListners();
-  hideToastEl();
+  hideToastEl(null, UNLOCK_TOAST_CLOSE_BTN_ID);
 };
 
 export function initAudioContext() {
@@ -29,8 +28,8 @@ export function initAudioContext() {
   contextNotSet = false;
   initUnlockAudio();
   // Unintrusive solution
-  keyboardContainer.addEventListener("mousedown", unlockAudio);
-  keyboardContainer.addEventListener("touchstart", unlockAudio);
+  MAIN_El.addEventListener("mousedown", unlockAudio);
+  MAIN_El.addEventListener("touchstart", unlockAudio);
 }
 
 export function createVoicePool() {

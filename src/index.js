@@ -4,13 +4,13 @@ import initGridSizeSelect from "./keyboard/gridSelect.js";
 import initFrequencyInput from "./audio/frequencyInput.js";
 import { initMIDIAccess } from "./keyboard/midi-keyboard.js";
 import { initSidebarControls } from "./ui/sidebar.js";
-import { initToast } from "./ui/error-toast.js";
+import { initErrorToast } from "./ui/error-toast.js";
 import { initAudioContext, createVoicePool } from "./audio/audio.js";
 
 //import { initCanvas } from "./visual/lissajous.js";
 createColumns();
 initColourSelect();
-initToast();
+initErrorToast();
 initGridSizeSelect();
 initFrequencyInput();
 initAudioContext();
@@ -20,4 +20,4 @@ initSidebarControls();
 
 //initCanvas();
 
-console.debug("v1.9.9");
+console.debug("v2.0.0");

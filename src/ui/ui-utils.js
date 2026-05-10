@@ -1,13 +1,15 @@
 const ACTIVE = "active";
 
-export function hideToastEl(e) {
-  const closeBtn = e?.target ?? document.getElementById("toast-close");
-  console.debug("closeBtn", closeBtn);
-  if (!closeBtn) {
-    console.debug("mo closeBtn");
-    return;
+export function hideToastEl(e, id) {
+  let closeBtn;
+  if (!!id) {
+    closeBtn = document.getElementById(id);
+  } else {
+    closeBtn = e?.target;
   }
   const toastEl = closeBtn.parentElement;
+  console.debug("close", closeBtn);
+  console.debug("toastEl", toastEl);
   toastEl.classList.remove(ACTIVE);
 }
 

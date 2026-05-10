@@ -1,6 +1,7 @@
 import { 
   KeyboardColourScheme,
-  KEYBOARD_BTN_CLASSNAME 
+  KEYBOARD_BTN_CLASSNAME,
+  MAIN_El
 } from "../constants.js";
 
 import state from "../state.js";
@@ -41,8 +42,7 @@ function updateColours(selectedColourOption, allKeyboardBtns) {
 
 export function getAllKeyboardBtns() {
   let allKeyboardBtns = [];
-  const keyboard = document.getElementById("main");
-  const keyboardColumns = Array.from(keyboard.children);
+  const keyboardColumns = Array.from(MAIN_El.children);
   keyboardColumns.forEach((keyboardCol) => {
     const keyboardColArr = Array.from(keyboardCol.children);
     keyboardColArr.forEach((childNode) => {
