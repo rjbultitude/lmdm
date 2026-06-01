@@ -8,8 +8,6 @@ export function hideToastEl(e, id) {
     closeBtn = e?.target;
   }
   const toastEl = closeBtn.parentElement;
-  console.debug("close", closeBtn);
-  console.debug("toastEl", toastEl);
   toastEl.classList.remove(ACTIVE);
 }
 
