@@ -49,6 +49,8 @@
       font-size: 3.2rem;
       text-align: center;
       margin: 0;
+      position: relative;
+      display: inline-block;
     }
     h2 {
       font-size: 1.2rem;
@@ -91,9 +93,12 @@
     .dialog__close {
       float: right;
     }
-    .sub-heading {
+    .heading__diminuendo {
       display: block;
-      font-size: 1.3rem;
+      font-size: 0.75rem;
+      position: absolute;
+      left: -18px;
+      top: 12px;
     }
     header {
       background-color: var(--dark-green);
@@ -234,6 +239,10 @@
       transform: rotate(0deg);
     }
 
+    .modal__button {
+      margin-top: 5px;
+    }
+
     .dialog__close,
     .keyboard-form__submit {
       background-color: var(--dark-green);
@@ -272,6 +281,7 @@
       height: var(--button-size);
       border: 1px solid white;
       transition: background-color var(--transition-period) linear;
+      transition: filter var(--transition-period) linear;
       position: relative;
       background-color: var(--button-color);
     }
@@ -366,6 +376,11 @@
       white-space: nowrap;
       width: 1px;
     }
+
+    .btn__flash {
+      filter: brightness(150%);
+      transition: 0.3s;
+    }
   </style>
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -377,10 +392,10 @@
 <body>
   <header>
     <div class="inner-wrapper">
-      <h1>Lambdoma Matrix <span class="sub-heading">harmonically consonant keyboard</span></h1>
-      <p>Barbara Hero's matrix of wholenumber ratios organises the harmonic series into a unique keyboard. 
-      This online version aims to reproduce her innovative work and make it accessible to anyone.
-      Best enjoyed on larger screens. <button command="show-modal" commandfor="my-dialog">Learn more about what it is and how to use it here</button></p>
+      <h1><span class="heading__diminuendo">the </span>Lambdoma Matrix</h1>
+      <p>This musical instrument organises the harmonic series into a unique keyboard. Based on Barbara Hero's matrix of playable wholenumber ratios,  
+      this online version aims to make her innovative work accessible to anyone.
+      Best enjoyed on larger screens. <button command="show-modal" commandfor="my-dialog" class="modal__button">Learn more about what it is and how to use it here</button></p>
     </div>
   </header>
   <div class="wrapper">
@@ -393,7 +408,7 @@
           <input name="base-frequency-input" type="number" min="128" max="480" id="input-base-frequency">
           <button id="keyboard-settings-submit" class="keyboard-form__submit">Update</button> 
         </div>
-        <button id="stop" class="keyboard-form__submit">Stop all</button>
+        <button id="stop-all" class="keyboard-form__submit">Stop all</button>
       </div>
     </form>
     <section class="section__note-data">

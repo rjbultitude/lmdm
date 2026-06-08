@@ -8,6 +8,7 @@ const state = {
   activeVoices: {},
   gridSize: GRID_SIZE,
   colourScheme: "gra",
+  isPlaying: false,
   playMode: ONE_SHOT,
   MIDINotSupported: false
 }

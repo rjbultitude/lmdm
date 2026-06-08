@@ -6,7 +6,7 @@ import { MAIN_El, AUDIO_CONFIG } from "../constants.js";
 import initUnlockAudio, { UNLOCK_TOAST_CLOSE_BTN_ID } from '../ui/unlock-toast.js';
 import { hideToastEl } from "../ui/ui-utils.js";
 
-const stopBtn = document.getElementById("stop");
+const stopAllBtn = document.getElementById("stop-all");
 let contextNotSet = true;
 let noVoicePool = true;
 
@@ -57,10 +57,12 @@ export function playNote(noteId, frequency, ratio) {
   }
   const volume = getThisVoiceVolume(state.voiceManager.activeVoices);
   const thisVoice = state.voiceManager.noteOn({noteId, frequency, volume, ratio});
+  state.isPlaying = true;
 };
 
 export function stopNote(noteId) {
   state.voiceManager.noteOff(noteId);
+  state.isPlaying = false;
 }
 
 /* Used for the root note form */
@@ -71,7 +73,7 @@ export function updateActiveVoices() {
   });
 }
 
-stopBtn.addEventListener('click', function(e) {
+stopAllBtn.addEventListener('click', function(e) {
   e.preventDefault();
   state.voiceManager.activeVoices.forEach((__value, activeVoiceKey) => {
     stopNote(activeVoiceKey);
