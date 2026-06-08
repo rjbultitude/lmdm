@@ -1,4 +1,4 @@
-import { AUDIO_CONFIG, GRID_SIZE, ONE_SHOT } from "./constants.js";
+import { AUDIO_CONFIG, GRID_SIZE, ONE_SHOT, SUSTAIN } from "./constants.js";
 
 const state = {
   audioContext: null,

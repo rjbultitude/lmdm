@@ -1,4 +1,4 @@
-import { MIDI_NOTE_MIDDLE_C, ONE_SHOT } from '../constants.js';
+import { MIDI_NOTE_MIDDLE_C, ONE_SHOT, SUSTAIN } from '../constants.js';
 import state from '../state.js';
 import { showToastEl } from '../ui/ui-utils.js';
 import { UNLOCK_ID } from '../ui/unlock-toast.js';
@@ -57,7 +57,7 @@ export function onMIDIMessage(message) {
       }
       break;
     case 128: // noteOff
-      if (noteInRange && state.playMode === ONE_SHOT) {
+      if (noteInRange) {
         noteButton.click();
       }
       break;

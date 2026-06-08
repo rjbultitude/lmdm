@@ -2,7 +2,7 @@ import masterLamdomaSeq, { createMasterLamdomaSeq } from "../createLambdomaSeq.j
 import { getNote } from "../audio/noteFunctions.js";
 import state from "../state.js";
 import { playNote, stopNote } from "../audio/audio.js";
-import { MAIN_El, KEYBOARD_BTN_CLASSNAME } from "../constants.js";
+import { MAIN_El, KEYBOARD_BTN_CLASSNAME, ONE_SHOT } from "../constants.js";
 
 //const noteNameEl = document.getElementById("note-data-notename");
 const noteFreqEl = document.getElementById("note-data-freq");
@@ -61,6 +61,12 @@ export function noteBtnAddClickEvent(el, ratio) {
       playNote(noteId, thisFreq, ratio);
       e.target.dataset.playing = "true";
       updateNoteDataUi(thisFreq);
+      if (state.playMode === ONE_SHOT) {
+        setTimeout(() => {
+        // TODO remove active class from btn
+        stopNote(noteId);
+      }, 250);
+  }
       return;
     }
     // STOP

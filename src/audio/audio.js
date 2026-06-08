@@ -2,7 +2,7 @@ import VoiceManager from "./VoiceManager.js";
 import { resetPlaying, clearNoteDataUi } from "../keyboard/keyboardInterface.js";
 import state from "../state.js";
 import { getNote } from "./noteFunctions.js";
-import { MAIN_El, AUDIO_CONFIG } from "../constants.js";
+import { MAIN_El, AUDIO_CONFIG, ONE_SHOT } from "../constants.js";
 import initUnlockAudio, { UNLOCK_TOAST_CLOSE_BTN_ID } from '../ui/unlock-toast.js';
 import { hideToastEl } from "../ui/ui-utils.js";
 

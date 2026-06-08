@@ -19,7 +19,7 @@ export class KeyboardColourScheme {
 }
 
 export const ONE_SHOT = "One Shot";
-export const RELEASE = "Release";
+export const SUSTAIN = "Sustain";
 export const MIDI_NOTE_MIDDLE_C = 60;
 
 export const GRID_SIZE = 8;
