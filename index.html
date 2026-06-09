@@ -19,7 +19,7 @@
       --light-green: #b8dbd9;
       --mid-grey: #8591a6;
       --panel-bg: #d3d8e0;
-      --panel-width: 170px;
+      --panel-width: 190px;
       --border-radius: 14px;
       --lambdoma-gradient-stop-1: hsl(41.860465116279066,70%,70%) 0 20%; 
       --lambdoma-gradient-stop-2: hsl(83.72093023255813,70%,70%) 20% 40%;
@@ -35,7 +35,7 @@
       font-family: "Encode Sans", serif;
       font-weight: 300;
       background-color: #f4f4f9;
-      color: #2f4550;
+      color: #1f3139;
       padding: 0;
       margin: 0;
     }
@@ -209,13 +209,28 @@
       display: flex;
       flex-direction: column;
       gap: var(--spacing-small);
-      min-width: 138px;
+      min-width: 160px;
     }
 
     .keyboard-form__fieldset {
       display: flex;
       flex-direction: column;
       gap: var(--spacing-small);
+      padding-bottom: var(--spacing-small);
+    }
+
+    .keyboard-form__fieldset--inline {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .keyboard-form__label {
+      font-weight: 600;
+    }
+
+    .keyboard-form__fieldset--inline .keyboard-form__label {
+      width: 100%;
+      flex-basis: 100%;
     }
 
     .keyboard-form__controls h2 {
@@ -259,7 +274,7 @@
       filter: brightness(80%);
     }
 
-    .keyboard-form__fieldset input {
+    .keyboard-form__fieldset input[type="number"] {
       width: 60px;
       height: 1.4rem;
       font-size: 1rem;
@@ -269,6 +284,10 @@
 
     .keyboard-form__fieldset select {
       font-size: 1rem;
+    }
+
+    .keyboard-form__fieldset .keyboard-form__submit {
+      flex-basis: 50%;
     }
 
     .keyboard__column {
@@ -310,6 +329,40 @@
     .keyboard__button[data-playing="true"] {
       background-color: coral;
       transition: background-color var(--transition-period) linear;
+    }
+
+    label:has([role="switch"]) {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25em;
+    }
+
+    [role="switch"] {
+      --height: 1.1875em;
+      --width: 0.8;
+
+      appearance: none;
+      background-color: var(--dark-green);
+      height: var(--height);
+      width: calc(var(--height) * calc(1 + var(--width)));
+      border: 0;
+      border-radius: 99em;
+      display: inline-block;
+    }
+
+    /* The toggle */
+    [role="switch"]::after {
+      content: "";
+      display: block;
+      aspect-ratio: 1;
+      background-color: white;
+      border: max(2px, 0.125em) solid #808080;
+      height: 82%;
+      border-radius: 50%;
+    }
+
+    [role="switch"]:checked::after {
+      translate: calc(var(--height) * var(--width)) 0;
     }
 
     .grid-16 .keyboard__column,
@@ -402,11 +455,18 @@
     <form id="keyboard-settings-form" class="keyboard-form keyboard-form--sound active">
       <button type="button" id="side-panel-left" class="sidebar-btn sidebar-btn--sound"><span class="sidebar-btn__text visually-hidden">Open</span></button>
       <div class="keyboard-form__controls">
-        <div class="keyboard-form__fieldset">
-          <h2>Sound</h2>
-          <label for="input-base-frequency" class="keyboard-form__label">Base Freq</label>
+        <h2>Sound</h2>
+        <div class="keyboard-form__fieldset keyboard-form__fieldset--inline">
+          <label for="input-base-frequency" class="keyboard-form__label">Base Frequency</label>
           <input name="base-frequency-input" type="number" min="128" max="4096" id="input-base-frequency">
           <button id="keyboard-settings-submit" class="keyboard-form__submit">Update</button> 
+        </div>
+        <div class="keyboard-form__fieldset keyboard-form__fieldset--inline">
+          <label for="input-play-mode" class="keyboard-form__label">
+            <span class="keyboard-form__label-text">Play mode</label>
+            <span class="keyboard-form__switch-text">Sustain</span>
+            <input type="checkbox" id="input-play-mode" role="switch">
+            <span class="keyboard-form__switch-text">One-shot</span>
         </div>
         <button id="stop-all" class="keyboard-form__submit">Stop all</button>
       </div>
@@ -429,7 +489,7 @@
         </select>
       </div>
       <div class="keyboard-form__fieldset">
-        <label for="input-grid-size" class="keyboard-form__label">grid size</label>
+        <label for="input-grid-size" class="keyboard-form__label">Grid size</label>
         <select name="grid-size-input" id="input-grid-size">
           <option>8 x 8</option>
           <option>16 x 16</option>
