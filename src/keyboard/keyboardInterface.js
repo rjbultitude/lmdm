@@ -44,6 +44,13 @@ export function clearNoteDataUi() {
   noteFreqEl.innerText = "";
 }
 
+function stopNoteUpdateUI(e, noteId) {
+  stopNote(noteId);
+  e.target.dataset.playing = "false";
+  updateNoteDataUi();
+  clearNoteDataUi();
+}
+
 export function noteBtnAddClickEvent(el, ratio) {
   el.addEventListener("click", function (e) {
     e.preventDefault();
@@ -63,17 +70,13 @@ export function noteBtnAddClickEvent(el, ratio) {
       updateNoteDataUi(thisFreq);
       if (state.playMode === ONE_SHOT) {
         setTimeout(() => {
-        // TODO remove active class from btn
-        stopNote(noteId);
-      }, 250);
-  }
+          stopNoteUpdateUI(e, noteId);
+        }, 200);
+      }
       return;
     }
-    // STOP
-    stopNote(noteId);
-    e.target.dataset.playing = "false";
-    updateNoteDataUi();
-    clearNoteDataUi();
+    stopNoteUpdateUI(e, noteId);
+    return;
   }, false);
 }
 

@@ -1,4 +1,4 @@
-import { AUDIO_CONFIG, GRID_SIZE, ONE_SHOT, SUSTAIN } from "./constants.js";
+import { AUDIO_CONFIG, GRID_SIZE, SUSTAIN } from "./constants.js";
 
 const state = {
   audioContext: null,
@@ -9,7 +9,7 @@ const state = {
   gridSize: GRID_SIZE,
   colourScheme: "gra",
   isPlaying: false,
-  playMode: ONE_SHOT,
+  playMode: SUSTAIN,
   MIDINotSupported: false
 }
 export default state;

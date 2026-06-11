@@ -2,6 +2,7 @@ import { createColumns, animateKeyboardButtons, setKeyboardAnimationInterval } f
 import { initColourSelect } from "./colourSchemes/colourSelect.js";
 import initGridSizeSelect from "./keyboard/gridSelect.js";
 import initFrequencyInput from "./audio/frequencyInput.js";
+import initPlayModeControls from "./audio/playMode.js";
 import { initMIDIAccess } from "./keyboard/midi-keyboard.js";
 import { initSidebarControls } from "./ui/sidebar.js";
 import { initErrorToast } from "./ui/error-toast.js";
@@ -13,6 +14,7 @@ initColourSelect();
 initErrorToast();
 initGridSizeSelect();
 initFrequencyInput();
+initPlayModeControls();
 initAudioContext();
 createVoicePool();
 initMIDIAccess();
@@ -24,4 +26,4 @@ setKeyboardAnimationInterval()
 
 //initCanvas();
 
-console.debug("v2.0.3");
+console.debug("v2.0.4");
